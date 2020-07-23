@@ -197,7 +197,6 @@ MouseOutHandler, MouseWheelHandler {
     int mousePost = -1;
     CircuitElm plotXElm, plotYElm;
     int draggingPost;
-    SwitchElm heldSwitchElm;
     double circuitMatrix[][], circuitRightSide[],
 	origRightSide[], origMatrix[][];
     RowInfo circuitRowInfo[];
@@ -819,7 +818,6 @@ MouseOutHandler, MouseWheelHandler {
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor (polarized)"), "PolarCapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Switch"), "SwitchElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Push Switch"), "PushSwitchElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add SPDT Switch"), "Switch2Elm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Potentiometer"), "PotElm"));
@@ -3274,19 +3272,6 @@ MouseOutHandler, MouseWheelHandler {
 	return (x+gridRound) & gridMask;
     }
 
-	boolean doSwitch(int x, int y) {
-		if (mouseElm == null || !(mouseElm instanceof SwitchElm))
-			return false;
-		SwitchElm se = (SwitchElm) mouseElm;
-		if (!se.getSwitchRect().contains(x, y))
-		    return false;
-		se.toggle();
-		if (se.momentary)
-			heldSwitchElm = se;
-		needAnalyze();
-		return true;
-	}
-
     int locateElm(CircuitElm elm) {
 	int i;
 	for (i = 0; i != elmList.size(); i++)
@@ -3834,7 +3819,7 @@ MouseOutHandler, MouseWheelHandler {
     public void onDoubleClick(DoubleClickEvent e){
     	e.preventDefault();
  //   	if (!didSwitch && mouseElm != null)
-    	if (mouseElm != null && !(mouseElm instanceof SwitchElm))
+    	if (mouseElm != null)
     		doEdit(mouseElm);
     }
     
@@ -3912,12 +3897,6 @@ MouseOutHandler, MouseWheelHandler {
 
 	int gx = inverseTransformX(e.getX());
 	int gy = inverseTransformY(e.getY());
-	if (doSwitch(gx, gy)) {
-	    // do this BEFORE we change the mouse mode to MODE_DRAG_POST!  Or else logic inputs
-	    // will add dots to the whole circuit when we click on them!
-            didSwitch = true;
-	    return;
-	}
 	
 	// IES - Grab resize handles in select mode if they are far enough apart and you are on top of them
 	if (tempMouseMode == MODE_SELECT && mouseElm!=null && 
@@ -3973,11 +3952,6 @@ MouseOutHandler, MouseWheelHandler {
     	selectedArea = null;
     	dragging = false;
     	boolean circuitChanged = false;
-    	if (heldSwitchElm != null) {
-    		heldSwitchElm.mouseUp();
-    		heldSwitchElm = null;
-    		circuitChanged = true;
-    	}
     	if (dragElm != null) {
     		// if the element is zero size then don't create it
     		// IES - and disable any previous selection
@@ -4669,7 +4643,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'n': return new NoiseElm(x1, y1, x2, y2, f, st);
     	case 'p': return new ProbeElm(x1, y1, x2, y2, f, st);
     	case 'r': return new ResistorElm(x1, y1, x2, y2, f, st);
-    	case 's': return new SwitchElm(x1, y1, x2, y2, f, st);
     	case 't': return new TransistorElm(x1, y1, x2, y2, f, st);
     	case 'v': return new VoltageElm(x1, y1, x2, y2, f, st);
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
@@ -4759,8 +4732,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new ResistorElm(x1, y1);
     	if (n=="RailElm")
     		return (CircuitElm) new RailElm(x1, y1);
-    	if (n=="SwitchElm")
-    		return (CircuitElm) new SwitchElm(x1, y1);
     	if (n=="Switch2Elm")
     		return (CircuitElm) new Switch2Elm(x1, y1);
     	if (n=="NTransistorElm" || n == "TransistorElm")
