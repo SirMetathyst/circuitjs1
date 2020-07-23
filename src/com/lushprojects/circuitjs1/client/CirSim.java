@@ -818,7 +818,6 @@ MouseOutHandler, MouseWheelHandler {
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor (polarized)"), "PolarCapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Push Switch"), "PushSwitchElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add SPDT Switch"), "Switch2Elm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Potentiometer"), "PotElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Transformer"), "TransformerElm"));
@@ -4794,8 +4793,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new FMElm(x1, y1);
     	if (n=="LampElm")
     		return (CircuitElm) new LampElm(x1, y1);
-    	if (n=="PushSwitchElm")
-    		return (CircuitElm) new PushSwitchElm(x1, y1);
     	if (n=="OpAmpElm")
     		return (CircuitElm) new OpAmpElm(x1, y1);
     	if (n=="OpAmpSwapElm")
