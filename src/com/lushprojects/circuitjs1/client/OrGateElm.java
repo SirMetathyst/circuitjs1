@@ -36,8 +36,8 @@ package com.lushprojects.circuitjs1.client;
 		// 0-15 = top curve, 16 = right, 17-32=bottom curve,
 		// 33-37 = left curve
 		Point triPoints[] = newPointArray(38);
-		if (this instanceof XorGateElm)
-		    linePoints = new Point[5];
+		//if (this instanceof XorGateElm)
+		    //linePoints = new Point[5];
 		int i;
 		for (i = 0; i != 16; i++) {
 		    double a = i/16.;
@@ -52,9 +52,9 @@ package com.lushprojects.circuitjs1.client;
 		    double b = 4*(1-a*a)-2;
 		    interpPoint(lead1, lead2,
 			    triPoints[33+i], b/(ww2), a*hs2);
-		    if (this instanceof XorGateElm)
-			linePoints[i] = interpPoint(lead1, lead2,
-				(b-5)/(ww2), a*hs2);
+		    //if (this instanceof XorGateElm)
+			//linePoints[i] = interpPoint(lead1, lead2,
+				//(b-5)/(ww2), a*hs2);
 		}
 		triPoints[16] = new Point(lead2);
 		gatePoly = createPolygon(triPoints);
