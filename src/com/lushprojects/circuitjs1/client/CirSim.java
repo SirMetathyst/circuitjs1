@@ -818,7 +818,6 @@ MouseOutHandler, MouseWheelHandler {
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor (polarized)"), "PolarCapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add SPDT Switch"), "Switch2Elm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Potentiometer"), "PotElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Transformer"), "TransformerElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Tapped Transformer"), "TappedTransformerElm"));
@@ -4627,7 +4626,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'M': return new LogicOutputElm(x1, y1, x2, y2, f, st);
     	case 'O': return new OutputElm(x1, y1, x2, y2, f, st);
     	case 'R': return new RailElm(x1, y1, x2, y2, f, st);
-    	case 'S': return new Switch2Elm(x1, y1, x2, y2, f, st);
     	case 'T': return new TransformerElm(x1, y1, x2, y2, f, st);
     	case 'a': return new OpAmpElm(x1, y1, x2, y2, f, st);
     	case 'b': return new BoxElm(x1, y1, x2, y2, f, st);
@@ -4731,8 +4729,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new ResistorElm(x1, y1);
     	if (n=="RailElm")
     		return (CircuitElm) new RailElm(x1, y1);
-    	if (n=="Switch2Elm")
-    		return (CircuitElm) new Switch2Elm(x1, y1);
     	if (n=="NTransistorElm" || n == "TransistorElm")
     		return (CircuitElm) new NTransistorElm(x1, y1);
     	if (n=="PTransistorElm")
