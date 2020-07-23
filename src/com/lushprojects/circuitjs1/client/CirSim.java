@@ -905,7 +905,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	MenuBar gateMenuBar = new MenuBar(true);
     	gateMenuBar.addItem(getClassCheckItem(LS("Add Logic Output"), "LogicOutputElm"));
-    	gateMenuBar.addItem(getClassCheckItem(LS("Add NAND Gate"), "NandGateElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add NOR Gate"), "NorGateElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add AND Gate"), "AndGateElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add OR Gate"), "OrGateElm"));
@@ -4643,7 +4642,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'x': return new TextElm(x1, y1, x2, y2, f, st);
     	case 'z': return new ZenerElm(x1, y1, x2, y2, f, st);
     	case 150: return new AndGateElm(x1, y1, x2, y2, f, st);
-    	case 151: return new NandGateElm(x1, y1, x2, y2, f, st);
     	case 152: return new OrGateElm(x1, y1, x2, y2, f, st);
     	case 153: return new NorGateElm(x1, y1, x2, y2, f, st);
     	case 154: return new XorGateElm(x1, y1, x2, y2, f, st);
@@ -4817,8 +4815,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new CC2Elm(x1, y1);
     	if (n=="CC2NegElm")
     		return (CircuitElm) new CC2NegElm(x1, y1);
-    	if (n=="NandGateElm")
-    		return (CircuitElm) new NandGateElm(x1, y1);
     	if (n=="NorGateElm")
     		return (CircuitElm) new NorGateElm(x1, y1);
     	if (n=="AndGateElm")
