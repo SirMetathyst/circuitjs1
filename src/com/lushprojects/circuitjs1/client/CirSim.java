@@ -839,7 +839,6 @@ MouseOutHandler, MouseWheelHandler {
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Clock"), "ClockElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Sweep"), "SweepElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Variable Voltage"), "VarRailElm"));
-    	inputMenuBar.addItem(getClassCheckItem(LS("Add AM Source"), "AMElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add FM Source"), "FMElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Current Source"), "CurrentElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Noise Generator"), "NoiseElm"));
@@ -4690,7 +4689,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 195: return new HalfAdderElm(x1, y1, x2, y2, f, st);
     	case 196: return new FullAdderElm(x1, y1, x2, y2, f, st);
     	case 197: return new SevenSegDecoderElm(x1, y1, x2, y2, f, st);
-    	case 200: return new AMElm(x1, y1, x2, y2, f, st);
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
     	case 203: return new DiacElm(x1, y1, x2, y2, f, st);
     	case 206: return new TriacElm(x1, y1, x2, y2, f, st);
@@ -4783,8 +4781,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new SparkGapElm(x1, y1);
     	if (n=="ClockElm")
     		return (CircuitElm) new ClockElm(x1, y1);
-    	if (n=="AMElm")
-    		return (CircuitElm) new AMElm(x1, y1);
     	if (n=="FMElm")
     		return (CircuitElm) new FMElm(x1, y1);
     	if (n=="LampElm")
