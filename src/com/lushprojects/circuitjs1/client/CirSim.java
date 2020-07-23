@@ -888,7 +888,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (ideal, + on top)"), "OpAmpSwapElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (real)"), "OpAmpRealElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPST)"), "AnalogSwitchElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPDT)"), "AnalogSwitch2Elm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Tristate Buffer"), "TriStateElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Schmitt Trigger"), "SchmittElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Schmitt Trigger (Inverting)"), "InvertingSchmittElm"));
@@ -4653,7 +4652,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 157: return new SevenSegElm(x1, y1, x2, y2, f, st);
     	case 158: return new VCOElm(x1, y1, x2, y2, f, st);
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
-    	case 160: return new AnalogSwitch2Elm(x1, y1, x2, y2, f, st);
     	case 161: return new PhaseCompElm(x1, y1, x2, y2, f, st);
     	case 162: return new LEDElm(x1, y1, x2, y2, f, st);
     	case 163: return new RingCounterElm(x1, y1, x2, y2, f, st);
@@ -4797,8 +4795,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new PJfetElm(x1, y1);
     	if (n=="AnalogSwitchElm")
     		return (CircuitElm) new AnalogSwitchElm(x1, y1);
-    	if (n=="AnalogSwitch2Elm")
-    		return (CircuitElm) new AnalogSwitch2Elm(x1, y1);
     	if (n=="SchmittElm")
     		return (CircuitElm) new SchmittElm(x1, y1);
     	if (n=="InvertingSchmittElm")
