@@ -843,7 +843,6 @@ MouseOutHandler, MouseWheelHandler {
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Clock"), "ClockElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Sweep"), "SweepElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Variable Voltage"), "VarRailElm"));
-    	inputMenuBar.addItem(getClassCheckItem(LS("Add Antenna"), "AntennaElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add AM Source"), "AMElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add FM Source"), "FMElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Current Source"), "CurrentElm"));
@@ -4655,7 +4654,6 @@ MouseOutHandler, MouseWheelHandler {
     
     public static CircuitElm createCe(int tint, int x1, int y1, int x2, int y2, int f, StringTokenizer st) {
 	switch (tint) {
-    	case 'A': return new AntennaElm(x1, y1, x2, y2, f, st);
     	case 'I': return new InverterElm(x1, y1, x2, y2, f, st);
     	case 'L': return new LogicInputElm(x1, y1, x2, y2, f, st);
     	case 'M': return new LogicOutputElm(x1, y1, x2, y2, f, st);
@@ -4808,8 +4806,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new SweepElm(x1, y1);
     	if (n=="LEDElm")
     		return (CircuitElm) new LEDElm(x1, y1);
-    	if (n=="AntennaElm")
-    		return (CircuitElm) new AntennaElm(x1, y1);
     	if (n=="LogicInputElm")
     		return (CircuitElm) new LogicInputElm(x1, y1);
     	if (n=="LogicOutputElm")
