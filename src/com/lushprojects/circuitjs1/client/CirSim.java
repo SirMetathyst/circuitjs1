@@ -913,7 +913,6 @@ MouseOutHandler, MouseWheelHandler {
     	MenuBar gateMenuBar = new MenuBar(true);
     	gateMenuBar.addItem(getClassCheckItem(LS("Add Logic Input"), "LogicInputElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add Logic Output"), "LogicOutputElm"));
-    	gateMenuBar.addItem(getClassCheckItem(LS("Add Inverter"), "InverterElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add NAND Gate"), "NandGateElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add NOR Gate"), "NorGateElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add AND Gate"), "AndGateElm"));
@@ -4654,7 +4653,6 @@ MouseOutHandler, MouseWheelHandler {
     
     public static CircuitElm createCe(int tint, int x1, int y1, int x2, int y2, int f, StringTokenizer st) {
 	switch (tint) {
-    	case 'I': return new InverterElm(x1, y1, x2, y2, f, st);
     	case 'L': return new LogicInputElm(x1, y1, x2, y2, f, st);
     	case 'M': return new LogicOutputElm(x1, y1, x2, y2, f, st);
     	case 'O': return new OutputElm(x1, y1, x2, y2, f, st);
@@ -4870,8 +4868,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new CC2Elm(x1, y1);
     	if (n=="CC2NegElm")
     		return (CircuitElm) new CC2NegElm(x1, y1);
-    	if (n=="InverterElm")
-    		return (CircuitElm) new InverterElm(x1, y1);
     	if (n=="NandGateElm")
     		return (CircuitElm) new NandGateElm(x1, y1);
     	if (n=="NorGateElm")
