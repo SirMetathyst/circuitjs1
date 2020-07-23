@@ -911,7 +911,6 @@ MouseOutHandler, MouseWheelHandler {
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Building Blocks")), activeBlocMenuBar);
     	
     	MenuBar gateMenuBar = new MenuBar(true);
-    	gateMenuBar.addItem(getClassCheckItem(LS("Add Logic Input"), "LogicInputElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add Logic Output"), "LogicOutputElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add NAND Gate"), "NandGateElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add NOR Gate"), "NorGateElm"));
@@ -4650,10 +4649,8 @@ MouseOutHandler, MouseWheelHandler {
     	if (iFrame!=null)
     		setiFrameHeight();
     }
-    
     public static CircuitElm createCe(int tint, int x1, int y1, int x2, int y2, int f, StringTokenizer st) {
 	switch (tint) {
-    	case 'L': return new LogicInputElm(x1, y1, x2, y2, f, st);
     	case 'M': return new LogicOutputElm(x1, y1, x2, y2, f, st);
     	case 'O': return new OutputElm(x1, y1, x2, y2, f, st);
     	case 'R': return new RailElm(x1, y1, x2, y2, f, st);
@@ -4804,8 +4801,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new SweepElm(x1, y1);
     	if (n=="LEDElm")
     		return (CircuitElm) new LEDElm(x1, y1);
-    	if (n=="LogicInputElm")
-    		return (CircuitElm) new LogicInputElm(x1, y1);
     	if (n=="LogicOutputElm")
     		return (CircuitElm) new LogicOutputElm(x1, y1);
     	if (n=="TransformerElm")
