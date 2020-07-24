@@ -877,7 +877,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	MenuBar chipMenuBar = new MenuBar(true);
     	chipMenuBar.addItem(getClassCheckItem(LS("Add D Flip-Flop"), "DFlipFlopElm"));
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add JK Flip-Flop"), "JKFlipFlopElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Multiplexer"), "MultiplexerElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Demultiplexer"), "DeMultiplexerElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Counter"), "CounterElm"));
@@ -4593,7 +4592,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'v': return new VoltageElm(x1, y1, x2, y2, f, st);
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
     	case 155: return new DFlipFlopElm(x1, y1, x2, y2, f, st);
-    	case 156: return new JKFlipFlopElm(x1, y1, x2, y2, f, st);
     	case 158: return new VCOElm(x1, y1, x2, y2, f, st);
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
     	case 161: return new PhaseCompElm(x1, y1, x2, y2, f, st);
@@ -4691,8 +4689,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new CC2NegElm(x1, y1);
     	if (n=="DFlipFlopElm")
     		return (CircuitElm) new DFlipFlopElm(x1, y1);
-    	if (n=="JKFlipFlopElm")
-    		return (CircuitElm) new JKFlipFlopElm(x1, y1);
     	if (n=="MultiplexerElm")
     		return (CircuitElm) new MultiplexerElm(x1, y1);
     	if (n=="DeMultiplexerElm")
