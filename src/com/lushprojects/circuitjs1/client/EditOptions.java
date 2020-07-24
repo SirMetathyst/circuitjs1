@@ -55,8 +55,6 @@ class EditOptions implements Editable {
 		if (n == 0 && ei.value > 0) {
 			sim.timeStep = ei.value;
 
-			// if timestep changed manually, prompt before changing it again
-			AudioOutputElm.okToChangeTimeStep = false;
 		}
 		if (n == 1 && ei.value > 0)
 			CircuitElm.voltageRange = ei.value;
