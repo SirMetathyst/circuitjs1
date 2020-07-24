@@ -916,7 +916,6 @@ MouseOutHandler, MouseWheelHandler {
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Digital Chips")), chipMenuBar);
     	
     	MenuBar achipMenuBar = new MenuBar(true);
-    	achipMenuBar.addItem(getClassCheckItem(LS("Add 555 Timer"), "TimerElm"));
     	achipMenuBar.addItem(getClassCheckItem(LS("Add Phase Comparator"), "PhaseCompElm"));
     	achipMenuBar.addItem(getClassCheckItem(LS("Add DAC"), "DACElm"));
     	achipMenuBar.addItem(getClassCheckItem(LS("Add ADC"), "ADCElm"));
@@ -4631,7 +4630,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 161: return new PhaseCompElm(x1, y1, x2, y2, f, st);
     	case 163: return new RingCounterElm(x1, y1, x2, y2, f, st);
     	case 164: return new CounterElm(x1, y1, x2, y2, f, st);
-    	case 165: return new TimerElm(x1, y1, x2, y2, f, st);
     	case 166: return new DACElm(x1, y1, x2, y2, f, st);
     	case 167: return new ADCElm(x1, y1, x2, y2, f, st);
     	case 168: return new LatchElm(x1, y1, x2, y2, f, st);
@@ -4787,8 +4785,6 @@ MouseOutHandler, MouseWheelHandler {
     	if (n=="DecadeElm" || n=="RingCounterElm")
     		return (CircuitElm) new RingCounterElm(x1, y1);
     	
-    	if (n=="TimerElm")
-    		return (CircuitElm) new TimerElm(x1, y1);
     	if (n=="DACElm")
     		return (CircuitElm) new DACElm(x1, y1);
     	if (n=="ADCElm")
