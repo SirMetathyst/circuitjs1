@@ -853,8 +853,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (ideal, - on top)"), "OpAmpElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (real)"), "OpAmpRealElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPST)"), "AnalogSwitchElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add CCII+"), "CC2Elm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add CCII-"), "CC2NegElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Comparator (Hi-Z/GND output)"), "ComparatorElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Voltage Source"), "VCVSElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Current Source"), "VCCSElm"));
@@ -4517,7 +4515,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
-    	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
     	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
@@ -4575,10 +4572,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new OpAmpElm(x1, y1);
     	if (n=="AnalogSwitchElm")
     		return (CircuitElm) new AnalogSwitchElm(x1, y1);
-    	if (n=="CC2Elm")
-    		return (CircuitElm) new CC2Elm(x1, y1);
-    	if (n=="CC2NegElm")
-    		return (CircuitElm) new CC2NegElm(x1, y1);
     	if (n=="BoxElm")
     		return (CircuitElm) new BoxElm(x1, y1);
     	if (n=="LabeledNodeElm")
