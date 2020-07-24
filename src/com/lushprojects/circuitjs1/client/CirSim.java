@@ -858,7 +858,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeMenuBar.addItem(getClassCheckItem(LS("Add MOSFET (P-Channel)"), "PMosfetElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add JFET (N-Channel)"), "NJfetElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add JFET (P-Channel)"), "PJfetElm"));
-    	activeMenuBar.addItem(getClassCheckItem(LS("Add SCR"), "SCRElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add DIAC"), "DiacElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Darlington Pair (NPN)"), "NDarlingtonElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Darlington Pair (PNP)"), "PDarlingtonElm"));
@@ -4621,7 +4620,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 167: return new ADCElm(x1, y1, x2, y2, f, st);
     	case 168: return new LatchElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
-    	case 177: return new SCRElm(x1, y1, x2, y2, f, st);
     	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
     	case 182: return new SchmittElm(x1, y1, x2, y2, f, st);
@@ -4722,8 +4720,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new SchmittElm(x1, y1);
     	if (n=="InvertingSchmittElm")
     		return (CircuitElm) new InvertingSchmittElm(x1, y1);
-    	if (n=="SCRElm")
-    		return (CircuitElm) new SCRElm(x1, y1);
     	if (n=="DiacElm")
     		return (CircuitElm) new DiacElm(x1, y1);
     	if (n=="CC2Elm")
