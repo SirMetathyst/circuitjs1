@@ -607,7 +607,7 @@ public abstract class CircuitElm implements Editable {
 	g.setColor(whiteColor);
 	int ya = (int)g.currentFontSize/2;
 	int xc, yc;
-	if (this instanceof RailElm || this instanceof SweepElm) {
+	if (this instanceof RailElm) {
 	    xc = x2;
 	    yc = y2;
 	} else {

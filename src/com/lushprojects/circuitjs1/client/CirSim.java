@@ -833,7 +833,6 @@ MouseOutHandler, MouseWheelHandler {
     	inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Voltage Source (1-terminal)"), "ACRailElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Square Wave Source (1-terminal)"), "SquareRailElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Clock"), "ClockElm"));
-    	inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Sweep"), "SweepElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Variable Voltage"), "VarRailElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add FM Source"), "FMElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Current Source"), "CurrentElm"));
@@ -4631,7 +4630,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 167: return new ADCElm(x1, y1, x2, y2, f, st);
     	case 168: return new LatchElm(x1, y1, x2, y2, f, st);
     	case 169: return new TappedTransformerElm(x1, y1, x2, y2, f, st);
-    	case 170: return new SweepElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
     	case 177: return new SCRElm(x1, y1, x2, y2, f, st);
     	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
@@ -4713,8 +4711,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new ACRailElm(x1, y1);
     	if (n=="SquareRailElm")
     		return (CircuitElm) new SquareRailElm(x1, y1);
-    	if (n=="SweepElm")
-    		return (CircuitElm) new SweepElm(x1, y1);
     	if (n=="LogicOutputElm")
     		return (CircuitElm) new LogicOutputElm(x1, y1);
     	if (n=="TappedTransformerElm")
