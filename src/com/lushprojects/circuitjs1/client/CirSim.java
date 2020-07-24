@@ -878,7 +878,6 @@ MouseOutHandler, MouseWheelHandler {
     	MenuBar chipMenuBar = new MenuBar(true);
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
     	//chipMenuBar.addItem(getClassCheckItem("Add Static RAM", "SRAMElm"));
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add Half Adder"), "HalfAdderElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Custom Logic"), "UserDefinedLogicElm")); // don't change this, it will break people's saved shortcuts
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Digital Chips")), chipMenuBar);
     	
@@ -4595,7 +4594,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
     	case 183: return new InvertingSchmittElm(x1, y1, x2, y2, f, st);
     	case 194: return new MonostableElm(x1, y1, x2, y2, f, st);
-    	case 195: return new HalfAdderElm(x1, y1, x2, y2, f, st);
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
     	case 203: return new DiacElm(x1, y1, x2, y2, f, st);
     	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
@@ -4689,8 +4687,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new VCOElm(x1, y1);
     	if (n=="BoxElm")
     		return (CircuitElm) new BoxElm(x1, y1);
-    	if (n=="HalfAdderElm")
-    		return (CircuitElm) new HalfAdderElm(x1, y1);
     	if (n=="MonostableElm")
     		return (CircuitElm) new MonostableElm(x1, y1);
     	if (n=="LabeledNodeElm")
