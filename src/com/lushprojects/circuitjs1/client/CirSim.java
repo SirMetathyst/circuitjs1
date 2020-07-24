@@ -841,7 +841,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPST)"), "AnalogSwitchElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Voltage Source"), "VCVSElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Current Source"), "VCCSElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Current-Controlled Voltage Source"), "CCVSElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Subcircuit Instance"), "CustomCompositeElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Building Blocks")), activeBlocMenuBar);
     	
@@ -4355,7 +4354,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
     	case 212: return new VCVSElm(x1, y1, x2, y2, f, st);
     	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
-    	case 214: return new CCVSElm(x1, y1, x2, y2, f, st);
         }
     	return null;
     }
@@ -4393,8 +4391,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new VCVSElm(x1, y1);
     	if (n=="VCCSElm")
 		return (CircuitElm) new VCCSElm(x1, y1);
-    	if (n=="CCVSElm")
-		return (CircuitElm) new CCVSElm(x1, y1);
     	return null;
     }
     
