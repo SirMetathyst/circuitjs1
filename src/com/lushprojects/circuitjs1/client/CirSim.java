@@ -850,7 +850,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Diode"), "DiodeElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, NPN)"), "NTransistorElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, PNP)"), "PTransistorElm"));
-    	activeMenuBar.addItem(getClassCheckItem(LS("Add MOSFET (N-Channel)"), "NMosfetElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add JFET (N-Channel)"), "NJfetElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add JFET (P-Channel)"), "PJfetElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add DIAC"), "DiacElm"));
@@ -4638,8 +4637,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new LampElm(x1, y1);
     	if (n=="OpAmpElm")
     		return (CircuitElm) new OpAmpElm(x1, y1);
-    	if (n=="NMosfetElm" || n == "MosfetElm")
-    		return (CircuitElm) new NMosfetElm(x1, y1);
     	if (n=="NJfetElm" || n == "JfetElm")
     		return (CircuitElm) new NJfetElm(x1, y1);
     	if (n=="PJfetElm")
