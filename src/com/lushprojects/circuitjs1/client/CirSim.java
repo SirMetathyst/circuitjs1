@@ -817,7 +817,6 @@ MouseOutHandler, MouseWheelHandler {
     	MenuBar passMenuBar = new MenuBar(true);
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Memristor"), "MemristorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Fuse"), "FuseElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Custom Transformer"), "CustomTransformerElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Passive Components")), passMenuBar);
 
@@ -4537,7 +4536,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 400: return new DarlingtonElm(x1, y1, x2, y2, f, st);
     	case 401: return new ComparatorElm(x1, y1, x2, y2, f, st);
     	case 403: return new ScopeElm(x1, y1, x2, y2, f, st);
-    	case 404: return new FuseElm(x1, y1, x2, y2, f, st);
     	case 405: return new LEDArrayElm(x1, y1, x2, y2, f, st);
     	case 406: return new CustomTransformerElm(x1, y1, x2, y2, f, st);
     	case 409: return new OpAmpRealElm(x1, y1, x2, y2, f, st);
@@ -4612,8 +4610,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new OhmMeterElm(x1, y1);
     	if (n=="ScopeElm")
     	    	return (CircuitElm) new ScopeElm(x1,y1);
-    	if (n=="FuseElm")
-	    	return (CircuitElm) new FuseElm(x1,y1);
     	if (n=="LEDArrayElm")
     	    	return (CircuitElm) new LEDArrayElm(x1, y1);
     	if (n=="CustomTransformerElm")
