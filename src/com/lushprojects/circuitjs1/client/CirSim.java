@@ -877,7 +877,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	MenuBar gateMenuBar = new MenuBar(true);
     	gateMenuBar.addItem(getClassCheckItem(LS("Add Logic Output"), "LogicOutputElm"));
-    	gateMenuBar.addItem(getClassCheckItem(LS("Add AND Gate"), "AndGateElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Logic Gates, Input and Output")), gateMenuBar);
 
     	MenuBar chipMenuBar = new MenuBar(true);
@@ -4598,7 +4597,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 't': return new TransistorElm(x1, y1, x2, y2, f, st);
     	case 'v': return new VoltageElm(x1, y1, x2, y2, f, st);
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
-    	case 150: return new AndGateElm(x1, y1, x2, y2, f, st);
     	case 155: return new DFlipFlopElm(x1, y1, x2, y2, f, st);
     	case 156: return new JKFlipFlopElm(x1, y1, x2, y2, f, st);
     	case 158: return new VCOElm(x1, y1, x2, y2, f, st);
@@ -4698,8 +4696,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new CC2Elm(x1, y1);
     	if (n=="CC2NegElm")
     		return (CircuitElm) new CC2NegElm(x1, y1);
-    	if (n=="AndGateElm")
-    		return (CircuitElm) new AndGateElm(x1, y1);
     	if (n=="DFlipFlopElm")
     		return (CircuitElm) new DFlipFlopElm(x1, y1);
     	if (n=="JKFlipFlopElm")
