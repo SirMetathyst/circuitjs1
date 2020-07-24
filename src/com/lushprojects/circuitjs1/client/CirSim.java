@@ -902,7 +902,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	MenuBar gateMenuBar = new MenuBar(true);
     	gateMenuBar.addItem(getClassCheckItem(LS("Add Logic Output"), "LogicOutputElm"));
-    	gateMenuBar.addItem(getClassCheckItem(LS("Add NOR Gate"), "NorGateElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add AND Gate"), "AndGateElm"));
     	gateMenuBar.addItem(getClassCheckItem(LS("Add OR Gate"), "OrGateElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Logic Gates, Input and Output")), gateMenuBar);
@@ -4638,7 +4637,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'z': return new ZenerElm(x1, y1, x2, y2, f, st);
     	case 150: return new AndGateElm(x1, y1, x2, y2, f, st);
     	case 152: return new OrGateElm(x1, y1, x2, y2, f, st);
-    	case 153: return new NorGateElm(x1, y1, x2, y2, f, st);
     	case 155: return new DFlipFlopElm(x1, y1, x2, y2, f, st);
     	case 156: return new JKFlipFlopElm(x1, y1, x2, y2, f, st);
     	case 157: return new SevenSegElm(x1, y1, x2, y2, f, st);
@@ -4805,8 +4803,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new CC2Elm(x1, y1);
     	if (n=="CC2NegElm")
     		return (CircuitElm) new CC2NegElm(x1, y1);
-    	if (n=="NorGateElm")
-    		return (CircuitElm) new NorGateElm(x1, y1);
     	if (n=="AndGateElm")
     		return (CircuitElm) new AndGateElm(x1, y1);
     	if (n=="OrGateElm")
