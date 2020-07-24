@@ -834,7 +834,6 @@ MouseOutHandler, MouseWheelHandler {
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Analog Output"), "OutputElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
-    	outputMenuBar.addItem(getClassCheckItem(LS("Add Labeled Node"), "LabeledNodeElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Outputs and Labels")), outputMenuBar);
     	
     	MenuBar activeMenuBar = new MenuBar(true);
@@ -1604,7 +1603,6 @@ MouseOutHandler, MouseWheelHandler {
 	//System.out.println("ac2");
 
 	// allocate nodes and voltage sources
-	LabeledNodeElm.resetNodeList();
 	for (i = 0; i != elmList.size(); i++) {
 	    CircuitElm ce = getElm(i);
 	    int inodes = ce.getInternalNodeCount();
@@ -4511,7 +4509,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
-    	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
     	case 212: return new VCVSElm(x1, y1, x2, y2, f, st);
     	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
     	case 214: return new CCVSElm(x1, y1, x2, y2, f, st);
@@ -4562,8 +4559,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new OpAmpElm(x1, y1);
     	if (n=="AnalogSwitchElm")
     		return (CircuitElm) new AnalogSwitchElm(x1, y1);
-    	if (n=="LabeledNodeElm")
-    		return (CircuitElm) new LabeledNodeElm(x1, y1);
     	if (n=="VCVSElm")
 		return (CircuitElm) new VCVSElm(x1, y1);
     	if (n=="VCCSElm")
@@ -4660,8 +4655,6 @@ MouseOutHandler, MouseWheelHandler {
 	    cs = cs.substring(p+1);
 	    if (cs=="WireElm") 
 		continue;
-	    if (cs=="LabeledNodeElm")
-		cs = cs+" "+((LabeledNodeElm)e).text;
 	    if (cs=="TransistorElm") {
 		if (((TransistorElm)e).pnp == -1)
 		    cs= "PTransistorElm";
@@ -4784,44 +4777,13 @@ MouseOutHandler, MouseWheelHandler {
 	    // mapping of node numbers -> equivalent node numbers (if they both have the same label)
 	    HashMap<Integer, Integer> nodeNumberHash = new HashMap<Integer, Integer>();
 	    
-	    // find all the labeled nodes, get a list of them, and create a node number map
-	    for (i = 0; i != elmList.size(); i++) {
-		CircuitElm ce = getElm(i);
-		if (sel && !ce.isSelected())
-		    continue;
-		if (ce instanceof LabeledNodeElm) {
-		    LabeledNodeElm lne = (LabeledNodeElm) ce;
-		    String label = lne.text;
-		    Integer map = nodeNameHash.get(label);
-		    
-		    // this node name already seen?  map the new node number to the old one
-		    if (map != null) {
-			Integer val = nodeNumberHash.get(lne.getNode(0));
-			if (val != null && !val.equals(map)) {
-			    Window.alert("Can't have a node with two labels!");
-			    return null;
-			}
-			nodeNumberHash.put(lne.getNode(0), map); 
-			continue;
-		    }
-		    nodeNameHash.put(label, lne.getNode(0));
-		    // put an entry in nodeNumberHash so we can detect if we try to map it to something else later
-		    nodeNumberHash.put(lne.getNode(0), lne.getNode(0));
-		    if (lne.isInternal())
-			continue;
-		    // create ext list entry for external nodes
-		    ExtListEntry ent = new ExtListEntry(label, ce.getNode(0));
-		    extList.add(ent);
-		}
-	    }
-	    
 	    // output all the elements
 	    for (i = 0; i != elmList.size(); i++) {
 		CircuitElm ce = getElm(i);
 		if (sel && !ce.isSelected())
 		    continue;
 		// don't need these elements dumped
-		if (ce instanceof WireElm || ce instanceof LabeledNodeElm || ce instanceof ScopeElm)
+		if (ce instanceof WireElm || ce instanceof ScopeElm)
 		    continue;
 		if (ce instanceof GraphicElm)
 		    continue;
