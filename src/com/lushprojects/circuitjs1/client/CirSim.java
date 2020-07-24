@@ -819,7 +819,6 @@ MouseOutHandler, MouseWheelHandler {
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor (polarized)"), "PolarCapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Memristor"), "MemristorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Spark Gap"), "SparkGapElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Fuse"), "FuseElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Custom Transformer"), "CustomTransformerElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Passive Components")), passMenuBar);
@@ -4636,7 +4635,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 184: return new MultiplexerElm(x1, y1, x2, y2, f, st);
     	case 185: return new DeMultiplexerElm(x1, y1, x2, y2, f, st);
     	case 186: return new PisoShiftElm(x1, y1, x2, y2, f, st);
-    	case 187: return new SparkGapElm(x1, y1, x2, y2, f, st);
     	case 188: return new SeqGenElm(x1, y1, x2, y2, f, st);
     	case 189: return new SipoShiftElm(x1, y1, x2, y2, f, st);
     	case 194: return new MonostableElm(x1, y1, x2, y2, f, st);
@@ -4711,8 +4709,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new LogicOutputElm(x1, y1);
     	if (n=="MemristorElm")
     		return (CircuitElm) new MemristorElm(x1, y1);
-    	if (n=="SparkGapElm")
-    		return (CircuitElm) new SparkGapElm(x1, y1);
     	if (n=="ClockElm")
     		return (CircuitElm) new ClockElm(x1, y1);
     	if (n=="FMElm")
