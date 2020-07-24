@@ -881,7 +881,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (ideal, + on top)"), "OpAmpSwapElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (real)"), "OpAmpRealElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPST)"), "AnalogSwitchElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Tristate Buffer"), "TriStateElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Schmitt Trigger"), "SchmittElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Schmitt Trigger (Inverting)"), "InvertingSchmittElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add CCII+"), "CC2Elm"));
@@ -4649,7 +4648,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 176: return new VaractorElm(x1, y1, x2, y2, f, st);
     	case 177: return new SCRElm(x1, y1, x2, y2, f, st);
     	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
-    	case 180: return new TriStateElm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
     	case 182: return new SchmittElm(x1, y1, x2, y2, f, st);
     	case 183: return new InvertingSchmittElm(x1, y1, x2, y2, f, st);
@@ -4767,8 +4765,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new SchmittElm(x1, y1);
     	if (n=="InvertingSchmittElm")
     		return (CircuitElm) new InvertingSchmittElm(x1, y1);
-    	if (n=="TriStateElm")
-    		return (CircuitElm) new TriStateElm(x1, y1);
     	if (n=="SCRElm")
     		return (CircuitElm) new SCRElm(x1, y1);
     	if (n=="DiacElm")
