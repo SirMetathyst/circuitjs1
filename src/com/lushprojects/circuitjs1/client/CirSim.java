@@ -851,7 +851,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, NPN)"), "NTransistorElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, PNP)"), "PTransistorElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add DIAC"), "DiacElm"));
-    	activeMenuBar.addItem(getClassCheckItem(LS("Add Darlington Pair (NPN)"), "NDarlingtonElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Darlington Pair (PNP)"), "PDarlingtonElm"));
     	//    	activeMenuBar.addItem(getClassCheckItem("Add Photoresistor", "PhotoResistorElm"));
     	//    	activeMenuBar.addItem(getClassCheckItem("Add Thermistor", "ThermistorElm"));
@@ -4653,8 +4652,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new DataRecorderElm(x1, y1);
     	if (n=="AudioOutputElm")
 		return (CircuitElm) new AudioOutputElm(x1, y1);
-    	if (n=="NDarlingtonElm" || n == "DarlingtonElm")
-		return (CircuitElm) new NDarlingtonElm(x1, y1);
     	if (n=="PDarlingtonElm")
 		return (CircuitElm) new PDarlingtonElm(x1, y1);
     	if (n=="ComparatorElm")
