@@ -860,7 +860,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	MenuBar activeMenuBar = new MenuBar(true);
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Diode"), "DiodeElm"));
-    	activeMenuBar.addItem(getClassCheckItem(LS("Add Zener Diode"), "ZenerElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, NPN)"), "NTransistorElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, PNP)"), "PTransistorElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add MOSFET (N-Channel)"), "NMosfetElm"));
@@ -4631,7 +4630,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'v': return new VoltageElm(x1, y1, x2, y2, f, st);
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
     	case 'x': return new TextElm(x1, y1, x2, y2, f, st);
-    	case 'z': return new ZenerElm(x1, y1, x2, y2, f, st);
     	case 150: return new AndGateElm(x1, y1, x2, y2, f, st);
     	case 155: return new DFlipFlopElm(x1, y1, x2, y2, f, st);
     	case 156: return new JKFlipFlopElm(x1, y1, x2, y2, f, st);
@@ -4729,8 +4727,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new ProbeElm(x1, y1);
     	if (n=="DiodeElm")
     		return (CircuitElm) new DiodeElm(x1, y1);
-    	if (n=="ZenerElm")
-    		return (CircuitElm) new ZenerElm(x1, y1);
     	if (n=="ACVoltageElm")
     		return (CircuitElm) new ACVoltageElm(x1, y1);
     	if (n=="ACRailElm")

@@ -177,7 +177,7 @@ class DiodeElm extends CircuitElm {
     public EditInfo getEditInfo(int n) {
 	if (!customModelUI && n == 0) {
 	    EditInfo ei =  new EditInfo("Model", 0, -1, -1);
-	    models = DiodeModel.getModelList(this instanceof ZenerElm);
+	    models = DiodeModel.getModelList(false);
 	    ei.choice = new Choice();
 	    int i;
 	    for (i = 0; i != models.size(); i++) {
