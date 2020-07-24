@@ -872,7 +872,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Darlington Pair (PNP)"), "PDarlingtonElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Varactor/Varicap"), "VaractorElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Tunnel Diode"), "TunnelDiodeElm"));
-    	activeMenuBar.addItem(getClassCheckItem(LS("Add Triode"), "TriodeElm"));
     	//    	activeMenuBar.addItem(getClassCheckItem("Add Photoresistor", "PhotoResistorElm"));
     	//    	activeMenuBar.addItem(getClassCheckItem("Add Thermistor", "ThermistorElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Components")), activeMenuBar);
@@ -4646,7 +4645,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 170: return new SweepElm(x1, y1, x2, y2, f, st);
     	case 171: return new TransLineElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
-    	case 173: return new TriodeElm(x1, y1, x2, y2, f, st);
     	case 175: return new TunnelDiodeElm(x1, y1, x2, y2, f, st);
     	case 176: return new VaractorElm(x1, y1, x2, y2, f, st);
     	case 177: return new SCRElm(x1, y1, x2, y2, f, st);
@@ -4775,8 +4773,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new SCRElm(x1, y1);
     	if (n=="DiacElm")
     		return (CircuitElm) new DiacElm(x1, y1);
-    	if (n=="TriodeElm")
-    		return (CircuitElm) new TriodeElm(x1, y1);
     	if (n=="VaractorElm")
     	    	return (CircuitElm) new VaractorElm(x1, y1);
     	if (n=="TunnelDiodeElm")
