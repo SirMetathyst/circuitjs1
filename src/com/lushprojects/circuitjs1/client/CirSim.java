@@ -838,7 +838,6 @@ MouseOutHandler, MouseWheelHandler {
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Ohmmeter"), "OhmMeterElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Labeled Node"), "LabeledNodeElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Data Export"), "DataRecorderElm"));
-    	outputMenuBar.addItem(getClassCheckItem(LS("Add LED Array"), "LEDArrayElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Outputs and Labels")), outputMenuBar);
     	
     	MenuBar activeMenuBar = new MenuBar(true);
@@ -4527,7 +4526,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 400: return new DarlingtonElm(x1, y1, x2, y2, f, st);
     	case 401: return new ComparatorElm(x1, y1, x2, y2, f, st);
     	case 403: return new ScopeElm(x1, y1, x2, y2, f, st);
-    	case 405: return new LEDArrayElm(x1, y1, x2, y2, f, st);
     	case 406: return new CustomTransformerElm(x1, y1, x2, y2, f, st);
     	case 409: return new OpAmpRealElm(x1, y1, x2, y2, f, st);
     	case 410: return new CustomCompositeElm(x1, y1, x2, y2, f, st);
@@ -4592,8 +4590,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new OhmMeterElm(x1, y1);
     	if (n=="ScopeElm")
     	    	return (CircuitElm) new ScopeElm(x1,y1);
-    	if (n=="LEDArrayElm")
-    	    	return (CircuitElm) new LEDArrayElm(x1, y1);
     	if (n=="CustomTransformerElm")
     	    	return (CircuitElm) new CustomTransformerElm(x1, y1);
     	if (n=="OpAmpRealElm")
