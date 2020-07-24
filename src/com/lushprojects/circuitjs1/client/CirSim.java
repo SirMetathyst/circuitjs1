@@ -830,7 +830,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	MenuBar outputMenuBar = new MenuBar(true);
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
-    	outputMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Outputs and Labels")), outputMenuBar);
     	
     	MenuBar activeMenuBar = new MenuBar(true);
@@ -4371,7 +4370,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'd': return new DiodeElm(x1, y1, x2, y2, f, st);
     	case 'g': return new GroundElm(x1, y1, x2, y2, f, st);
     	case 'i': return new CurrentElm(x1, y1, x2, y2, f, st);
-    	case 'p': return new ProbeElm(x1, y1, x2, y2, f, st);
     	case 'r': return new ResistorElm(x1, y1, x2, y2, f, st);
     	case 't': return new TransistorElm(x1, y1, x2, y2, f, st);
     	case 'v': return new VoltageElm(x1, y1, x2, y2, f, st);
@@ -4409,8 +4407,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new VarRailElm(x1, y1);
     	if (n=="CurrentElm")
     		return (CircuitElm) new CurrentElm(x1, y1);
-    	if (n=="ProbeElm")
-    		return (CircuitElm) new ProbeElm(x1, y1);
     	if (n=="DiodeElm")
     		return (CircuitElm) new DiodeElm(x1, y1);
     	if (n=="ACVoltageElm")
