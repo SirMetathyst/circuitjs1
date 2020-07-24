@@ -881,7 +881,6 @@ MouseOutHandler, MouseWheelHandler {
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Digital Chips")), chipMenuBar);
     	
     	MenuBar achipMenuBar = new MenuBar(true);
-    	achipMenuBar.addItem(getClassCheckItem(LS("Add DAC"), "DACElm"));
     	achipMenuBar.addItem(getClassCheckItem(LS("Add VCO"), "VCOElm"));
     	achipMenuBar.addItem(getClassCheckItem(LS("Add Monostable"), "MonostableElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Analog and Hybrid Chips")), achipMenuBar);
@@ -4585,7 +4584,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 158: return new VCOElm(x1, y1, x2, y2, f, st);
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
     	case 163: return new RingCounterElm(x1, y1, x2, y2, f, st);
-    	case 166: return new DACElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
     	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
@@ -4674,9 +4672,6 @@ MouseOutHandler, MouseWheelHandler {
     	// if you take out DecadeElm, it will break the menus and people's saved shortcuts
     	if (n=="DecadeElm" || n=="RingCounterElm")
     		return (CircuitElm) new RingCounterElm(x1, y1);
-    	
-    	if (n=="DACElm")
-    		return (CircuitElm) new DACElm(x1, y1);
     	if (n=="VCOElm")
     		return (CircuitElm) new VCOElm(x1, y1);
     	if (n=="BoxElm")
