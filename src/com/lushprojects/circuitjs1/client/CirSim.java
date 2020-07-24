@@ -835,7 +835,6 @@ MouseOutHandler, MouseWheelHandler {
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Box"), "BoxElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
-    	outputMenuBar.addItem(getClassCheckItem(LS("Add Ohmmeter"), "OhmMeterElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Labeled Node"), "LabeledNodeElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Data Export"), "DataRecorderElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Outputs and Labels")), outputMenuBar);
@@ -4522,7 +4521,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
     	case 214: return new CCVSElm(x1, y1, x2, y2, f, st);
     	case 215: return new CCCSElm(x1, y1, x2, y2, f, st);
-    	case 216: return new OhmMeterElm(x1, y1, x2, y2, f, st);
     	case 400: return new DarlingtonElm(x1, y1, x2, y2, f, st);
     	case 401: return new ComparatorElm(x1, y1, x2, y2, f, st);
     	case 403: return new ScopeElm(x1, y1, x2, y2, f, st);
@@ -4586,8 +4584,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new CCVSElm(x1, y1);
     	if (n=="CCCSElm")
 		return (CircuitElm) new CCCSElm(x1, y1);
-    	if (n=="OhmMeterElm")
-		return (CircuitElm) new OhmMeterElm(x1, y1);
     	if (n=="ScopeElm")
     	    	return (CircuitElm) new ScopeElm(x1,y1);
     	if (n=="CustomTransformerElm")
