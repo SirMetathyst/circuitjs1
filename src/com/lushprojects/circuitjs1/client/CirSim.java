@@ -816,7 +816,6 @@ MouseOutHandler, MouseWheelHandler {
 
     	MenuBar passMenuBar = new MenuBar(true);
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor (polarized)"), "PolarCapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Memristor"), "MemristorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Fuse"), "FuseElm"));
@@ -4628,7 +4627,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 203: return new DiacElm(x1, y1, x2, y2, f, st);
     	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
     	case 208: return new CustomLogicElm(x1, y1, x2, y2, f, st);
-    	case 209: return new PolarCapacitorElm(x1, y1, x2, y2, f, st);   	
     	case 210: return new DataRecorderElm(x1, y1, x2, y2, f, st);
     	case 211: return new AudioOutputElm(x1, y1, x2, y2, f, st);
     	case 212: return new VCVSElm(x1, y1, x2, y2, f, st);
@@ -4665,8 +4663,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new WireElm(x1, y1);
     	if (n=="CapacitorElm")
     		return (CircuitElm) new CapacitorElm(x1, y1);
-    	if (n=="PolarCapacitorElm")
-		return (CircuitElm) new PolarCapacitorElm(x1, y1);
     	if (n=="InductorElm")
     		return (CircuitElm) new InductorElm(x1, y1);
     	if (n=="DCVoltageElm" || n=="VoltageElm")
