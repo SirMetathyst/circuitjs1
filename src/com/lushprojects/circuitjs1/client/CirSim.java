@@ -827,7 +827,6 @@ MouseOutHandler, MouseWheelHandler {
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Variable Voltage"), "VarRailElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add FM Source"), "FMElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Current Source"), "CurrentElm"));
-    	inputMenuBar.addItem(getClassCheckItem(LS("Add Audio Input"), "AudioInputElm"));
 
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Inputs and Sources")), inputMenuBar);
     	
@@ -3101,7 +3100,6 @@ MouseOutHandler, MouseWheelHandler {
 	if (centre)
 		centreCircuit();
 	
-	AudioInputElm.clearCache();  // to save memory
     }
 
     // delete sliders for an element
@@ -4538,7 +4536,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 406: return new CustomTransformerElm(x1, y1, x2, y2, f, st);
     	case 409: return new OpAmpRealElm(x1, y1, x2, y2, f, st);
     	case 410: return new CustomCompositeElm(x1, y1, x2, y2, f, st);
-    	case 411: return new AudioInputElm(x1, y1, x2, y2, f, st);
         }
     	return null;
     }
@@ -4614,8 +4611,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new OpAmpRealElm(x1, y1);
     	if (n=="CustomCompositeElm")
 		return (CircuitElm) new CustomCompositeElm(x1, y1);
-    	if (n=="AudioInputElm")
-		return (CircuitElm) new AudioInputElm(x1, y1);
     	return null;
     }
     
