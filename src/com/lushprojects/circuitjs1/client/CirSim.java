@@ -4492,7 +4492,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'a': return new OpAmpElm(x1, y1, x2, y2, f, st);
     	case 'c': return new CapacitorElm(x1, y1, x2, y2, f, st);   	
     	case 'd': return new DiodeElm(x1, y1, x2, y2, f, st);
-    	case 'f': return new MosfetElm(x1, y1, x2, y2, f, st);
     	case 'g': return new GroundElm(x1, y1, x2, y2, f, st);
     	case 'i': return new CurrentElm(x1, y1, x2, y2, f, st);
     	case 'p': return new ProbeElm(x1, y1, x2, y2, f, st);
