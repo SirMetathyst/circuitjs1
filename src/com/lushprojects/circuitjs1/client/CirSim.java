@@ -877,7 +877,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	MenuBar chipMenuBar = new MenuBar(true);
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add Latch"), "LatchElm"));
     	//chipMenuBar.addItem(getClassCheckItem("Add Static RAM", "SRAMElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Full Adder"), "FullAdderElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Half Adder"), "HalfAdderElm"));
@@ -4592,7 +4591,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 161: return new PhaseCompElm(x1, y1, x2, y2, f, st);
     	case 163: return new RingCounterElm(x1, y1, x2, y2, f, st);
     	case 166: return new DACElm(x1, y1, x2, y2, f, st);
-    	case 168: return new LatchElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
     	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
@@ -4689,8 +4687,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	if (n=="DACElm")
     		return (CircuitElm) new DACElm(x1, y1);
-    	if (n=="LatchElm")
-    		return (CircuitElm) new LatchElm(x1, y1);
     	if (n=="VCOElm")
     		return (CircuitElm) new VCOElm(x1, y1);
     	if (n=="BoxElm")
