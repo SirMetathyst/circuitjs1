@@ -876,7 +876,6 @@ MouseOutHandler, MouseWheelHandler {
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Building Blocks")), activeBlocMenuBar);
     	
     	MenuBar chipMenuBar = new MenuBar(true);
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add Counter"), "CounterElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Latch"), "LatchElm"));
     	//chipMenuBar.addItem(getClassCheckItem("Add Static RAM", "SRAMElm"));
@@ -4592,7 +4591,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
     	case 161: return new PhaseCompElm(x1, y1, x2, y2, f, st);
     	case 163: return new RingCounterElm(x1, y1, x2, y2, f, st);
-    	case 164: return new CounterElm(x1, y1, x2, y2, f, st);
     	case 166: return new DACElm(x1, y1, x2, y2, f, st);
     	case 168: return new LatchElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
@@ -4683,8 +4681,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new CC2NegElm(x1, y1);
     	if (n=="PhaseCompElm")
     		return (CircuitElm) new PhaseCompElm(x1, y1);
-    	if (n=="CounterElm")
-    		return (CircuitElm) new CounterElm(x1, y1);
     	
 	// if you take out RingCounterElm, it will break subcircuits
     	// if you take out DecadeElm, it will break the menus and people's saved shortcuts
