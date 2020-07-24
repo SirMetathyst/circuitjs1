@@ -841,7 +841,6 @@ MouseOutHandler, MouseWheelHandler {
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Variable Voltage"), "VarRailElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add FM Source"), "FMElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Current Source"), "CurrentElm"));
-    	inputMenuBar.addItem(getClassCheckItem(LS("Add Noise Generator"), "NoiseElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Audio Input"), "AudioInputElm"));
 
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Inputs and Sources")), inputMenuBar);
@@ -4631,7 +4630,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'j': return new JfetElm(x1, y1, x2, y2, f, st);
     	case 'l': return new InductorElm(x1, y1, x2, y2, f, st);
     	case 'm': return new MemristorElm(x1, y1, x2, y2, f, st);
-    	case 'n': return new NoiseElm(x1, y1, x2, y2, f, st);
     	case 'p': return new ProbeElm(x1, y1, x2, y2, f, st);
     	case 'r': return new ResistorElm(x1, y1, x2, y2, f, st);
     	case 't': return new TransistorElm(x1, y1, x2, y2, f, st);
@@ -4886,8 +4884,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new ComparatorElm(x1, y1);
     	if (n=="OTAElm")
 		return (CircuitElm) new OTAElm(x1, y1);
-    	if (n=="NoiseElm")
-		return (CircuitElm) new NoiseElm(x1, y1);
     	if (n=="VCVSElm")
 		return (CircuitElm) new VCVSElm(x1, y1);
     	if (n=="VCCSElm")
