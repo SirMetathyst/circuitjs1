@@ -881,7 +881,6 @@ MouseOutHandler, MouseWheelHandler {
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Digital Chips")), chipMenuBar);
     	
     	MenuBar achipMenuBar = new MenuBar(true);
-    	achipMenuBar.addItem(getClassCheckItem(LS("Add Monostable"), "MonostableElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Analog and Hybrid Chips")), achipMenuBar);
     	
     	MenuBar otherMenuBar = new MenuBar(true);
@@ -4586,7 +4585,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
     	case 183: return new InvertingSchmittElm(x1, y1, x2, y2, f, st);
-    	case 194: return new MonostableElm(x1, y1, x2, y2, f, st);
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
     	case 203: return new DiacElm(x1, y1, x2, y2, f, st);
     	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
@@ -4672,8 +4670,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new RingCounterElm(x1, y1);
     	if (n=="BoxElm")
     		return (CircuitElm) new BoxElm(x1, y1);
-    	if (n=="MonostableElm")
-    		return (CircuitElm) new MonostableElm(x1, y1);
     	if (n=="LabeledNodeElm")
     		return (CircuitElm) new LabeledNodeElm(x1, y1);
     	if (n=="DataRecorderElm")
