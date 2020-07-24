@@ -874,7 +874,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Current Source"), "VCCSElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Current-Controlled Voltage Source"), "CCVSElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Current-Controlled Current Source"), "CCCSElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Optocoupler"), "OptocouplerElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Subcircuit Instance"), "CustomCompositeElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Building Blocks")), activeBlocMenuBar);
     	
@@ -4637,7 +4636,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 404: return new FuseElm(x1, y1, x2, y2, f, st);
     	case 405: return new LEDArrayElm(x1, y1, x2, y2, f, st);
     	case 406: return new CustomTransformerElm(x1, y1, x2, y2, f, st);
-    	case 407: return new OptocouplerElm(x1, y1, x2, y2, f, st);
     	case 409: return new OpAmpRealElm(x1, y1, x2, y2, f, st);
     	case 410: return new CustomCompositeElm(x1, y1, x2, y2, f, st);
     	case 411: return new AudioInputElm(x1, y1, x2, y2, f, st);
@@ -4775,8 +4773,6 @@ MouseOutHandler, MouseWheelHandler {
     	    	return (CircuitElm) new LEDArrayElm(x1, y1);
     	if (n=="CustomTransformerElm")
     	    	return (CircuitElm) new CustomTransformerElm(x1, y1);
-    	if (n=="OptocouplerElm")
-		return (CircuitElm) new OptocouplerElm(x1, y1);
     	if (n=="OpAmpRealElm")
 		return (CircuitElm) new OpAmpRealElm(x1, y1);
     	if (n=="CustomCompositeElm")
