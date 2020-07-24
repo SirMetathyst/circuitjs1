@@ -2239,9 +2239,6 @@ MouseOutHandler, MouseWheelHandler {
 	for (i = 0; i != scopeCount; i++)
 	    if (scopes[i].viewingWire())
 		return false;
-	for (i=0; i != elmList.size(); i++)
-	    if (getElm(i) instanceof ScopeElm && ((ScopeElm)getElm(i)).elmScope.viewingWire())
-		return false;
 	return true;
     }
     
@@ -2371,9 +2368,6 @@ MouseOutHandler, MouseWheelHandler {
 		calcWireCurrents();
 	    for (i = 0; i != scopeCount; i++)
 	    	scopes[i].timeStep();
-	    for (i=0; i != elmList.size(); i++)
-		if (getElm(i) instanceof ScopeElm )
-		    ((ScopeElm)getElm(i)).stepScope();
 		
 	    tm = System.currentTimeMillis();
 	    lit = tm;
@@ -2561,67 +2555,7 @@ MouseOutHandler, MouseWheelHandler {
     		if (i > 0)
     		    scopes[i].speed = scopes[i-1].speed;
     	}
-    	
-    	if (item=="viewInFloatScope" && menuElm != null) {
-    	    ScopeElm newScope = new ScopeElm(snapGrid(menuElm.x+50), snapGrid(menuElm.y+50));
-    	    elmList.addElement(newScope);
-    	    newScope.setScopeElm(menuElm);
-	}
-    	
-    	if (menu=="scopepop") {
-    		pushUndo();
-    		Scope s;
-		if (menuScope != -1 )
-		    	s= scopes[menuScope];
-		else
-		    	s= ((ScopeElm)mouseElm).elmScope;
-
-    		if (item=="dock") {
-            		if (scopeCount == scopes.length)
-            			return;
-            		scopes[scopeCount] = ((ScopeElm)mouseElm).elmScope;
-            		((ScopeElm)mouseElm).clearElmScope();
-            		scopes[scopeCount].position = scopeCount;
-            		scopeCount++;
-            		doDelete(false);
-    		}
-    		if (item=="undock") {
-    	    	    ScopeElm newScope = new ScopeElm(snapGrid(menuElm.x+50), snapGrid(menuElm.y+50));
-    	    	    elmList.addElement(newScope);
-    	    	    newScope.setElmScope(scopes[menuScope]);
-    	    	    
-    	    	    int i;
-    	    	    // remove scope from list.  setupScopes() will fix the positions
-    	    	    for (i = menuScope; i < scopeCount; i++)
-    	    		scopes[i] = scopes[i+1];
-    	    	    scopeCount--;
-    		}
-    		if (item=="remove")
-    		    	s.setElm(null);  // setupScopes() will clean this up
-    		if (item=="removeplot")
-			s.removePlot(menuPlot);
-    		if (item=="speed2")
-    			s.speedUp();
-    		if (item=="speed1/2")
-    			s.slowDown();
-//    		if (item=="scale")
-//    			scopes[menuScope].adjustScale(.5);
-    		if (item=="maxscale")
-    			s.maxScale();
-    		if (item=="stack")
-    			stackScope(menuScope);
-    		if (item=="unstack")
-    			unstackScope(menuScope);
-    		if (item=="combine")
-			combineScope(menuScope);
-    		if (item=="selecty")
-    			s.selectY();
-    		if (item=="reset")
-    			s.resetGraph(true);
-    		if (item=="properties")
-			s.properties();
-    		deleteUnusedScopeElms();
-    	}
+    
     	if (menu=="circuits" && item.indexOf("setup ") ==0) {
     		pushUndo();
     		int sp = item.indexOf(' ', 6);
@@ -3601,29 +3535,6 @@ MouseOutHandler, MouseWheelHandler {
     	    	    contextPanel.setPopupPosition(menuClientX, y);
     	    	    contextPanel.show();
     		}
-    	} else if (mouseElm != null) {
-    	    	if (! (mouseElm instanceof ScopeElm)) {
-    	    	    elmScopeMenuItem.setEnabled(mouseElm.canViewInScope());
-    	    	    elmFloatScopeMenuItem.setEnabled(mouseElm.canViewInScope());
-    	    	    elmEditMenuItem .setEnabled(mouseElm.getEditInfo(0) != null);
-    	    	    elmFlipMenuItem .setEnabled(mouseElm.getPostCount() == 2);
-    	    	    elmSplitMenuItem.setEnabled(canSplit(mouseElm));
-    	    	    elmSliderMenuItem.setEnabled(sliderItemEnabled(mouseElm));
-    	    	    contextPanel=new PopupPanel(true);
-    	    	    contextPanel.add(elmMenuBar);
-    	    	    contextPanel.setPopupPosition(menuClientX, menuClientY);
-    	    	    contextPanel.show();
-    	    	} else {
-    	    	    ScopeElm s = (ScopeElm) mouseElm;
-    	    	    if (s.elmScope.canMenu()) {
-    	    		menuPlot = s.elmScope.selectedPlot;
-    	    		scopePopupMenu.doScopePopupChecks(true, s.elmScope);
-    			contextPanel=new PopupPanel(true);
-    			contextPanel.add(scopePopupMenu.getMenuBar());
-    			contextPanel.setPopupPosition(menuClientX, menuClientY);
-    			contextPanel.show();
-    	    	    }
-    	    	}
     	} else {
     		doMainMenuChecks();
     		contextPanel=new PopupPanel(true);
@@ -3743,20 +3654,6 @@ MouseOutHandler, MouseWheelHandler {
 		tempMouseMode = MODE_DRAG_POST;
 	} else
 	    tempMouseMode = MODE_DRAG_ALL;
-	
-	if ((scopeSelected != -1 && scopes[scopeSelected].cursorInSettingsWheel()) ||
-		( scopeSelected == -1 && mouseElm instanceof ScopeElm && ((ScopeElm)mouseElm).elmScope.cursorInSettingsWheel())){
-	    console("Doing something");
-	    Scope s;
-	    if (scopeSelected != -1)
-		s=scopes[scopeSelected];
-	    else 
-		s=((ScopeElm)mouseElm).elmScope;
-	    s.properties();
-	    clearSelection();
-	    mouseDragging=false;
-	    return;
-	}
 
 	int gx = inverseTransformX(e.getX());
 	int gy = inverseTransformY(e.getY());
@@ -3983,9 +3880,6 @@ MouseOutHandler, MouseWheelHandler {
     		// ScopeElms don't cut-paste well because their reference to a parent
     		// elm by number get's messed up in the dump. For now we will just ignore them
     		// until I can be bothered to come up with something better
-    		if (willDelete(ce) && !(ce instanceof ScopeElm) ) {
-    			clipboard += ce.dump() + "\n";
-    		}
     	}
     	writeClipboardToStorage();
     	doDelete(true);
@@ -4021,19 +3915,6 @@ MouseOutHandler, MouseWheelHandler {
 		return;
 	recovery = stor.getItem("circuitRecovery");
     }
-
-
-    void deleteUnusedScopeElms() {
-	// Remove any scopeElms for elements that no longer exist
-	for (int i = elmList.size()-1; i >= 0; i--) {
-    		CircuitElm ce = getElm(i);
-    		if (ce instanceof ScopeElm && (((ScopeElm) ce).elmScope.needToRemove() )) {
-    			ce.delete();
-    			elmList.removeElementAt(i);
-    		}
-    	}
-	
-    }
     
     void doDelete(boolean pushUndoFlag) {
     	int i;
@@ -4052,7 +3933,6 @@ MouseOutHandler, MouseWheelHandler {
     		}
     	}
     	if ( hasDeleted ) {
-    	    deleteUnusedScopeElms();
     	    needAnalyze();
     	    writeRecoveryToStorage();
     	}    
@@ -4080,8 +3960,6 @@ MouseOutHandler, MouseWheelHandler {
 	    if (m != null && !m.isEmpty())
 		r += m + "\n";
 	    // See notes on do cut why we don't copy ScopeElms.
-	    if (ce.isSelected() && !(ce instanceof ScopeElm))
-		r += ce.dump() + "\n";
 	}
 	return r;
     }
@@ -4506,7 +4384,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
     	case 214: return new CCVSElm(x1, y1, x2, y2, f, st);
     	case 215: return new CCCSElm(x1, y1, x2, y2, f, st);
-    	case 403: return new ScopeElm(x1, y1, x2, y2, f, st);
     	case 406: return new CustomTransformerElm(x1, y1, x2, y2, f, st);
     	case 410: return new CustomCompositeElm(x1, y1, x2, y2, f, st);
         }
@@ -4554,8 +4431,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new CCVSElm(x1, y1);
     	if (n=="CCCSElm")
 		return (CircuitElm) new CCCSElm(x1, y1);
-    	if (n=="ScopeElm")
-    	    	return (CircuitElm) new ScopeElm(x1,y1);
     	if (n=="CustomTransformerElm")
     	    	return (CircuitElm) new CustomTransformerElm(x1, y1);
     	if (n=="CustomCompositeElm")
@@ -4768,7 +4643,7 @@ MouseOutHandler, MouseWheelHandler {
 		if (sel && !ce.isSelected())
 		    continue;
 		// don't need these elements dumped
-		if (ce instanceof WireElm || ce instanceof ScopeElm)
+		if (ce instanceof WireElm)
 		    continue;
 		if (ce instanceof GraphicElm)
 		    continue;
