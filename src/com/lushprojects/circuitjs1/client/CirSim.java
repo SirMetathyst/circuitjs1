@@ -876,7 +876,6 @@ MouseOutHandler, MouseWheelHandler {
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Building Blocks")), activeBlocMenuBar);
     	
     	MenuBar chipMenuBar = new MenuBar(true);
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add Multiplexer"), "MultiplexerElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Demultiplexer"), "DeMultiplexerElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Counter"), "CounterElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
@@ -4601,7 +4600,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
     	case 183: return new InvertingSchmittElm(x1, y1, x2, y2, f, st);
-    	case 184: return new MultiplexerElm(x1, y1, x2, y2, f, st);
     	case 185: return new DeMultiplexerElm(x1, y1, x2, y2, f, st);
     	case 194: return new MonostableElm(x1, y1, x2, y2, f, st);
     	case 195: return new HalfAdderElm(x1, y1, x2, y2, f, st);
@@ -4685,8 +4683,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new CC2Elm(x1, y1);
     	if (n=="CC2NegElm")
     		return (CircuitElm) new CC2NegElm(x1, y1);
-    	if (n=="MultiplexerElm")
-    		return (CircuitElm) new MultiplexerElm(x1, y1);
     	if (n=="DeMultiplexerElm")
     		return (CircuitElm) new DeMultiplexerElm(x1, y1);
     	if (n=="PhaseCompElm")
