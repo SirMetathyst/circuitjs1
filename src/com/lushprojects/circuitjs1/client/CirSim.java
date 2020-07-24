@@ -848,7 +848,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	MenuBar outputMenuBar = new MenuBar(true);
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Analog Output"), "OutputElm"));
-    	outputMenuBar.addItem(getClassCheckItem(LS("Add LED"), "LEDElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Text"), "TextElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Box"), "BoxElm"));
@@ -4649,7 +4648,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 158: return new VCOElm(x1, y1, x2, y2, f, st);
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
     	case 161: return new PhaseCompElm(x1, y1, x2, y2, f, st);
-    	case 162: return new LEDElm(x1, y1, x2, y2, f, st);
     	case 163: return new RingCounterElm(x1, y1, x2, y2, f, st);
     	case 164: return new CounterElm(x1, y1, x2, y2, f, st);
     	case 165: return new TimerElm(x1, y1, x2, y2, f, st);
@@ -4755,8 +4753,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new SquareRailElm(x1, y1);
     	if (n=="SweepElm")
     		return (CircuitElm) new SweepElm(x1, y1);
-    	if (n=="LEDElm")
-    		return (CircuitElm) new LEDElm(x1, y1);
     	if (n=="LogicOutputElm")
     		return (CircuitElm) new LogicOutputElm(x1, y1);
     	if (n=="TransformerElm")
