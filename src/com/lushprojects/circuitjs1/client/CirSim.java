@@ -897,7 +897,6 @@ MouseOutHandler, MouseWheelHandler {
     	chipMenuBar.addItem(getClassCheckItem(LS("Add 7 Segment Decoder"), "SevenSegDecoderElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Multiplexer"), "MultiplexerElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Demultiplexer"), "DeMultiplexerElm"));
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add SIPO shift register"), "SipoShiftElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add PISO shift register"), "PisoShiftElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Counter"), "CounterElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
@@ -4636,7 +4635,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 185: return new DeMultiplexerElm(x1, y1, x2, y2, f, st);
     	case 186: return new PisoShiftElm(x1, y1, x2, y2, f, st);
     	case 188: return new SeqGenElm(x1, y1, x2, y2, f, st);
-    	case 189: return new SipoShiftElm(x1, y1, x2, y2, f, st);
     	case 194: return new MonostableElm(x1, y1, x2, y2, f, st);
     	case 195: return new HalfAdderElm(x1, y1, x2, y2, f, st);
     	case 196: return new FullAdderElm(x1, y1, x2, y2, f, st);
@@ -4753,8 +4751,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new MultiplexerElm(x1, y1);
     	if (n=="DeMultiplexerElm")
     		return (CircuitElm) new DeMultiplexerElm(x1, y1);
-    	if (n=="SipoShiftElm")
-    		return (CircuitElm) new SipoShiftElm(x1, y1);
     	if (n=="PisoShiftElm")
     		return (CircuitElm) new PisoShiftElm(x1, y1);
     	if (n=="PhaseCompElm")
