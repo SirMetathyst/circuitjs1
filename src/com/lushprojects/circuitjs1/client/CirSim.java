@@ -4509,7 +4509,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
     	case 214: return new CCVSElm(x1, y1, x2, y2, f, st);
     	case 215: return new CCCSElm(x1, y1, x2, y2, f, st);
-    	case 400: return new DarlingtonElm(x1, y1, x2, y2, f, st);
     	case 403: return new ScopeElm(x1, y1, x2, y2, f, st);
     	case 406: return new CustomTransformerElm(x1, y1, x2, y2, f, st);
     	case 409: return new OpAmpRealElm(x1, y1, x2, y2, f, st);
