@@ -818,7 +818,6 @@ MouseOutHandler, MouseWheelHandler {
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor (polarized)"), "PolarCapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Tapped Transformer"), "TappedTransformerElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Memristor"), "MemristorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Spark Gap"), "SparkGapElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Fuse"), "FuseElm"));
@@ -4628,7 +4627,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 166: return new DACElm(x1, y1, x2, y2, f, st);
     	case 167: return new ADCElm(x1, y1, x2, y2, f, st);
     	case 168: return new LatchElm(x1, y1, x2, y2, f, st);
-    	case 169: return new TappedTransformerElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
     	case 177: return new SCRElm(x1, y1, x2, y2, f, st);
     	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
@@ -4711,8 +4709,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new SquareRailElm(x1, y1);
     	if (n=="LogicOutputElm")
     		return (CircuitElm) new LogicOutputElm(x1, y1);
-    	if (n=="TappedTransformerElm")
-    		return (CircuitElm) new TappedTransformerElm(x1, y1);
     	if (n=="MemristorElm")
     		return (CircuitElm) new MemristorElm(x1, y1);
     	if (n=="SparkGapElm")
