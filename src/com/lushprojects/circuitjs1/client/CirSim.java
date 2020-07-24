@@ -844,7 +844,6 @@ MouseOutHandler, MouseWheelHandler {
 
     	MenuBar activeBlocMenuBar = new MenuBar(true);
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (ideal, - on top)"), "OpAmpElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (real)"), "OpAmpRealElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPST)"), "AnalogSwitchElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Voltage Source"), "VCVSElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Current Source"), "VCCSElm"));
@@ -4511,7 +4510,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 215: return new CCCSElm(x1, y1, x2, y2, f, st);
     	case 403: return new ScopeElm(x1, y1, x2, y2, f, st);
     	case 406: return new CustomTransformerElm(x1, y1, x2, y2, f, st);
-    	case 409: return new OpAmpRealElm(x1, y1, x2, y2, f, st);
     	case 410: return new CustomCompositeElm(x1, y1, x2, y2, f, st);
         }
     	return null;
@@ -4562,8 +4560,6 @@ MouseOutHandler, MouseWheelHandler {
     	    	return (CircuitElm) new ScopeElm(x1,y1);
     	if (n=="CustomTransformerElm")
     	    	return (CircuitElm) new CustomTransformerElm(x1, y1);
-    	if (n=="OpAmpRealElm")
-		return (CircuitElm) new OpAmpRealElm(x1, y1);
     	if (n=="CustomCompositeElm")
 		return (CircuitElm) new CustomCompositeElm(x1, y1);
     	return null;
