@@ -835,7 +835,6 @@ MouseOutHandler, MouseWheelHandler {
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Labeled Node"), "LabeledNodeElm"));
-    	outputMenuBar.addItem(getClassCheckItem(LS("Add Data Export"), "DataRecorderElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Outputs and Labels")), outputMenuBar);
     	
     	MenuBar activeMenuBar = new MenuBar(true);
@@ -4513,7 +4512,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
     	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
-    	case 210: return new DataRecorderElm(x1, y1, x2, y2, f, st);
     	case 212: return new VCVSElm(x1, y1, x2, y2, f, st);
     	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
     	case 214: return new CCVSElm(x1, y1, x2, y2, f, st);
@@ -4566,8 +4564,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new AnalogSwitchElm(x1, y1);
     	if (n=="LabeledNodeElm")
     		return (CircuitElm) new LabeledNodeElm(x1, y1);
-    	if (n=="DataRecorderElm")
-		return (CircuitElm) new DataRecorderElm(x1, y1);
     	if (n=="VCVSElm")
 		return (CircuitElm) new VCVSElm(x1, y1);
     	if (n=="VCCSElm")

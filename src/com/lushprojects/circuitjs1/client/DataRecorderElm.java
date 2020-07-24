@@ -1,4 +1,4 @@
-package com.lushprojects.circuitjs1.client;
+/*package com.lushprojects.circuitjs1.client;
 
 import java.util.Date;
 
@@ -80,7 +80,7 @@ public class DataRecorderElm extends CircuitElm {
                 var url = URL.createObjectURL(blob);
                 $doc.recorderBlob = url;
                 return url;
-        }-*/;
+        };
 
 	public EditInfo getEditInfo(int n) {
 	    if (n == 0) {
@@ -116,4 +116,4 @@ public class DataRecorderElm extends CircuitElm {
 	    if (n == 1)
 		return;
 	}
-}
+}*/
