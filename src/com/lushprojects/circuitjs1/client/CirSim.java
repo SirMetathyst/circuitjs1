@@ -828,7 +828,6 @@ MouseOutHandler, MouseWheelHandler {
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Voltage Source (2-terminal)"), "DCVoltageElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Voltage Source (2-terminal)"), "ACVoltageElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Voltage Source (1-terminal)"), "RailElm"));
-    	inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Voltage Source (1-terminal)"), "ACRailElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Clock"), "ClockElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Variable Voltage"), "VarRailElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add FM Source"), "FMElm"));
@@ -4688,8 +4687,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new DiodeElm(x1, y1);
     	if (n=="ACVoltageElm")
     		return (CircuitElm) new ACVoltageElm(x1, y1);
-    	if (n=="ACRailElm")
-    		return (CircuitElm) new ACRailElm(x1, y1);
     	if (n=="LogicOutputElm")
     		return (CircuitElm) new LogicOutputElm(x1, y1);
     	if (n=="MemristorElm")
