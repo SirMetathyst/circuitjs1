@@ -830,7 +830,6 @@ MouseOutHandler, MouseWheelHandler {
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Inputs and Sources")), inputMenuBar);
     	
     	MenuBar outputMenuBar = new MenuBar(true);
-    	outputMenuBar.addItem(getClassCheckItem(LS("Add Analog Output"), "OutputElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Outputs and Labels")), outputMenuBar);
@@ -4490,7 +4489,6 @@ MouseOutHandler, MouseWheelHandler {
     }
     public static CircuitElm createCe(int tint, int x1, int y1, int x2, int y2, int f, StringTokenizer st) {
 	switch (tint) {
-    	case 'O': return new OutputElm(x1, y1, x2, y2, f, st);
     	case 'R': return new RailElm(x1, y1, x2, y2, f, st);
     	case 'a': return new OpAmpElm(x1, y1, x2, y2, f, st);
     	case 'c': return new CapacitorElm(x1, y1, x2, y2, f, st);   	
@@ -4539,8 +4537,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new DCVoltageElm(x1, y1);
     	if (n=="VarRailElm")
     		return (CircuitElm) new VarRailElm(x1, y1);
-    	if (n=="OutputElm")
-    		return (CircuitElm) new OutputElm(x1, y1);
     	if (n=="CurrentElm")
     		return (CircuitElm) new CurrentElm(x1, y1);
     	if (n=="ProbeElm")

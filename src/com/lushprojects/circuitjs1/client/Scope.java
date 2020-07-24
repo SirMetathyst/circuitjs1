@@ -318,8 +318,7 @@ class Scope {
 	    plots.add(new ScopePlot(ce, UNITS_V, 0));
 	    
 	    // create plot for current if applicable
-	    if (ce != null && !(ce instanceof OutputElm ||
-		    ce instanceof ProbeElm))
+	    if (ce != null && !(ce instanceof ProbeElm))
 		plots.add(new ScopePlot(ce, UNITS_A, VAL_CURRENT));
 	} else {
 	    int u = ce.getScopeUnits(val);
@@ -1629,7 +1628,7 @@ class Scope {
     	while (true) {
     	    for (e++; e < sim.elmList.size(); e++) {
     		CircuitElm ce = sim.getElm(e);
-    		if ((ce instanceof OutputElm || ce instanceof ProbeElm) &&
+    		if ((ce instanceof ProbeElm) &&
     			ce != plots.get(0).elm) {
     		    yElm = ce;
     		    if (plots.size() == 1)
