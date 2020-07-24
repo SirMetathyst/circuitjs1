@@ -878,7 +878,6 @@ MouseOutHandler, MouseWheelHandler {
     	MenuBar chipMenuBar = new MenuBar(true);
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
     	//chipMenuBar.addItem(getClassCheckItem("Add Static RAM", "SRAMElm"));
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add Custom Logic"), "UserDefinedLogicElm")); // don't change this, it will break people's saved shortcuts
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Digital Chips")), chipMenuBar);
     	
     	MenuBar achipMenuBar = new MenuBar(true);
@@ -4597,7 +4596,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
     	case 203: return new DiacElm(x1, y1, x2, y2, f, st);
     	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
-    	case 208: return new CustomLogicElm(x1, y1, x2, y2, f, st);
     	case 210: return new DataRecorderElm(x1, y1, x2, y2, f, st);
     	case 211: return new AudioOutputElm(x1, y1, x2, y2, f, st);
     	case 212: return new VCVSElm(x1, y1, x2, y2, f, st);
@@ -4691,11 +4689,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new MonostableElm(x1, y1);
     	if (n=="LabeledNodeElm")
     		return (CircuitElm) new LabeledNodeElm(x1, y1);
-    	
-    	// if you take out UserDefinedLogicElm, it will break people's saved shortcuts
-    	if (n=="UserDefinedLogicElm" || n=="CustomLogicElm")
-    	    	return (CircuitElm) new CustomLogicElm(x1, y1);
-    	
     	if (n=="DataRecorderElm")
 		return (CircuitElm) new DataRecorderElm(x1, y1);
     	if (n=="AudioOutputElm")
