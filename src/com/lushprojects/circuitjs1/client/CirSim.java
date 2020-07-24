@@ -2449,8 +2449,6 @@ MouseOutHandler, MouseWheelHandler {
     		doExportAsText();
     	if (item=="exportasimage")
 		doExportAsImage();
-    	if (item=="createsubcircuit")
-		doCreateSubcircuit();
     	if (item=="dcanalysis")
     	    	doDCAnalysis();
     	if (item=="print")
@@ -2704,16 +2702,6 @@ MouseOutHandler, MouseWheelHandler {
     	dialogShowing.show();
     }
     
-    void doCreateSubcircuit()
-    {
-    	EditCompositeModelDialog dlg = new EditCompositeModelDialog();
-    	if (!dlg.createModel())
-    	    return;
-    	dlg.createDialog();
-    	dialogShowing = dlg;
-    	dialogShowing.show();
-    }
-    
     void doExportAsLocalFile() {
     	String dump = dumpCircuit();
     	dialogShowing = new ExportAsLocalFileDialog(dump);
@@ -2724,7 +2712,6 @@ MouseOutHandler, MouseWheelHandler {
     String dumpCircuit() {
 	int i;
 	CustomLogicModel.clearDumpedFlags();
-	CustomCompositeModel.clearDumpedFlags();
 	DiodeModel.clearDumpedFlags();
 	int f = (dotsCheckItem.getState()) ? 1 : 0;
 	f |= (smallGridCheckItem.getState()) ? 2 : 0;
@@ -2973,10 +2960,6 @@ MouseOutHandler, MouseWheelHandler {
 		    if (tint == 38) {
 			Adjustable adj = new Adjustable(st, this);
 			adjustables.add(adj);
-			break;
-		    }
-		    if (tint == '.') {
-			CustomCompositeModel.undumpModel(st);
 			break;
 		    }
 		    int x1 = new Integer(st.nextToken()).intValue();
@@ -3946,7 +3929,6 @@ MouseOutHandler, MouseWheelHandler {
     String copyOfSelectedElms() {
 	String r="";
 	CustomLogicModel.clearDumpedFlags();
-	CustomCompositeModel.clearDumpedFlags();
 	DiodeModel.clearDumpedFlags();
 	for (int i = elmList.size()-1; i >= 0; i--) {
 	    CircuitElm ce = getElm(i);
@@ -4376,7 +4358,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
     	case 214: return new CCVSElm(x1, y1, x2, y2, f, st);
     	case 215: return new CCCSElm(x1, y1, x2, y2, f, st);
-    	case 410: return new CustomCompositeElm(x1, y1, x2, y2, f, st);
         }
     	return null;
     }
@@ -4418,8 +4399,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new CCVSElm(x1, y1);
     	if (n=="CCCSElm")
 		return (CircuitElm) new CCCSElm(x1, y1);
-    	if (n=="CustomCompositeElm")
-		return (CircuitElm) new CustomCompositeElm(x1, y1);
     	return null;
     }
     
@@ -4604,66 +4583,6 @@ MouseOutHandler, MouseWheelHandler {
 		if (getElm(i).isSelected())
 		    return true;
 	    return false;
-	}
-	
-	public CustomCompositeModel getCircuitAsComposite() {
-	    int i;
-	    String nodeList = "";
-	    String dump = "";
-//	    String models = "";
-	    CustomLogicModel.clearDumpedFlags();
-	    DiodeModel.clearDumpedFlags();
-	    Vector<ExtListEntry> extList = new Vector<ExtListEntry>();
-	    boolean sel = isSelection();
-	    
-	    // mapping of node labels -> node numbers
-	    HashMap<String, Integer> nodeNameHash = new HashMap<String, Integer>();
-	    
-	    // mapping of node numbers -> equivalent node numbers (if they both have the same label)
-	    HashMap<Integer, Integer> nodeNumberHash = new HashMap<Integer, Integer>();
-	    
-	    // output all the elements
-	    for (i = 0; i != elmList.size(); i++) {
-		CircuitElm ce = getElm(i);
-		if (sel && !ce.isSelected())
-		    continue;
-		// don't need these elements dumped
-		if (ce instanceof WireElm)
-		    continue;
-		if (ce instanceof GraphicElm)
-		    continue;
-		int j;
-		if (nodeList.length() > 0)
-		    nodeList += "\r";
-		nodeList += ce.getClass().getSimpleName();
-		for (j = 0; j != ce.getPostCount(); j++) {
-		    int n = ce.getNode(j);
-		    Integer nobj = nodeNumberHash.get(n);
-		    int n0 = (nobj == null) ? n : nobj;
-		    nodeList += " " + n0;
-		}
-		
-	        // save positions
-                int x1 = ce.x;  int y1 = ce.y;
-                int x2 = ce.x2; int y2 = ce.y2;
-                
-                // set them to 0 so they're easy to remove
-                ce.x = ce.y = ce.x2 = ce.y2 = 0;
-
-                String tstring = ce.dump();
-                tstring = tstring.replaceFirst("[A-Za-z0-9]+ 0 0 0 0 ", ""); // remove unused tint_x1 y1 x2 y2 coords for internal components
-                
-                // restore positions
-                ce.x = x1; ce.y = y1; ce.x2 = x2; ce.y2 = y2;
-                if (dump.length() > 0)
-                    dump += " ";
-                dump += CustomLogicModel.escape(tstring);
-	    }
-	    CustomCompositeModel ccm = new CustomCompositeModel();
-	    ccm.nodeList = nodeList;
-	    ccm.elmDump = dump;
-	    ccm.extList = extList;
-	    return ccm;
 	}
 	
 	static void invertMatrix(double a[][], int n) {
