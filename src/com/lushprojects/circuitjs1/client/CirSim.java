@@ -833,7 +833,6 @@ MouseOutHandler, MouseWheelHandler {
     	MenuBar outputMenuBar = new MenuBar(true);
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Analog Output"), "OutputElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
-    	outputMenuBar.addItem(getClassCheckItem(LS("Add Box"), "BoxElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Labeled Node"), "LabeledNodeElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Data Export"), "DataRecorderElm"));
@@ -4499,7 +4498,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'O': return new OutputElm(x1, y1, x2, y2, f, st);
     	case 'R': return new RailElm(x1, y1, x2, y2, f, st);
     	case 'a': return new OpAmpElm(x1, y1, x2, y2, f, st);
-    	case 'b': return new BoxElm(x1, y1, x2, y2, f, st);
     	case 'c': return new CapacitorElm(x1, y1, x2, y2, f, st);   	
     	case 'd': return new DiodeElm(x1, y1, x2, y2, f, st);
     	case 'f': return new MosfetElm(x1, y1, x2, y2, f, st);
@@ -4568,8 +4566,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new OpAmpElm(x1, y1);
     	if (n=="AnalogSwitchElm")
     		return (CircuitElm) new AnalogSwitchElm(x1, y1);
-    	if (n=="BoxElm")
-    		return (CircuitElm) new BoxElm(x1, y1);
     	if (n=="LabeledNodeElm")
     		return (CircuitElm) new LabeledNodeElm(x1, y1);
     	if (n=="DataRecorderElm")
