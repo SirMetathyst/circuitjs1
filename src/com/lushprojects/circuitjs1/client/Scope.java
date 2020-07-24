@@ -319,7 +319,6 @@ class Scope {
 	    
 	    // create plot for current if applicable
 	    if (ce != null && !(ce instanceof OutputElm ||
-		    ce instanceof LogicOutputElm ||
 		    ce instanceof AudioOutputElm ||
 		    ce instanceof ProbeElm))
 		plots.add(new ScopePlot(ce, UNITS_A, VAL_CURRENT));
