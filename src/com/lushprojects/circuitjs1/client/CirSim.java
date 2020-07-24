@@ -816,7 +816,6 @@ MouseOutHandler, MouseWheelHandler {
 
     	MenuBar passMenuBar = new MenuBar(true);
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Memristor"), "MemristorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Custom Transformer"), "CustomTransformerElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Passive Components")), passMenuBar);
 
@@ -4514,7 +4513,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'g': return new GroundElm(x1, y1, x2, y2, f, st);
     	case 'i': return new CurrentElm(x1, y1, x2, y2, f, st);
     	case 'j': return new JfetElm(x1, y1, x2, y2, f, st);
-    	case 'm': return new MemristorElm(x1, y1, x2, y2, f, st);
     	case 'p': return new ProbeElm(x1, y1, x2, y2, f, st);
     	case 'r': return new ResistorElm(x1, y1, x2, y2, f, st);
     	case 't': return new TransistorElm(x1, y1, x2, y2, f, st);
@@ -4574,8 +4572,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new DiodeElm(x1, y1);
     	if (n=="ACVoltageElm")
     		return (CircuitElm) new ACVoltageElm(x1, y1);
-    	if (n=="MemristorElm")
-    		return (CircuitElm) new MemristorElm(x1, y1);
     	if (n=="FMElm")
     		return (CircuitElm) new FMElm(x1, y1);
     	if (n=="LampElm")
