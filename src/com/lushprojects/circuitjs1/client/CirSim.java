@@ -893,7 +893,6 @@ MouseOutHandler, MouseWheelHandler {
     	MenuBar chipMenuBar = new MenuBar(true);
     	chipMenuBar.addItem(getClassCheckItem(LS("Add D Flip-Flop"), "DFlipFlopElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add JK Flip-Flop"), "JKFlipFlopElm"));
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add 7 Segment Decoder"), "SevenSegDecoderElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Multiplexer"), "MultiplexerElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Demultiplexer"), "DeMultiplexerElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add PISO shift register"), "PisoShiftElm"));
@@ -4636,7 +4635,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 194: return new MonostableElm(x1, y1, x2, y2, f, st);
     	case 195: return new HalfAdderElm(x1, y1, x2, y2, f, st);
     	case 196: return new FullAdderElm(x1, y1, x2, y2, f, st);
-    	case 197: return new SevenSegDecoderElm(x1, y1, x2, y2, f, st);
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
     	case 203: return new DiacElm(x1, y1, x2, y2, f, st);
     	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
@@ -4771,8 +4769,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new VCOElm(x1, y1);
     	if (n=="BoxElm")
     		return (CircuitElm) new BoxElm(x1, y1);
-    	if (n=="SevenSegDecoderElm")
-    		return (CircuitElm) new SevenSegDecoderElm(x1, y1);
     	if (n=="FullAdderElm")
     		return (CircuitElm) new FullAdderElm(x1, y1);
     	if (n=="HalfAdderElm")
