@@ -881,7 +881,6 @@ MouseOutHandler, MouseWheelHandler {
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Digital Chips")), chipMenuBar);
     	
     	MenuBar achipMenuBar = new MenuBar(true);
-    	achipMenuBar.addItem(getClassCheckItem(LS("Add Phase Comparator"), "PhaseCompElm"));
     	achipMenuBar.addItem(getClassCheckItem(LS("Add DAC"), "DACElm"));
     	achipMenuBar.addItem(getClassCheckItem(LS("Add VCO"), "VCOElm"));
     	achipMenuBar.addItem(getClassCheckItem(LS("Add Monostable"), "MonostableElm"));
@@ -4585,7 +4584,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
     	case 158: return new VCOElm(x1, y1, x2, y2, f, st);
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
-    	case 161: return new PhaseCompElm(x1, y1, x2, y2, f, st);
     	case 163: return new RingCounterElm(x1, y1, x2, y2, f, st);
     	case 166: return new DACElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
@@ -4671,8 +4669,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new CC2Elm(x1, y1);
     	if (n=="CC2NegElm")
     		return (CircuitElm) new CC2NegElm(x1, y1);
-    	if (n=="PhaseCompElm")
-    		return (CircuitElm) new PhaseCompElm(x1, y1);
     	
 	// if you take out RingCounterElm, it will break subcircuits
     	// if you take out DecadeElm, it will break the menus and people's saved shortcuts
