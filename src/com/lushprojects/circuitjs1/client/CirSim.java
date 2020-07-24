@@ -900,7 +900,6 @@ MouseOutHandler, MouseWheelHandler {
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Latch"), "LatchElm"));
     	//chipMenuBar.addItem(getClassCheckItem("Add Static RAM", "SRAMElm"));
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add Sequence generator"), "SeqGenElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Full Adder"), "FullAdderElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Half Adder"), "HalfAdderElm"));
     	chipMenuBar.addItem(getClassCheckItem(LS("Add Custom Logic"), "UserDefinedLogicElm")); // don't change this, it will break people's saved shortcuts
@@ -4631,7 +4630,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 184: return new MultiplexerElm(x1, y1, x2, y2, f, st);
     	case 185: return new DeMultiplexerElm(x1, y1, x2, y2, f, st);
     	case 186: return new PisoShiftElm(x1, y1, x2, y2, f, st);
-    	case 188: return new SeqGenElm(x1, y1, x2, y2, f, st);
     	case 194: return new MonostableElm(x1, y1, x2, y2, f, st);
     	case 195: return new HalfAdderElm(x1, y1, x2, y2, f, st);
     	case 196: return new FullAdderElm(x1, y1, x2, y2, f, st);
@@ -4763,8 +4761,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new ADCElm(x1, y1);
     	if (n=="LatchElm")
     		return (CircuitElm) new LatchElm(x1, y1);
-    	if (n=="SeqGenElm")
-    		return (CircuitElm) new SeqGenElm(x1, y1);
     	if (n=="VCOElm")
     		return (CircuitElm) new VCOElm(x1, y1);
     	if (n=="BoxElm")
