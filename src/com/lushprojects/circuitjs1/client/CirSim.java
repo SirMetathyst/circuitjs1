@@ -816,7 +816,6 @@ MouseOutHandler, MouseWheelHandler {
 
     	MenuBar passMenuBar = new MenuBar(true);
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Custom Transformer"), "CustomTransformerElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Passive Components")), passMenuBar);
 
     	MenuBar inputMenuBar = new MenuBar(true);
@@ -4384,7 +4383,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
     	case 214: return new CCVSElm(x1, y1, x2, y2, f, st);
     	case 215: return new CCCSElm(x1, y1, x2, y2, f, st);
-    	case 406: return new CustomTransformerElm(x1, y1, x2, y2, f, st);
     	case 410: return new CustomCompositeElm(x1, y1, x2, y2, f, st);
         }
     	return null;
@@ -4431,8 +4429,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new CCVSElm(x1, y1);
     	if (n=="CCCSElm")
 		return (CircuitElm) new CCCSElm(x1, y1);
-    	if (n=="CustomTransformerElm")
-    	    	return (CircuitElm) new CustomTransformerElm(x1, y1);
     	if (n=="CustomCompositeElm")
 		return (CircuitElm) new CustomCompositeElm(x1, y1);
     	return null;
