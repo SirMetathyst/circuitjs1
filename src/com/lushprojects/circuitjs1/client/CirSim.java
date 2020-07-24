@@ -850,7 +850,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Diode"), "DiodeElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, NPN)"), "NTransistorElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, PNP)"), "PTransistorElm"));
-    	activeMenuBar.addItem(getClassCheckItem(LS("Add DIAC"), "DiacElm"));
     	//    	activeMenuBar.addItem(getClassCheckItem("Add Photoresistor", "PhotoResistorElm"));
     	//    	activeMenuBar.addItem(getClassCheckItem("Add Thermistor", "ThermistorElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Components")), activeMenuBar);
@@ -4572,7 +4571,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
     	case 183: return new InvertingSchmittElm(x1, y1, x2, y2, f, st);
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
-    	case 203: return new DiacElm(x1, y1, x2, y2, f, st);
     	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
     	case 210: return new DataRecorderElm(x1, y1, x2, y2, f, st);
     	case 211: return new AudioOutputElm(x1, y1, x2, y2, f, st);
@@ -4637,8 +4635,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new AnalogSwitchElm(x1, y1);
     	if (n=="InvertingSchmittElm")
     		return (CircuitElm) new InvertingSchmittElm(x1, y1);
-    	if (n=="DiacElm")
-    		return (CircuitElm) new DiacElm(x1, y1);
     	if (n=="CC2Elm")
     		return (CircuitElm) new CC2Elm(x1, y1);
     	if (n=="CC2NegElm")
