@@ -875,14 +875,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Subcircuit Instance"), "CustomCompositeElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Building Blocks")), activeBlocMenuBar);
     	
-    	MenuBar chipMenuBar = new MenuBar(true);
-    	chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
-    	//chipMenuBar.addItem(getClassCheckItem("Add Static RAM", "SRAMElm"));
-    	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Digital Chips")), chipMenuBar);
-    	
-    	MenuBar achipMenuBar = new MenuBar(true);
-    	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Analog and Hybrid Chips")), achipMenuBar);
-    	
     	MenuBar otherMenuBar = new MenuBar(true);
     	CheckboxMenuItem mi;
     	otherMenuBar.addItem(mi=getClassCheckItem(LS("Drag All"), "DragAll"));
@@ -4580,7 +4572,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'v': return new VoltageElm(x1, y1, x2, y2, f, st);
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
-    	case 163: return new RingCounterElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
     	case 179: return new CC2Elm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
@@ -4663,11 +4654,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new CC2Elm(x1, y1);
     	if (n=="CC2NegElm")
     		return (CircuitElm) new CC2NegElm(x1, y1);
-    	
-	// if you take out RingCounterElm, it will break subcircuits
-    	// if you take out DecadeElm, it will break the menus and people's saved shortcuts
-    	if (n=="DecadeElm" || n=="RingCounterElm")
-    		return (CircuitElm) new RingCounterElm(x1, y1);
     	if (n=="BoxElm")
     		return (CircuitElm) new BoxElm(x1, y1);
     	if (n=="LabeledNodeElm")
