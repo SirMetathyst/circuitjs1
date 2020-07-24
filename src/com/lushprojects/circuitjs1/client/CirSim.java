@@ -816,7 +816,6 @@ MouseOutHandler, MouseWheelHandler {
 
     	MenuBar passMenuBar = new MenuBar(true);
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Memristor"), "MemristorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Fuse"), "FuseElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Custom Transformer"), "CustomTransformerElm"));
@@ -1345,16 +1344,6 @@ MouseOutHandler, MouseWheelHandler {
 	CircuitElm c2 = getElm(hintItem2);
 	if (c1 == null || c2 == null)
 	    return null;
-	if (hintType == HINT_LC) {
-	    if (!(c1 instanceof InductorElm))
-		return null;
-	    if (!(c2 instanceof CapacitorElm))
-		return null;
-	    InductorElm ie = (InductorElm) c1;
-	    CapacitorElm ce = (CapacitorElm) c2;
-	    return LS("res.f = ") + CircuitElm.getUnitText(1/(2*pi*Math.sqrt(ie.inductance*
-						    ce.capacitance)), "Hz");
-	}
 	if (hintType == HINT_RC) {
 	    if (!(c1 instanceof ResistorElm))
 		return null;
@@ -1374,16 +1363,6 @@ MouseOutHandler, MouseWheelHandler {
 	    CapacitorElm ce = (CapacitorElm) c2;
 	    return LS("f.3db = ") +
 		CircuitElm.getUnitText(1/(2*pi*re.resistance*ce.capacitance), "Hz");
-	}
-	if (hintType == HINT_3DB_L) {
-	    if (!(c1 instanceof ResistorElm))
-		return null;
-	    if (!(c2 instanceof InductorElm))
-		return null;
-	    ResistorElm re = (ResistorElm) c1;
-	    InductorElm ie = (InductorElm) c2;
-	    return LS("f.3db = ") +
-		CircuitElm.getUnitText(re.resistance/(2*pi*ie.inductance), "Hz");
 	}
 	if (hintType == HINT_TWINT) {
 	    if (!(c1 instanceof ResistorElm))
@@ -1781,17 +1760,6 @@ MouseOutHandler, MouseWheelHandler {
 
 	for (i = 0; i != elmList.size(); i++) {
 	    CircuitElm ce = getElm(i);
-	    // look for inductors with no current path
-	    if (ce instanceof InductorElm) {
-		FindPathInfo fpi = new FindPathInfo(FindPathInfo.INDUCT, ce,
-						    ce.getNode(1));
-		// first try findPath with maximum depth of 5, to avoid slowdowns
-		if (!fpi.findPath(ce.getNode(0), 5) &&
-		    !fpi.findPath(ce.getNode(0))) {
-//		    console(ce + " no path");
-		    ce.reset();
-		}
-	    }
 	    // look for current sources with no current path
 	    if (ce instanceof CurrentElm) {
 		CurrentElm cur = (CurrentElm) ce;
@@ -2119,16 +2087,6 @@ MouseOutHandler, MouseWheelHandler {
 		    //System.out.println(ce + " has ground");
 		    used[n1] = false;
 		    return true;
-		}
-		if (type == INDUCT && ce instanceof InductorElm) {
-		    // inductors can use paths with other inductors of matching current
-		    double c = ce.getCurrent();
-		    if (j == 0)
-			c = -c;
-		    //System.out.println("matching " + c + " to " + firstElm.getCurrent());
-		    //System.out.println(ce + " " + firstElm);
-		    if (Math.abs(c-firstElm.getCurrent()) > 1e-10)
-			continue;
 		}
 		int k;
 		for (k = 0; k != ce.getConnectionNodeCount(); k++) {
@@ -3951,7 +3909,7 @@ MouseOutHandler, MouseWheelHandler {
 
     void scrollValues(int x, int y, int deltay) {
     	if (mouseElm!=null && !dialogIsShowing() && scopeSelected == -1)
-    		if (mouseElm instanceof ResistorElm || mouseElm instanceof CapacitorElm ||  mouseElm instanceof InductorElm) {
+    		if (mouseElm instanceof ResistorElm || mouseElm instanceof CapacitorElm) {
     			scrollValuePopup = new ScrollValuePopup(x, y, deltay, mouseElm, this);
     		}
     }
@@ -4557,7 +4515,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'g': return new GroundElm(x1, y1, x2, y2, f, st);
     	case 'i': return new CurrentElm(x1, y1, x2, y2, f, st);
     	case 'j': return new JfetElm(x1, y1, x2, y2, f, st);
-    	case 'l': return new InductorElm(x1, y1, x2, y2, f, st);
     	case 'm': return new MemristorElm(x1, y1, x2, y2, f, st);
     	case 'p': return new ProbeElm(x1, y1, x2, y2, f, st);
     	case 'r': return new ResistorElm(x1, y1, x2, y2, f, st);
@@ -4605,8 +4562,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new WireElm(x1, y1);
     	if (n=="CapacitorElm")
     		return (CircuitElm) new CapacitorElm(x1, y1);
-    	if (n=="InductorElm")
-    		return (CircuitElm) new InductorElm(x1, y1);
     	if (n=="DCVoltageElm" || n=="VoltageElm")
     		return (CircuitElm) new DCVoltageElm(x1, y1);
     	if (n=="VarRailElm")

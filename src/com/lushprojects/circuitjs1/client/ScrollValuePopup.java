@@ -96,10 +96,6 @@ public class ScrollValuePopup extends PopupPanel implements MouseOutHandler, Mou
 			minpow=-11;
 			maxpow=-3;
 		} 
-		if (myElm instanceof InductorElm) {
-			minpow=-6;
-			maxpow=0;
-		} 
 		values = new double[2+(maxpow-minpow)*12];
 		int ptr=0;
 		for(int i=minpow; i<=maxpow; i++) {
