@@ -839,8 +839,6 @@ MouseOutHandler, MouseWheelHandler {
     	MenuBar activeBlocMenuBar = new MenuBar(true);
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (ideal, - on top)"), "OpAmpElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPST)"), "AnalogSwitchElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Current Source"), "VCCSElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Subcircuit Instance"), "CustomCompositeElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Building Blocks")), activeBlocMenuBar);
     	
     	MenuBar otherMenuBar = new MenuBar(true);
@@ -1746,15 +1744,6 @@ MouseOutHandler, MouseWheelHandler {
 		    cur.stampCurrentSource(true);
 		} else
 		    cur.stampCurrentSource(false);
-	    }
-	    if (ce instanceof VCCSElm) {
-		VCCSElm cur = (VCCSElm) ce;
-		FindPathInfo fpi = new FindPathInfo(FindPathInfo.INDUCT, ce,
-						    cur.getOutputNode(0));
-		if (cur.hasCurrentOutput() && !fpi.findPath(cur.getOutputNode(1))) {
-		    cur.broken = true;
-		} else
-		    cur.broken = false;
 	    }
 	    // look for voltage source or wire loops.  we do this for voltage sources or wire-like elements (not actual wires
 	    // because those are optimized out, so the findPath won't work)
@@ -4351,7 +4340,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
-    	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
         }
     	return null;
     }
@@ -4385,8 +4373,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new OpAmpElm(x1, y1);
     	if (n=="AnalogSwitchElm")
     		return (CircuitElm) new AnalogSwitchElm(x1, y1);
-    	if (n=="VCCSElm")
-		return (CircuitElm) new VCCSElm(x1, y1);
     	return null;
     }
     
