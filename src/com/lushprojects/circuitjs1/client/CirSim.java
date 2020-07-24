@@ -825,7 +825,6 @@ MouseOutHandler, MouseWheelHandler {
     	inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Voltage Source (2-terminal)"), "ACVoltageElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Voltage Source (1-terminal)"), "RailElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Variable Voltage"), "VarRailElm"));
-    	inputMenuBar.addItem(getClassCheckItem(LS("Add FM Source"), "FMElm"));
     	inputMenuBar.addItem(getClassCheckItem(LS("Add Current Source"), "CurrentElm"));
 
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Inputs and Sources")), inputMenuBar);
@@ -4508,7 +4507,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
     	case 181: return new LampElm(x1, y1, x2, y2, f, st);
-    	case 201: return new FMElm(x1, y1, x2, y2, f, st);
     	case 212: return new VCVSElm(x1, y1, x2, y2, f, st);
     	case 213: return new VCCSElm(x1, y1, x2, y2, f, st);
     	case 214: return new CCVSElm(x1, y1, x2, y2, f, st);
@@ -4551,8 +4549,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new DiodeElm(x1, y1);
     	if (n=="ACVoltageElm")
     		return (CircuitElm) new ACVoltageElm(x1, y1);
-    	if (n=="FMElm")
-    		return (CircuitElm) new FMElm(x1, y1);
     	if (n=="LampElm")
     		return (CircuitElm) new LampElm(x1, y1);
     	if (n=="OpAmpElm")
