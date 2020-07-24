@@ -818,7 +818,6 @@ MouseOutHandler, MouseWheelHandler {
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor (polarized)"), "PolarCapacitorElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
-    	passMenuBar.addItem(getClassCheckItem(LS("Add Potentiometer"), "PotElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Transformer"), "TransformerElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Tapped Transformer"), "TappedTransformerElm"));
     	passMenuBar.addItem(getClassCheckItem(LS("Add Transmission Line"), "TransLineElm"));
@@ -3773,7 +3772,7 @@ MouseOutHandler, MouseWheelHandler {
 	int i;
 	
 	// prevent confusion
-	if (elm instanceof VarRailElm || elm instanceof PotElm)
+	if (elm instanceof VarRailElm)
 	    return false;
 	
 	for (i = 0; ; i++) {
@@ -4651,7 +4650,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 171: return new TransLineElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
     	case 173: return new TriodeElm(x1, y1, x2, y2, f, st);
-    	case 174: return new PotElm(x1, y1, x2, y2, f, st);
     	case 175: return new TunnelDiodeElm(x1, y1, x2, y2, f, st);
     	case 176: return new VaractorElm(x1, y1, x2, y2, f, st);
     	case 177: return new SCRElm(x1, y1, x2, y2, f, st);
@@ -4723,8 +4721,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new DCVoltageElm(x1, y1);
     	if (n=="VarRailElm")
     		return (CircuitElm) new VarRailElm(x1, y1);
-    	if (n=="PotElm")
-    		return (CircuitElm) new PotElm(x1, y1);
     	if (n=="OutputElm")
     		return (CircuitElm) new OutputElm(x1, y1);
     	if (n=="CurrentElm")
