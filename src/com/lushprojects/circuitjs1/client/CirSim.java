@@ -844,7 +844,6 @@ MouseOutHandler, MouseWheelHandler {
     	MenuBar outputMenuBar = new MenuBar(true);
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Analog Output"), "OutputElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
-    	outputMenuBar.addItem(getClassCheckItem(LS("Add Text"), "TextElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Box"), "BoxElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
     	outputMenuBar.addItem(getClassCheckItem(LS("Add Ohmmeter"), "OhmMeterElm"));
@@ -4619,7 +4618,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 't': return new TransistorElm(x1, y1, x2, y2, f, st);
     	case 'v': return new VoltageElm(x1, y1, x2, y2, f, st);
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
-    	case 'x': return new TextElm(x1, y1, x2, y2, f, st);
     	case 150: return new AndGateElm(x1, y1, x2, y2, f, st);
     	case 155: return new DFlipFlopElm(x1, y1, x2, y2, f, st);
     	case 156: return new JKFlipFlopElm(x1, y1, x2, y2, f, st);
@@ -4795,8 +4793,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new VCOElm(x1, y1);
     	if (n=="BoxElm")
     		return (CircuitElm) new BoxElm(x1, y1);
-    	if (n=="TextElm")
-    		return (CircuitElm) new TextElm(x1, y1);
     	if (n=="SevenSegDecoderElm")
     		return (CircuitElm) new SevenSegDecoderElm(x1, y1);
     	if (n=="FullAdderElm")
