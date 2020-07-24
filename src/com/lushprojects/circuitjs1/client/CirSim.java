@@ -892,7 +892,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add CCII+"), "CC2Elm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add CCII-"), "CC2NegElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Comparator (Hi-Z/GND output)"), "ComparatorElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add OTA (LM13700 style)"), "OTAElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Voltage Source"), "VCVSElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Current Source"), "VCCSElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Current-Controlled Voltage Source"), "CCVSElm"));
@@ -4694,7 +4693,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 368: return new TestPointElm(x1, y1, x2, y2, f, st);
     	case 400: return new DarlingtonElm(x1, y1, x2, y2, f, st);
     	case 401: return new ComparatorElm(x1, y1, x2, y2, f, st);
-    	case 402: return new OTAElm(x1, y1, x2, y2, f, st);
     	case 403: return new ScopeElm(x1, y1, x2, y2, f, st);
     	case 404: return new FuseElm(x1, y1, x2, y2, f, st);
     	case 405: return new LEDArrayElm(x1, y1, x2, y2, f, st);
@@ -4882,8 +4880,6 @@ MouseOutHandler, MouseWheelHandler {
 		return (CircuitElm) new PDarlingtonElm(x1, y1);
     	if (n=="ComparatorElm")
 		return (CircuitElm) new ComparatorElm(x1, y1);
-    	if (n=="OTAElm")
-		return (CircuitElm) new OTAElm(x1, y1);
     	if (n=="VCVSElm")
 		return (CircuitElm) new VCVSElm(x1, y1);
     	if (n=="VCCSElm")
