@@ -868,7 +868,6 @@ MouseOutHandler, MouseWheelHandler {
     	activeMenuBar.addItem(getClassCheckItem(LS("Add JFET (P-Channel)"), "PJfetElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add SCR"), "SCRElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add DIAC"), "DiacElm"));
-    	activeMenuBar.addItem(getClassCheckItem(LS("Add TRIAC"), "TriacElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Darlington Pair (NPN)"), "NDarlingtonElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Darlington Pair (PNP)"), "PDarlingtonElm"));
     	activeMenuBar.addItem(getClassCheckItem(LS("Add Varactor/Varicap"), "VaractorElm"));
@@ -4669,7 +4668,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 197: return new SevenSegDecoderElm(x1, y1, x2, y2, f, st);
     	case 201: return new FMElm(x1, y1, x2, y2, f, st);
     	case 203: return new DiacElm(x1, y1, x2, y2, f, st);
-    	case 206: return new TriacElm(x1, y1, x2, y2, f, st);
     	case 207: return new LabeledNodeElm(x1, y1, x2, y2, f, st);
     	case 208: return new CustomLogicElm(x1, y1, x2, y2, f, st);
     	case 209: return new PolarCapacitorElm(x1, y1, x2, y2, f, st);   	
@@ -4777,8 +4775,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new SCRElm(x1, y1);
     	if (n=="DiacElm")
     		return (CircuitElm) new DiacElm(x1, y1);
-    	if (n=="TriacElm")
-    		return (CircuitElm) new TriacElm(x1, y1);
     	if (n=="TriodeElm")
     		return (CircuitElm) new TriodeElm(x1, y1);
     	if (n=="VaractorElm")
