@@ -863,7 +863,6 @@ MouseOutHandler, MouseWheelHandler {
 
     	MenuBar activeBlocMenuBar = new MenuBar(true);
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (ideal, - on top)"), "OpAmpElm"));
-    	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (ideal, + on top)"), "OpAmpSwapElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (real)"), "OpAmpRealElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPST)"), "AnalogSwitchElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Schmitt Trigger (Inverting)"), "InvertingSchmittElm"));
@@ -4686,8 +4685,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new LampElm(x1, y1);
     	if (n=="OpAmpElm")
     		return (CircuitElm) new OpAmpElm(x1, y1);
-    	if (n=="OpAmpSwapElm")
-    		return (CircuitElm) new OpAmpSwapElm(x1, y1);
     	if (n=="NMosfetElm" || n == "MosfetElm")
     		return (CircuitElm) new NMosfetElm(x1, y1);
     	if (n=="NJfetElm" || n == "JfetElm")
