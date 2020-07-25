@@ -35,7 +35,6 @@ public abstract class CircuitElm implements Editable {
     
     static CirSim sim;
     static Color whiteColor, selectColor, lightGrayColor;
-    static Font unitsFont;
 
     static NumberFormat showFormat, shortFormat;//, noCommaFormat;
     static final double pi = 3.14159265358979323846;
@@ -88,7 +87,6 @@ public abstract class CircuitElm implements Editable {
     int getDefaultFlags() { return 0; }
 
     static void initClass(CirSim s) {
-	unitsFont = new Font("SansSerif", 0, 12);
 	sim = s;
 	
 	colorScale = new Color[colorScaleCount];
@@ -598,7 +596,6 @@ public abstract class CircuitElm implements Editable {
     void drawValues(Graphics g, String s, double hs) {
 	if (s == null)
 	    return;
-	g.setFont(unitsFont);
 	//FontMetrics fm = g.getFontMetrics();
 	int w = (int)g.context.measureText(s).getWidth();
 	g.setColor(whiteColor);

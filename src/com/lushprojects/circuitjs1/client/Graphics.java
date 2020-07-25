@@ -25,7 +25,6 @@ public class Graphics {
 	
 	Context2d context;
 	int currentFontSize;
-	Font currentFont= null;
 	Color lastColor;
 	
 	  public Graphics(Context2d context) {
@@ -121,18 +120,6 @@ public class Graphics {
 		  }
 		  context.closePath();
 		  context.fill();
-		  }
-	  
-	  public void setFont(Font f){
-		  if (f!=null){
-			  context.setFont(f.fontname);
-			  currentFontSize=f.size;
-			  currentFont=f;
-		  }
-	  }
-	  
-	  Font getFont(){
-		  return currentFont;
 	  }
 	  
 	   static int distanceSq(int x1, int y1, int x2, int y2) {

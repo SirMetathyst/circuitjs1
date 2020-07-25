@@ -989,8 +989,6 @@ MouseOutHandler, MouseWheelHandler {
 	
 	int i;
 //	Font oldfont = g.getFont();
-	Font oldfont = CircuitElm.unitsFont;
-	g.setFont(oldfont);
 	
 	// this causes bad behavior on Chrome 55
 //	g.clipRect(0, 0, circuitArea.width, circuitArea.height);
@@ -1076,7 +1074,6 @@ MouseOutHandler, MouseWheelHandler {
 	    g.setColor(Color.black);
 	g.fillRect(0, circuitArea.height, circuitArea.width, cv.getCoordinateSpaceHeight()-circuitArea.height);
 //	g.restore();
-	g.setFont(oldfont);
 	if (mouseWasOverSplitter) {
 		g.setColor(Color.cyan);
 		g.setLineWidth(4.0);
