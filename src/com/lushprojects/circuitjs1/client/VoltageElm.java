@@ -232,7 +232,7 @@ class VoltageElm extends CircuitElm {
 	{
 	    g.setColor(needsHighlight() ? selectColor : whiteColor);
 	    setPowerColor(g, false);
-	    drawCenteredText(g, sim.LS("Noise"), xc, yc, true);
+	    drawCenteredText(g, "Noise", xc, yc, true);
 	    break;
 	}
 	case WF_AC:
@@ -339,7 +339,7 @@ class VoltageElm extends CircuitElm {
 	    frequency = ei.value;
 	    double maxfreq = 1/(8*sim.timeStep);
 	    if (frequency > maxfreq) {
-		if (Window.confirm(sim.LS("Adjust timestep to allow for higher frequencies?")))
+		if (Window.confirm("Adjust timestep to allow for higher frequencies?"))
 		    sim.timeStep = 1/(32*frequency);
 		else
 		    frequency = maxfreq;

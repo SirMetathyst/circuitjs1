@@ -17,17 +17,18 @@
     along with CircuitJS1.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+
 package com.lushprojects.circuitjs1.client;
 
 import com.google.gwt.user.client.ui.CheckBox;
 
 class Checkbox extends CheckBox {
 	public Checkbox(String s){
-		super(CirSim.LS(s));
+		super(s);
 	}
 	
 	public Checkbox(String s, boolean b){
-		super(CirSim.LS(s));
+		super(s);
 		this.setValue(b);
 	}
 	

@@ -163,7 +163,7 @@ class DiodeElm extends CircuitElm {
 	if (model.oldStyle)
 	    arr[0] = "diode";
 	else
-	    arr[0] = sim.LS("diode") + " (" + modelName + ")";
+	    arr[0] = "diode" + " (" + modelName + ")";
 	arr[1] = "I = " + getCurrentText(getCurrent());
 	arr[2] = "Vd = " + getVoltageText(getVoltageDiff());
 	arr[3] = "P = " + getUnitText(getPower(), "W");
@@ -198,12 +198,12 @@ class DiodeElm extends CircuitElm {
             if (model.readOnly && !customModelUI)
         		return null;
             EditInfo ei = new EditInfo("", 0, -1, -1);
-            ei.button = new Button(sim.LS("Edit Model"));
+            ei.button = new Button("Edit Model");
             return ei;
         }
         if (n == 2) {
             EditInfo ei = new EditInfo("", 0, -1, -1);
-            ei.button = new Button(sim.LS("Create Simple Model"));
+            ei.button = new Button("Create Simple Model");
             return ei;
         }
         return super.getEditInfo(n);
@@ -235,7 +235,7 @@ class DiodeElm extends CircuitElm {
         }
         if (n == 1) {
             if (model.readOnly) {
-        		Window.alert(sim.LS("This model cannot be modified.  Change the model name to allow customization."));
+        		Window.alert("This model cannot be modified.  Change the model name to allow customization.");
         		return;
             }
             EditDialog editDialog = new EditDialog(model, sim);
@@ -244,7 +244,7 @@ class DiodeElm extends CircuitElm {
             return;
         }
         if (n == 2) {
-            String val = Window.prompt(sim.LS("Fwd Voltage @ 1A"), sim.LS("0.8"));
+            String val = Window.prompt("Fwd Voltage @ 1A", "0.8");
             try {
         		double fwdrop = new Double(val).doubleValue();
         		if (fwdrop > 0) {

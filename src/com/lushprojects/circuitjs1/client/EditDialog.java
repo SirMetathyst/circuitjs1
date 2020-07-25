@@ -57,7 +57,7 @@ class EditDialog extends DialogBox  {
 	EditDialog(Editable ce, CirSim f) {
 //		super(f, "Edit Component", false);
 		super(); // Do we need this?
-		setText(CirSim.LS("Edit Component"));
+		setText("Edit Component");
 		cframe = f;
 		elm = ce;
 //		setLayout(new EditDialogLayout());
@@ -72,13 +72,13 @@ class EditDialog extends DialogBox  {
 		hp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
 		hp.setStyleName("topSpace");
 		vp.add(hp);
-		hp.add(applyButton = new Button(CirSim.LS("Apply")));
+		hp.add(applyButton = new Button("Apply"));
 		applyButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				apply();
 			}
 		});
-		hp.add(okButton = new Button(CirSim.LS("OK")));
+		hp.add(okButton = new Button("OK"));
 		okButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				apply();
@@ -86,7 +86,7 @@ class EditDialog extends DialogBox  {
 			}
 		});
 		hp.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-		hp.add(cancelButton = new Button(CirSim.LS("Cancel")));
+		hp.add(cancelButton = new Button("Cancel"));
 		cancelButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				closeDialog();
@@ -106,7 +106,7 @@ class EditDialog extends DialogBox  {
 				break;
 			EditInfo ei = einfos[i];
 			idx = vp.getWidgetIndex(hp);
-			String name = CirSim.LS(ei.name);
+			String name = ei.name;
 			if (ei.name.startsWith("<"))
 			    vp.insert(l = new HTML(name),idx);
 			else

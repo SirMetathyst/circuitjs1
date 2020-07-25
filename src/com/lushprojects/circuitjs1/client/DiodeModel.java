@@ -222,7 +222,7 @@ public class DiodeModel implements Editable, Comparable<DiodeModel> {
     String getDescription() {
 	if (description == null)
 	    return name;
-	return name + " (" + CirSim.LS(description) + ")";
+	return name + " (" + description + ")";
     }
     
     DiodeModel() {
