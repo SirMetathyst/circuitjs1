@@ -369,7 +369,6 @@ MouseOutHandler, MouseWheelHandler {
 	  fileMenuBar.addItem(exportAsUrlItem);
 	  exportAsTextItem = new MenuItem(LS("Export As Text..."), new MyCommand("file","exportastext"));
 	  fileMenuBar.addItem(exportAsTextItem);
-	  fileMenuBar.addItem(new MenuItem(LS("Export As Image..."), new MyCommand("file","exportasimage")));
 	  fileMenuBar.addItem(new MenuItem(LS("Create Subcircuit..."), new MyCommand("file","createsubcircuit")));
 	  fileMenuBar.addItem(new MenuItem(LS("Find DC Operating Point"), new MyCommand("file", "dcanalysis")));
 	  recoverItem = new MenuItem(LS("Recover Auto-Save"), new MyCommand("file","recover"));
@@ -2412,8 +2411,6 @@ MouseOutHandler, MouseWheelHandler {
     		doExportAsLocalFile();
     	if (item=="exportastext")
     		doExportAsText();
-    	if (item=="exportasimage")
-		doExportAsImage();
     	if (item=="dcanalysis")
     	    	doDCAnalysis();
     	if (item=="print")
@@ -2656,12 +2653,6 @@ MouseOutHandler, MouseWheelHandler {
     	dialogShowing.show();
     }
 
-    void doExportAsImage()
-    {
-    	dialogShowing = new ExportAsImageDialog();
-    	dialogShowing.show();
-    }
-    
     void doExportAsLocalFile() {
     	String dump = dumpCircuit();
     	dialogShowing = new ExportAsLocalFileDialog(dump);
