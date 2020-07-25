@@ -126,14 +126,10 @@ MouseOutHandler, MouseWheelHandler {
     MenuItem elmCutMenuItem;
     MenuItem elmCopyMenuItem;
     MenuItem elmDeleteMenuItem;
-    MenuItem elmScopeMenuItem;
-    MenuItem elmFloatScopeMenuItem;
     MenuItem elmFlipMenuItem;
     MenuItem elmSplitMenuItem;
     MenuItem elmSliderMenuItem;
     MenuBar mainMenuBar;
-    MenuItem scopeRemovePlotMenuItem;
-    MenuItem scopeSelectYMenuItem;
     static HashMap<String,String> localizationMap;
    
     String lastCursorStyle;
@@ -174,9 +170,6 @@ MouseOutHandler, MouseWheelHandler {
     String ctrlMetaKey;
     double t;
     int pause = 10;
-    int scopeSelected = -1;
-    int menuScope = -1;
-    int menuPlot = -1;
     int hintType = -1, hintItem1, hintItem2;
     String stopMessage;
     double timeStep;
@@ -204,10 +197,7 @@ MouseOutHandler, MouseWheelHandler {
     int circuitMatrixSize, circuitMatrixFullSize;
     boolean circuitNeedsMap;
  //   public boolean useFrame;
-    int scopeCount;
-    Scope scopes[];
     boolean showResistanceInVoltageSources;
-   int scopeColCount[];
     static EditDialog editDialog, customLogicEditDialog, diodeModelEditDialog;
     static ScrollValuePopup scrollValuePopup;
     static DialogBox dialogShowing;
@@ -227,7 +217,6 @@ MouseOutHandler, MouseWheelHandler {
 	VerticalPanel verticalPanel;
 	CellPanel buttonPanel;
 	private boolean mouseDragging;
-	double scopeHeightFraction=0.2;
 	
 	Vector<CheckboxMenuItem> mainMenuItems = new Vector<CheckboxMenuItem>();
 	Vector<String> mainMenuItemNames = new Vector<String>();
@@ -283,7 +272,7 @@ MouseOutHandler, MouseWheelHandler {
     void setCircuitArea() {
     	int height = cv.getCanvasElement().getHeight();
     	int width = cv.getCanvasElement().getWidth();
-		int h = (int) ((double)height * scopeHeightFraction);
+		int h = (int) ((double)height * 0.2);
 		/*if (h < 128 && winSize.height > 300)
 		  h = 128;*/
 		circuitArea = new Rectangle(0, 0, width, height-h);
@@ -407,11 +396,6 @@ MouseOutHandler, MouseWheelHandler {
 
 	menuBar.addItem(LS("Draw"), drawMenuBar);
 	
-	m = new MenuBar(true);
-	m.addItem(new MenuItem(LS("Stack All"), new MyCommand("scopes", "stackAll")));
-	m.addItem(new MenuItem(LS("Unstack All"),new MyCommand("scopes", "unstackAll")));
-	m.addItem(new MenuItem(LS("Combine All"),new MyCommand("scopes", "combineAll")));
-	menuBar.addItem(LS("Scopes"), m);
 		
 	optionsMenuBar = m = new MenuBar(true );
 	menuBar.addItem(LS("Options"), optionsMenuBar);
@@ -464,8 +448,7 @@ MouseOutHandler, MouseWheelHandler {
 	m.addItem(printableCheckItem = new CheckboxMenuItem(LS("White Background"),
 			new Command() { public void execute(){
 				int i;
-				for (i=0;i<scopeCount;i++)
-					scopes[i].setRect(scopes[i].rect);
+				
 				setOptionInStorage("whiteBackground", printableCheckItem.getState());
 			}
 	}));
@@ -575,11 +558,6 @@ MouseOutHandler, MouseWheelHandler {
 //	setupList = new Vector();
 	undoStack = new Vector<String>();
 	redoStack = new Vector<String>();
-
-
-	scopes = new Scope[20];
-	scopeColCount = new int[20];
-	scopeCount = 0;
 	
 	random = new Random();
 //	cv.setBackground(Color.black);
@@ -587,8 +565,6 @@ MouseOutHandler, MouseWheelHandler {
 	
 	elmMenuBar = new MenuBar(true);
 	elmMenuBar.addItem(elmEditMenuItem = new MenuItem(LS("Edit..."),new MyCommand("elm","edit")));
-	elmMenuBar.addItem(elmScopeMenuItem = new MenuItem(LS("View in Scope"), new MyCommand("elm","viewInScope")));
-	elmMenuBar.addItem(elmFloatScopeMenuItem  = new MenuItem(LS("View in Undocked Scope"), new MyCommand("elm","viewInFloatScope")));
 	elmMenuBar.addItem(elmCutMenuItem = new MenuItem(LS("Cut"),new MyCommand("elm","cut")));
 	elmMenuBar.addItem(elmCopyMenuItem = new MenuItem(LS("Copy"),new MyCommand("elm","copy")));
 	elmMenuBar.addItem(elmDeleteMenuItem = new MenuItem(LS("Delete"),new MyCommand("elm","delete")));
@@ -987,7 +963,6 @@ MouseOutHandler, MouseWheelHandler {
 //	    mouseElm = (CircuitElm) (editDialog.elm);
 	if (stopElm != null && stopElm != mouseElm)
 	    stopElm.setMouseElm(true);
-	setupScopes();
 
 	Graphics g=new Graphics(backcontext);
 	
@@ -1130,11 +1105,9 @@ MouseOutHandler, MouseWheelHandler {
 	g.fillRect(0, circuitArea.height, circuitArea.width, cv.getCoordinateSpaceHeight()-circuitArea.height);
 //	g.restore();
 	g.setFont(oldfont);
-	int ct = scopeCount;
+	int ct = 0;
 	if (stopMessage != null)
 	    ct = 0;
-	for (i = 0; i != ct; i++)
-	    scopes[i].draw(g);
 	if (mouseWasOverSplitter) {
 		g.setColor(Color.cyan);
 		g.setLineWidth(4.0);
@@ -1177,8 +1150,6 @@ MouseOutHandler, MouseWheelHandler {
 		    info[i] = s;
 	    }
 	    int x = 0;
-	    if (ct != 0)
-		x = scopes[ct-1].rightEdge() + 20;
 	    x = max(x, cv.getCoordinateSpaceWidth()*2/3);
 	  //  x=cv.getCoordinateSpaceWidth()*2/3;
 	    
@@ -1222,69 +1193,7 @@ MouseOutHandler, MouseWheelHandler {
 	myframes++;
     }
 
-    
-    void setupScopes() {
-    	int i;
 
-    	// check scopes to make sure the elements still exist, and remove
-    	// unused scopes/columns
-    	int pos = -1;
-    	for (i = 0; i < scopeCount; i++) {
-    	    	if (scopes[i].needToRemove()) {
-    			int j;
-    			for (j = i; j != scopeCount; j++)
-    				scopes[j] = scopes[j+1];
-    			scopeCount--;
-    			i--;
-    			continue;
-    		}
-    		if (scopes[i].position > pos+1)
-    			scopes[i].position = pos+1;
-    		pos = scopes[i].position;
-    	}
-    	while (scopeCount > 0 && scopes[scopeCount-1].getElm() == null)
-    		scopeCount--;
-    	int h = cv.getCoordinateSpaceHeight() - circuitArea.height;
-    	pos = 0;
-    	for (i = 0; i != scopeCount; i++)
-    		scopeColCount[i] = 0;
-    	for (i = 0; i != scopeCount; i++) {
-    		pos = max(scopes[i].position, pos);
-    		scopeColCount[scopes[i].position]++;
-    	}
-    	int colct = pos+1;
-    	int iw = infoWidth;
-    	if (colct <= 2)
-    		iw = iw*3/2;
-    	int w = (cv.getCoordinateSpaceWidth()-iw) / colct;
-    	int marg = 10;
-    	if (w < marg*2)
-    		w = marg*2;
-    	pos = -1;
-    	int colh = 0;
-    	int row = 0;
-    	int speed = 0;
-    	for (i = 0; i != scopeCount; i++) {
-    		Scope s = scopes[i];
-    		if (s.position > pos) {
-    			pos = s.position;
-    			colh = h / scopeColCount[pos];
-    			row = 0;
-    			speed = s.speed;
-    		}
-    		s.stackCount = scopeColCount[pos];
-    		if (s.speed != speed) {
-    			s.speed = speed;
-    			s.resetGraph();
-    		}
-    		Rectangle r = new Rectangle(pos*w, cv.getCoordinateSpaceHeight()-h+colh*row,
-    				w-marg, colh);
-    		row++;
-    		if (!r.equals(s.rect))
-    			s.setRect(r);
-    	}
-    }
-    
     String getHint() {
 	CircuitElm c1 = getElm(hintItem1);
 	CircuitElm c2 = getElm(hintItem2);
@@ -2187,10 +2096,6 @@ MouseOutHandler, MouseWheelHandler {
     // we need to calculate wire currents for every iteration if someone is viewing a wire in the
     // scope.  Otherwise we can do it only once per frame.
     boolean canDelayWireProcessing() {
-	int i;
-	for (i = 0; i != scopeCount; i++)
-	    if (scopes[i].viewingWire())
-		return false;
 	return true;
     }
     
@@ -2318,8 +2223,6 @@ MouseOutHandler, MouseWheelHandler {
 		getElm(i).stepFinished();
 	    if (!delayWireProcessing)
 		calcWireCurrents();
-	    for (i = 0; i != scopeCount; i++)
-	    	scopes[i].timeStep();
 		
 	    tm = System.currentTimeMillis();
 	    lit = tm;
@@ -2373,8 +2276,6 @@ MouseOutHandler, MouseWheelHandler {
     	int i;
     	for (i = 0; i != elmList.size(); i++)
     		getElm(i).reset();
-    	for (i = 0; i != scopeCount; i++)
-    		scopes[i].resetGraph(true);
     	// TODO: Will need to do IE bug fix here?
     	analyzeFlag = true;
     	if (t == 0)
@@ -2398,7 +2299,7 @@ MouseOutHandler, MouseWheelHandler {
     	    	doPrint();
     	if (item=="recover")
     	    	doRecover();
-    	if ((menu=="elm" || menu=="scopepop") && contextPanel!=null)
+    	if (menu=="elm" && contextPanel!=null)
     		contextPanel.hide();
     	if (menu=="options" && item=="other")
     		doEdit(new EditOptions(this));
@@ -2445,12 +2346,6 @@ MouseOutHandler, MouseWheelHandler {
     		pushUndo();
     		centreCircuit();
     	}
-    	if (item=="stackAll")
-    		stackAll();
-    	if (item=="unstackAll")
-    		unstackAll();
-    	if (item=="combineAll")
-		combineAll();
     	if (item=="zoomin")
     	    zoomCircuit(20);
     	if (item=="zoomout")
@@ -2465,25 +2360,6 @@ MouseOutHandler, MouseWheelHandler {
     		pushUndo();
     		doDelete(true);
     	}
-
-    	if (item=="viewInScope" && menuElm != null) {
-    		int i;
-    		for (i = 0; i != scopeCount; i++)
-    			if (scopes[i].getElm() == null)
-    				break;
-    		if (i == scopeCount) {
-    			if (scopeCount == scopes.length)
-    				return;
-    			scopeCount++;
-    			scopes[i] = new Scope(this);
-    			scopes[i].position = i;
-    			//handleResize();
-    		}
-    		scopes[i].setElm(menuElm);
-    		if (i > 0)
-    		    scopes[i].speed = scopes[i-1].speed;
-    	}
-    
     	if (menu=="circuits" && item.indexOf("setup ") ==0) {
     		pushUndo();
     		int sp = item.indexOf(' ', 6);
@@ -2531,68 +2407,6 @@ MouseOutHandler, MouseWheelHandler {
     	}
 	repaint();
     }
-    
-
-    void stackScope(int s) {
-    	if (s == 0) {
-    		if (scopeCount < 2)
-    			return;
-    		s = 1;
-    	}
-    	if (scopes[s].position == scopes[s-1].position)
-    		return;
-    	scopes[s].position = scopes[s-1].position;
-    	for (s++; s < scopeCount; s++)
-    		scopes[s].position--;
-    }
-
-    void unstackScope(int s) {
-    	if (s == 0) {
-    		if (scopeCount < 2)
-    			return;
-    		s = 1;
-    	}
-    	if (scopes[s].position != scopes[s-1].position)
-    		return;
-    	for (; s < scopeCount; s++)
-    		scopes[s].position++;
-    }
-
-    void combineScope(int s) {
-    	if (s == 0) {
-    		if (scopeCount < 2)
-    			return;
-    		s = 1;
-    	}
-    	scopes[s-1].combine(scopes[s]);
-    	scopes[s].setElm(null);
-    }
-    
-
-    void stackAll() {
-    	int i;
-    	for (i = 0; i != scopeCount; i++) {
-    		scopes[i].position = 0;
-    		scopes[i].showMax = scopes[i].showMin = false;
-    	}
-    }
-
-    void unstackAll() {
-    	int i;
-    	for (i = 0; i != scopeCount; i++) {
-    		scopes[i].position = i;
-    		scopes[i].showMax = true;
-    	}
-    }
-
-    void combineAll() {
-    	int i;
-    	for (i = scopeCount-2; i >= 0; i--) {
-    	    scopes[i].combine(scopes[i+1]);
-    	    scopes[i+1].setElm(null);
-    	}
-    }
-    
 
     void doEdit(Editable eable) {
     	clearSelection();
@@ -2634,11 +2448,6 @@ MouseOutHandler, MouseWheelHandler {
 	    if (m != null && !m.isEmpty())
 		dump += m + "\n";
 	    dump += ce.dump() + "\n";
-	}
-	for (i = 0; i != scopeCount; i++) {
-	    String d = scopes[i].dump();
-	    if (d != null)
-		dump += d + "\n";
 	}
 	for (i = 0; i != adjustables.size(); i++) {
 	    Adjustable adj = adjustables.get(i);
@@ -2807,7 +2616,6 @@ MouseOutHandler, MouseWheelHandler {
 	    currentBar.setValue(50);
 	    powerBar.setValue(50);
 	    CircuitElm.voltageRange = 5;
-	    scopeCount = 0;
 	    lastIterTime = 0;
 	}
 	//cv.repaint();
@@ -2828,13 +2636,6 @@ MouseOutHandler, MouseWheelHandler {
 		String type = st.nextToken();
 		int tint = type.charAt(0);
 		try {
-		    if (tint == 'o') {
-			Scope sc = new Scope(this);
-			sc.position = scopeCount;
-			sc.undump(st);
-			scopes[scopeCount++] = sc;
-			break;
-		    }
 		    if (tint == 'h') {
 			readHint(st);
 			break;
@@ -2896,8 +2697,6 @@ MouseOutHandler, MouseWheelHandler {
 	    for (i = 0; i != adjustables.size(); i++)
 		adjustables.get(i).createSlider(this);
 	}
-//	if (!retain)
-	//    handleResize(); // for scopes
 	needAnalyze();
 	if (centre)
 		centreCircuit();
@@ -2968,10 +2767,6 @@ MouseOutHandler, MouseWheelHandler {
     			return;
     	}
     	
-    	if (tempMouseMode==MODE_DRAG_SPLITTER) {
-    		dragSplitter(e.getX(), e.getY());
-    		return;
-    	}
     	int gx = inverseTransformX(e.getX());
     	int gy = inverseTransformY(e.getY());
     	if (!circuitArea.contains(e.getX(), e.getY()))
@@ -3030,19 +2825,6 @@ MouseOutHandler, MouseWheelHandler {
    	}
     	if (changed)
     	    writeRecoveryToStorage();
-    	repaint();
-    }
-    
-    void dragSplitter(int x, int y) {
-    	double h = (double) cv.getCanvasElement().getHeight();
-    	if (h<1)
-    		h=1;
-    	scopeHeightFraction=1.0-(((double)y)/h);
-    	if (scopeHeightFraction<0.1)
-    		scopeHeightFraction=0.1;
-    	if (scopeHeightFraction>0.9)
-    		scopeHeightFraction=0.9;
-    	setCircuitArea();
     	repaint();
     }
 
@@ -3342,19 +3124,7 @@ MouseOutHandler, MouseWheelHandler {
     			}
     		} // for
     	}
-    	scopeSelected = -1;
     	if (newMouseElm == null) {
-    		for (i = 0; i != scopeCount; i++) {
-    			Scope s = scopes[i];
-    			if (s.rect.contains(sx, sy)) {
-    				newMouseElm=s.getElm();
-    		    	if (s.plotXY) {
-    		    		plotXElm = s.getXElm();
-    		    		plotYElm = s.getYElm();
-    		    	}
-    				scopeSelected = i;
-    			}
-    		}
     		//	    // the mouse pointer was not in any of the bounding boxes, but we
     		//	    // might still be close to a post
     		for (i = 0; i != elmList.size(); i++) {
@@ -3402,12 +3172,7 @@ MouseOutHandler, MouseWheelHandler {
     
     void doPopupMenu() {
     	menuElm = mouseElm;
-    	menuScope=-1;
-    	menuPlot=-1;
     	int x, y;
-    	if (scopeSelected!=-1) {
-
-    	} else {
     		doMainMenuChecks();
     		contextPanel=new PopupPanel(true);
     		contextPanel.add(mainMenuBar);
@@ -3415,7 +3180,7 @@ MouseOutHandler, MouseWheelHandler {
     		y=Math.max(0, Math.min(menuClientY,cv.getCoordinateSpaceHeight()-450));
     		contextPanel.setPopupPosition(x,y);
     		contextPanel.show();
-    	}
+    	
     }
 
     boolean canSplit(CircuitElm ce) {
@@ -3477,7 +3242,6 @@ MouseOutHandler, MouseWheelHandler {
     }
 
     void clearMouseElm() {
-    	scopeSelected = -1;
     	setMouseElm(null);
     	plotXElm = plotYElm = null;
     }
@@ -3620,8 +3384,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	if (mouseElm instanceof MouseWheelHandler && !zoomOnly)
     		((MouseWheelHandler) mouseElm).onMouseWheel(e);
-    	else if (scopeSelected != -1)
-    	    scopes[scopeSelected].onMouseWheel(e);
     	else if (!dialogIsShowing()) {
     	    zoomCircuit(-e.getDeltaY());
     	    zoomTime = System.currentTimeMillis();
@@ -3660,7 +3422,7 @@ MouseOutHandler, MouseWheelHandler {
     }
 
     void scrollValues(int x, int y, int deltay) {
-    	if (mouseElm!=null && !dialogIsShowing() && scopeSelected == -1)
+    	if (mouseElm!=null && !dialogIsShowing())
     		if (mouseElm instanceof ResistorElm || mouseElm instanceof CapacitorElm) {
     			scrollValuePopup = new ScrollValuePopup(x, y, deltay, mouseElm, this);
     		}
@@ -4005,16 +3767,11 @@ MouseOutHandler, MouseWheelHandler {
     	}
     	if ((t & Event.ONKEYDOWN)!=0) {
     		if (code==KEY_BACKSPACE || code==KEY_DELETE) {
-    		    if (scopeSelected != -1) {
-    			// Treat DELETE key with scope selected as "remove scope", not delete
-    			scopes[scopeSelected].setElm(null);
-    			scopeSelected = -1;
-    		    } else {
     		    	menuElm = null;
     		    	pushUndo();
     			doDelete(true);
     			e.cancel();
-    		    }
+    		    
     		}
     		if (code==KEY_ESCAPE){
     			setMouseMode(MODE_SELECT);

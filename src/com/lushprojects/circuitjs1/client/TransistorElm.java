@@ -247,20 +247,6 @@ package com.lushprojects.circuitjs1.client;
 	    sim.stampRightSide(nodes[2], -ie + gee*vbe + gec*vbc);
 	}
 	
-	@Override String getScopeText(int x) {
-	    String t ="";
-	    switch (x) {
-	    case Scope.VAL_IB: t = "Ib"; break; 
-	    case Scope.VAL_IC: t = "Ic"; break;
-	    case Scope.VAL_IE: t = "Ie"; break;
-	    case Scope.VAL_VBE: t = "Vbe"; break;
-	    case Scope.VAL_VBC: t = "Vbc"; break;
-	    case Scope.VAL_VCE: t = "Vce"; break;
-	    case Scope.VAL_POWER: t = "P"; break;
-	    }
-	    return sim.LS("transistor") + ", " + t;
-	}
-	
 	void getInfo(String arr[]) {
 	    arr[0] = sim.LS("transistor") + " (" + ((pnp == -1) ? "PNP)" : "NPN)") + " \u03b2=" + showFormat.format(beta);
 	    double vbc = volts[0]-volts[1];
@@ -279,27 +265,6 @@ package com.lushprojects.circuitjs1.client;
 	    arr[7] = "P = " + getUnitText(getPower(), "W");
 	}
 	
-	double getScopeValue(int x) {
-	    switch (x) {
-	    case Scope.VAL_IB: return ib;
-	    case Scope.VAL_IC: return ic;
-	    case Scope.VAL_IE: return ie;
-	    case Scope.VAL_VBE: return volts[0]-volts[2];
-	    case Scope.VAL_VBC: return volts[0]-volts[1];
-	    case Scope.VAL_VCE: return volts[1]-volts[2];
-	    case Scope.VAL_POWER: return getPower(); 
-	    }
-	    return 0;
-	}
-	
-	int getScopeUnits(int x) {
-	    switch (x) {
-	    case Scope.VAL_IB: case Scope.VAL_IC:
-	    case Scope.VAL_IE: return Scope.UNITS_A;
-	    case Scope.VAL_POWER: return Scope.UNITS_W;
-	    default: return Scope.UNITS_V;
-	    }
-	}
 	public EditInfo getEditInfo(int n) {
 	    if (n == 0)
 		return new EditInfo("Beta/hFE", beta, 10, 1000).
@@ -336,7 +301,6 @@ package com.lushprojects.circuitjs1.client;
                 sim.stop("max current exceeded", this);
         }
 
-	boolean canViewInScope() { return true; }
 	
 	double getCurrentIntoNode(int n) {
 	    if (n==0)

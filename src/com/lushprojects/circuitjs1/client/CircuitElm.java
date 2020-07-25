@@ -821,12 +821,7 @@ public abstract class CircuitElm implements Editable {
 	arr[2] = "Vd = " + getVoltageDText(getVoltageDiff());
 	return 3;
     }
-    String getScopeText(int v) {
-        String info[] = new String[10];
-        getInfo(info);
-        return info[0];
-    }
-    
+
     Color getVoltageColor(Graphics g, double volts) {
     	if (needsHighlight()) {
     	    	return (selectColor);
@@ -885,14 +880,7 @@ public abstract class CircuitElm implements Editable {
 	g.setColor(new Color(rg, rg, rg));
     }
     double getPower() { return getVoltageDiff()*current; }
-    double getScopeValue(int x) {
-	return (x == Scope.VAL_CURRENT) ? getCurrent() :
-	    (x == Scope.VAL_POWER) ? getPower() : getVoltageDiff();
-    }
-    int getScopeUnits(int x) {
-	return (x == Scope.VAL_CURRENT) ? Scope.UNITS_A :
-	    (x == Scope.VAL_POWER) ? Scope.UNITS_W : Scope.UNITS_V;
-    }
+
     public EditInfo getEditInfo(int n) { return null; }
     public void setEditValue(int n, EditInfo ei) {}
     
@@ -913,7 +901,6 @@ public abstract class CircuitElm implements Editable {
     // is this a wire or equivalent to a wire?
     boolean isWire() { return false; }
     
-    boolean canViewInScope() { return getPostCount() <= 2; }
     boolean comparePair(int x1, int x2, int y1, int y2) {
 	return ((x1 == y1 && x2 == y2) || (x1 == y2 && x2 == y1));
     }
@@ -921,7 +908,6 @@ public abstract class CircuitElm implements Editable {
 	return mouseElmRef==this || selected || sim.plotYElm == this; 
     }
     boolean isSelected() { return selected; }
-    boolean canShowValueInScope(int v) { return false; }
     void setSelected(boolean x) { selected = x; }
     void selectRect(Rectangle r) {
 	selected = r.intersects(boundingBox);
