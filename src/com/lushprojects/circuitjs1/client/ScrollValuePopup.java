@@ -92,10 +92,6 @@ public class ScrollValuePopup extends PopupPanel implements MouseOutHandler, Mou
 			minpow=0;
 			maxpow=6;
 		} 
-		if (myElm instanceof CapacitorElm) {
-			minpow=-11;
-			maxpow=-3;
-		} 
 		values = new double[2+(maxpow-minpow)*12];
 		int ptr=0;
 		for(int i=minpow; i<=maxpow; i++) {

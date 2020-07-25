@@ -737,10 +737,6 @@ MouseOutHandler, MouseWheelHandler {
     	mainMenuBar.addItem(getClassCheckItem("Add Wire", "WireElm"));
     	mainMenuBar.addItem(getClassCheckItem("Add Resistor", "ResistorElm"));
 
-    	MenuBar passMenuBar = new MenuBar(true);
-    	passMenuBar.addItem(getClassCheckItem("Add Capacitor", "CapacitorElm"));
-    	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+"&nbsp;</div>Passive Components"), passMenuBar);
-
     	MenuBar inputMenuBar = new MenuBar(true);
     	inputMenuBar.addItem(getClassCheckItem("Add Ground", "GroundElm"));
     	inputMenuBar.addItem(getClassCheckItem("Add Voltage Source (2-terminal)", "DCVoltageElm"));
@@ -1097,15 +1093,6 @@ MouseOutHandler, MouseWheelHandler {
 	    	info[0] = "t = " + CircuitElm.getTimeText(t);
 	    	info[1] = "time step = " + CircuitElm.getTimeText(timeStep);
 	    }
-	    if (hintType != -1) {
-		for (i = 0; info[i] != null; i++)
-		    ;
-		String s = getHint();
-		if (s == null)
-		    hintType = -1;
-		else
-		    info[i] = s;
-	    }
 	    int x = 0;
 	    x = max(x, cv.getCoordinateSpaceWidth()*2/3);
 	  //  x=cv.getCoordinateSpaceWidth()*2/3;
@@ -1139,45 +1126,6 @@ MouseOutHandler, MouseWheelHandler {
 	lastFrameTime = lastTime;
 	mytime=mytime+System.currentTimeMillis()-mystarttime;
 	myframes++;
-    }
-
-
-    String getHint() {
-	CircuitElm c1 = getElm(hintItem1);
-	CircuitElm c2 = getElm(hintItem2);
-	if (c1 == null || c2 == null)
-	    return null;
-	if (hintType == HINT_RC) {
-	    if (!(c1 instanceof ResistorElm))
-		return null;
-	    if (!(c2 instanceof CapacitorElm))
-		return null;
-	    ResistorElm re = (ResistorElm) c1;
-	    CapacitorElm ce = (CapacitorElm) c2;
-	    return "RC = " + CircuitElm.getUnitText(re.resistance*ce.capacitance,
-					 "s");
-	}
-	if (hintType == HINT_3DB_C) {
-	    if (!(c1 instanceof ResistorElm))
-		return null;
-	    if (!(c2 instanceof CapacitorElm))
-		return null;
-	    ResistorElm re = (ResistorElm) c1;
-	    CapacitorElm ce = (CapacitorElm) c2;
-	    return "f.3db = " +
-		CircuitElm.getUnitText(1/(2*pi*re.resistance*ce.capacitance), "Hz");
-	}
-	if (hintType == HINT_TWINT) {
-	    if (!(c1 instanceof ResistorElm))
-		return null;
-	    if (!(c2 instanceof CapacitorElm))
-		return null;
-	    ResistorElm re = (ResistorElm) c1;
-	    CapacitorElm ce = (CapacitorElm) c2;
-	    return "fc = " +
-		CircuitElm.getUnitText(1/(2*pi*re.resistance*ce.capacitance), "Hz");
-	}
-	return null;
     }
     
     void needAnalyze() {
@@ -1580,27 +1528,6 @@ MouseOutHandler, MouseWheelHandler {
 		    return;
 		}
 	    }
-	    
-	    // look for shorted caps, or caps w/ voltage but no R
-	    if (ce instanceof CapacitorElm) {
-		FindPathInfo fpi = new FindPathInfo(FindPathInfo.SHORT, ce,
-						    ce.getNode(1));
-		if (fpi.findPath(ce.getNode(0))) {
-		    console(ce + " shorted");
-		    ce.reset();
-		} else {
-		    // a capacitor loop used to cause a matrix error. but we changed the capacitor model
-		    // so it works fine now. The only issue is if a capacitor is added in parallel with
-		    // another capacitor with a nonzero voltage; in that case we will get oscillation unless
-		    // we reset both capacitors to have the same voltage. Rather than check for that, we just
-		    // give an error.
-		    fpi = new FindPathInfo(FindPathInfo.CAP_V, ce, ce.getNode(1));
-		    if (fpi.findPath(ce.getNode(0))) {
-			stop("Capacitor loop with no resistance!", ce);
-			return;
-		    }
-		}
-	    }
 	}
 	//System.out.println("ac6");
 
@@ -1829,7 +1756,7 @@ MouseOutHandler, MouseWheelHandler {
 		    continue;
 		if (type == CAP_V) {
 		    // checking for capacitor/voltage source loops
-		    if (!(ce.isWire() || ce instanceof CapacitorElm || ce instanceof VoltageElm))
+		    if (!(ce.isWire() || ce instanceof VoltageElm))
 			continue;
 		}
 		if (n1 == 0) {
@@ -3327,7 +3254,7 @@ MouseOutHandler, MouseWheelHandler {
 
     void scrollValues(int x, int y, int deltay) {
     	if (mouseElm!=null && !dialogIsShowing())
-    		if (mouseElm instanceof ResistorElm || mouseElm instanceof CapacitorElm) {
+    		if (mouseElm instanceof ResistorElm) {
     			scrollValuePopup = new ScrollValuePopup(x, y, deltay, mouseElm, this);
     		}
     }
@@ -3873,8 +3800,7 @@ MouseOutHandler, MouseWheelHandler {
     }
     public static CircuitElm createCe(int tint, int x1, int y1, int x2, int y2, int f, StringTokenizer st) {
 	switch (tint) {
-    	case 'R': return new RailElm(x1, y1, x2, y2, f, st);
-    	case 'c': return new CapacitorElm(x1, y1, x2, y2, f, st);   	
+    	case 'R': return new RailElm(x1, y1, x2, y2, f, st);	
     	case 'd': return new DiodeElm(x1, y1, x2, y2, f, st);
     	case 'g': return new GroundElm(x1, y1, x2, y2, f, st);
     	case 'i': return new CurrentElm(x1, y1, x2, y2, f, st);
@@ -3900,8 +3826,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new PTransistorElm(x1, y1);
     	if (n=="WireElm")
     		return (CircuitElm) new WireElm(x1, y1);
-    	if (n=="CapacitorElm")
-    		return (CircuitElm) new CapacitorElm(x1, y1);
     	if (n=="DCVoltageElm" || n=="VoltageElm")
     		return (CircuitElm) new DCVoltageElm(x1, y1);
     	if (n=="VarRailElm")
