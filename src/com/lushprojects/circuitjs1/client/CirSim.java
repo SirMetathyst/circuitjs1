@@ -134,7 +134,6 @@ MouseOutHandler, MouseWheelHandler {
     MenuBar mainMenuBar;
     MenuItem scopeRemovePlotMenuItem;
     MenuItem scopeSelectYMenuItem;
-    ScopePopupMenu scopePopupMenu;
     static HashMap<String,String> localizationMap;
    
     String lastCursorStyle;
@@ -598,8 +597,6 @@ MouseOutHandler, MouseWheelHandler {
 	elmMenuBar.addItem(elmFlipMenuItem = new MenuItem(LS("Swap Terminals"),new MyCommand("elm","flip")));
 	elmMenuBar.addItem(elmSplitMenuItem = menuItemWithShortcut(LS("Split Wire"), LS(ctrlMetaKey + "-click"), new MyCommand("elm","split")));
 	elmMenuBar.addItem(elmSliderMenuItem = new MenuItem(LS("Sliders..."),new MyCommand("elm","sliders")));
-	
-	scopePopupMenu = new ScopePopupMenu();
 
 	CircuitElm.setColorScale();
 	
@@ -3423,16 +3420,7 @@ MouseOutHandler, MouseWheelHandler {
     	menuPlot=-1;
     	int x, y;
     	if (scopeSelected!=-1) {
-    	    	if (scopes[scopeSelected].canMenu()) {
-    	    	    menuScope=scopeSelected;
-    	    	    menuPlot=scopes[scopeSelected].selectedPlot;
-    	    	    scopePopupMenu.doScopePopupChecks(false, scopes[scopeSelected]);
-    	    	    contextPanel=new PopupPanel(true);
-    	    	    contextPanel.add(scopePopupMenu.getMenuBar());
-    	    	    y=Math.max(0, Math.min(menuClientY,cv.getCoordinateSpaceHeight()-160));
-    	    	    contextPanel.setPopupPosition(menuClientX, y);
-    	    	    contextPanel.show();
-    		}
+
     	} else {
     		doMainMenuChecks();
     		contextPanel=new PopupPanel(true);

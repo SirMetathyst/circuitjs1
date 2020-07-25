@@ -177,7 +177,6 @@ class Scope {
     double scaleX, scaleY;
     int wheelDeltaY;
     int selectedPlot;
-    ScopePropertiesDialog properties;
     
     Scope(CirSim s) {
     	sim = s;
@@ -1327,11 +1326,6 @@ class Scope {
 	    sp = 1024;
 	speed = sp;
 	resetGraph();
-    }
-    
-    void properties() {
-	properties = new ScopePropertiesDialog(sim, this);
-	CirSim.dialogShowing = properties;
     }
     
     void speedUp() {
