@@ -501,7 +501,6 @@ MouseOutHandler, MouseWheelHandler {
 	}));
 	conventionCheckItem.setState(convention);
 	
-	m.addItem(new CheckboxAlignedMenuItem(LS("Shortcuts..."), new MyCommand("options", "shortcuts")));
 	m.addItem(optionsItem = new CheckboxAlignedMenuItem(LS("Other Options..."), new MyCommand("options","other")));
 
 	mainMenuBar = new MenuBar(true);
@@ -2434,13 +2433,8 @@ MouseOutHandler, MouseWheelHandler {
     	    	doPrint();
     	if (item=="recover")
     	    	doRecover();
-
     	if ((menu=="elm" || menu=="scopepop") && contextPanel!=null)
     		contextPanel.hide();
-    	if (menu=="options" && item=="shortcuts") {
-    	    	dialogShowing = new ShortcutsDialog(this);
-    	    	dialogShowing.show();
-    	}
     	if (menu=="options" && item=="other")
     		doEdit(new EditOptions(this));
     	if (item=="undo")
