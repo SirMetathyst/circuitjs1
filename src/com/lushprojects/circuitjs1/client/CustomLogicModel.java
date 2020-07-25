@@ -3,6 +3,7 @@ package com.lushprojects.circuitjs1.client;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Vector;
 
 import com.google.gwt.user.client.Window;
@@ -52,9 +53,9 @@ public class CustomLogicModel implements Editable {
     static void clearDumpedFlags() {
 	if (modelMap == null)
 	    return;
-	Iterator it = modelMap.entrySet().iterator();
+	Iterator<Entry<String, CustomLogicModel>> it = modelMap.entrySet().iterator();
 	while (it.hasNext()) {
-	    Map.Entry<String,CustomLogicModel> pair = (Map.Entry)it.next();
+	    Map.Entry<String,CustomLogicModel> pair = it.next();
 	    pair.getValue().dumped = false;
 	}
     }

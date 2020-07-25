@@ -55,13 +55,13 @@ public class Adjustable implements Command {
     }
     
     public void execute() {
-	elm.sim.analyzeFlag = true;
+	CircuitElm.sim.analyzeFlag = true;
 	if (settingValue)
 	    return;
 	EditInfo ei = elm.getEditInfo(editItem);
 	ei.value = getSliderValue();
 	elm.setEditValue(editItem, ei);
-	elm.sim.repaint();
+	CircuitElm.sim.repaint();
     }
     
     double getSliderValue() {
@@ -74,6 +74,6 @@ public class Adjustable implements Command {
     }
     
     String dump() {
-	return elm.sim.locateElm(elm) + " " + editItem + " " + minValue + " " + maxValue + " " + CustomLogicModel.escape(sliderText);
+	return CircuitElm.sim.locateElm(elm) + " " + editItem + " " + minValue + " " + maxValue + " " + CustomLogicModel.escape(sliderText);
     }
 }

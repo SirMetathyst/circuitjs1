@@ -19,8 +19,6 @@
 
 package com.lushprojects.circuitjs1.client;
 
-import java.awt.Checkbox;
-
 import com.google.gwt.user.client.ui.CheckBox;
 
 class AnalogSwitchElm extends CircuitElm {

@@ -43,9 +43,7 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
 	}
 	
 	void draw(Graphics g) {
-	    int segments = 16;
 	    int i;
-	    int ox = 0;
 	    //int hs = sim.euroResistorCheckItem.getState() ? 6 : 8;
 	    int hs=6;
 	    double v1 = volts[0];
@@ -97,7 +95,7 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
 	void getInfo(String arr[]) {
 	    arr[0] = "resistor";
 	    getBasicInfo(arr);
-	    arr[3] = "R = " + getUnitText(resistance, sim.ohmString);
+	    arr[3] = "R = " + getUnitText(resistance, CirSim.ohmString);
 	    arr[4] = "P = " + getUnitText(getPower(), "W");
 	}
 	public EditInfo getEditInfo(int n) {

@@ -19,7 +19,6 @@
 
 package com.lushprojects.circuitjs1.client;
 
-import java.awt.Choice;
 import java.util.Vector;
 
 import com.google.gwt.user.client.Window;

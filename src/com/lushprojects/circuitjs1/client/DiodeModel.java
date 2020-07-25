@@ -4,10 +4,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Vector;
-
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.TextArea;
 
 public class DiodeModel implements Editable, Comparable<DiodeModel> {
 
@@ -107,9 +105,9 @@ public class DiodeModel implements Editable, Comparable<DiodeModel> {
 	final double emcoef = 2;
 
 	// look for existing model with same parameters
-	Iterator it = modelMap.entrySet().iterator();
+	Iterator<Entry<String, DiodeModel>> it = modelMap.entrySet().iterator();
 	while (it.hasNext()) {
-	    Map.Entry<String,DiodeModel> pair = (Map.Entry)it.next();
+	    Map.Entry<String,DiodeModel> pair = it.next();
 	    DiodeModel dm = pair.getValue();
 	    if (Math.abs(dm.fwdrop-fwdrop) < 1e-8 && dm.seriesResistance == 0 && Math.abs(dm.breakdownVoltage-zvoltage) < 1e-8 && dm.emissionCoefficient == emcoef)
 		return dm;
@@ -140,9 +138,9 @@ public class DiodeModel implements Editable, Comparable<DiodeModel> {
 	createModelMap();
 
 	// look for existing model with same parameters
-	Iterator it = modelMap.entrySet().iterator();
+	Iterator<Entry<String, DiodeModel>> it = modelMap.entrySet().iterator();
 	while (it.hasNext()) {
-	    Map.Entry<String,DiodeModel> pair = (Map.Entry)it.next();
+	    Map.Entry<String,DiodeModel> pair = (Map.Entry<String, DiodeModel>)it.next();
 	    DiodeModel dm = pair.getValue();
 	    if (Math.abs(dm.fwdrop-fwdrop) < 1e-8 && Math.abs(dm.breakdownVoltage) < 1e-8)
 		return dm;
@@ -167,9 +165,9 @@ public class DiodeModel implements Editable, Comparable<DiodeModel> {
 	createModelMap();
 
 	// look for existing model with same parameters
-	Iterator it = modelMap.entrySet().iterator();
+	Iterator<Entry<String, DiodeModel>> it = modelMap.entrySet().iterator();
 	while (it.hasNext()) {
-	    Map.Entry<String,DiodeModel> pair = (Map.Entry)it.next();
+	    Map.Entry<String,DiodeModel> pair = (Map.Entry<String, DiodeModel>)it.next();
 	    DiodeModel dm = pair.getValue();
 	    if (Math.abs(dm.breakdownVoltage-zvoltage) < 1e-8)
 		return dm;
@@ -194,18 +192,18 @@ public class DiodeModel implements Editable, Comparable<DiodeModel> {
     static void clearDumpedFlags() {
 	if (modelMap == null)
 	    return;
-	Iterator it = modelMap.entrySet().iterator();
+	Iterator<Entry<String, DiodeModel>> it = modelMap.entrySet().iterator();
 	while (it.hasNext()) {
-	    Map.Entry<String,DiodeModel> pair = (Map.Entry)it.next();
+	    Map.Entry<String,DiodeModel> pair = (Map.Entry<String, DiodeModel>)it.next();
 	    pair.getValue().dumped = false;
 	}
     }
     
     static Vector<DiodeModel> getModelList(boolean zener) {
 	Vector<DiodeModel> vector = new Vector<DiodeModel>();
-	Iterator it = modelMap.entrySet().iterator();
+	Iterator<Entry<String, DiodeModel>> it = modelMap.entrySet().iterator();
 	while (it.hasNext()) {
-	    Map.Entry<String,DiodeModel> pair = (Map.Entry)it.next();
+	    Map.Entry<String,DiodeModel> pair = (Map.Entry<String, DiodeModel>)it.next();
 	    DiodeModel dm = pair.getValue();
 	    if (zener && dm.breakdownVoltage == 0)
 		continue;

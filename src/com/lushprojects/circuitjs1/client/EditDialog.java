@@ -246,7 +246,7 @@ class EditDialog extends DialogBox  {
 		cframe.needAnalyze();
 	}
 
-	public void itemStateChanged(GwtEvent e) {
+	public void itemStateChanged(@SuppressWarnings("rawtypes") GwtEvent e) {
 	    Object src = e.getSource();
 	    int i;
 	    boolean changed = false;
@@ -286,7 +286,7 @@ class EditDialog extends DialogBox  {
 	protected void closeDialog()
 	{
 		EditDialog.this.hide();
-		cframe.editDialog = null;
+		CirSim.editDialog = null;
 	}
 }
 

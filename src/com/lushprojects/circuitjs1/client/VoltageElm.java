@@ -19,8 +19,6 @@
 
 package com.lushprojects.circuitjs1.client;
 
-import java.awt.Choice;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ListBox;
 
@@ -296,7 +294,7 @@ class VoltageElm extends CircuitElm {
 		    getUnitText(2.9979e8/frequency, "m");
 	}
 	if (waveform == WF_DC && current != 0 && sim.showResistanceInVoltageSources)
-	    arr[i++] = "(R = " + getUnitText(maxVoltage/current, sim.ohmString) + ")";
+	    arr[i++] = "(R = " + getUnitText(maxVoltage/current, CirSim.ohmString) + ")";
 	arr[i++] = "P = " + getUnitText(getPower(), "W");
     }
     public EditInfo getEditInfo(int n) {
@@ -347,7 +345,6 @@ class VoltageElm extends CircuitElm {
 		else
 		    frequency = maxfreq;
 	    }
-	    double adj = frequency-oldfreq;
 	    freqTimeZero = sim.t-oldfreq*(sim.t-freqTimeZero)/frequency;
 	}
 	if (n == 1) {

@@ -21,7 +21,7 @@ package com.lushprojects.circuitjs1.client;
 
 class PTransistorElm extends TransistorElm {
 	public PTransistorElm(int xx, int yy) { super(xx, yy, true); }
-	Class getDumpClass() { return TransistorElm.class; }
+	Class<TransistorElm> getDumpClass() { return TransistorElm.class; }
 	
 	 int getShortcut() { return 'p'; }
 	 

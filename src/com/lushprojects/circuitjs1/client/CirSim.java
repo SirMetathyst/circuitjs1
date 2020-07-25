@@ -70,7 +70,6 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -86,7 +85,6 @@ import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.ui.PopupPanel;
 import static com.google.gwt.event.dom.client.KeyCodes.*;
 import com.google.gwt.user.client.ui.Frame;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.Window.Navigator;
 
@@ -302,24 +300,15 @@ MouseOutHandler, MouseWheelHandler {
 
 	CircuitElm.initClass(this);
 	readRecovery();
-
-	QueryParameters qp = new QueryParameters();
 			
 	try {
 		//baseURL = applet.getDocumentBase().getFile();
 		// look for circuit embedded in URL
 //		String doc = applet.getDocumentBase().toString();
-		String cct=qp.getValue("cct");
-		if (cct!=null)
-			startCircuitText = cct.replace("%24", "$");
-		startCircuit = qp.getValue("startCircuit");
-		startLabel   = qp.getValue("startLabel");
-		startCircuitLink = qp.getValue("startCircuitLink");
-		euroRes = qp.getBooleanValue("euroResistors", false);
-		usRes = qp.getBooleanValue("usResistors",  false);
-		printable = qp.getBooleanValue("whiteBackground", getOptionFromStorage("whiteBackground", false));
-		convention = qp.getBooleanValue("conventionalCurrent",
-			getOptionFromStorage("conventionalCurrent", true));
+		euroRes = false;
+		usRes = false;
+		printable = false;
+		convention = true;
 	} catch (Exception e) { }
 	
 	boolean euroSetting = false;
@@ -443,7 +432,6 @@ MouseOutHandler, MouseWheelHandler {
 	euroGatesCheckItem.setState(euroGates);
 	m.addItem(printableCheckItem = new CheckboxMenuItem("White Background",
 			new Command() { public void execute(){
-				int i;
 				
 				setOptionInStorage("whiteBackground", printableCheckItem.getState());
 			}
@@ -503,13 +491,6 @@ MouseOutHandler, MouseWheelHandler {
 			      setSimRunning(!simIsRunning());
 			    }
 			  });
-		 
-		 /*
-	dumpMatrixButton = new Button("Dump Matrix");
-	dumpMatrixButton.addClickHandler(new ClickHandler() {
-	    public void onClick(ClickEvent event) { dumpMatrix = true; }});
-	verticalPanel.add(dumpMatrixButton);// IES for debugging
-*/
 	
 	if (LoadFile.isSupported())
 		verticalPanel.add(loadFileInput = new LoadFile(this));
@@ -1099,9 +1080,6 @@ MouseOutHandler, MouseWheelHandler {
 	g.fillRect(0, circuitArea.height, circuitArea.width, cv.getCoordinateSpaceHeight()-circuitArea.height);
 //	g.restore();
 	g.setFont(oldfont);
-	int ct = 0;
-	if (stopMessage != null)
-	    ct = 0;
 	if (mouseWasOverSplitter) {
 		g.setColor(Color.cyan);
 		g.setLineWidth(4.0);
@@ -1123,12 +1101,6 @@ MouseOutHandler, MouseWheelHandler {
 		} else
 		    info[0] = "V = " +
 			CircuitElm.getUnitText(mouseElm.getPostVoltage(mousePost), "V");
-//		/* //shownodes
-//		for (i = 0; i != mouseElm.getPostCount(); i++)
-//		    info[0] += " " + mouseElm.nodes[i];
-//		if (mouseElm.getVoltageSourceCount() > 0)
-//		    info[0] += ";" + (mouseElm.getVoltageSource()+nodeList.size());
-//		*/
 		
 	    } else {
 	    	info[0] = "t = " + CircuitElm.getTimeText(t);
@@ -1165,15 +1137,6 @@ MouseOutHandler, MouseWheelHandler {
 	frames++;
 	
 	g.setColor(Color.white);
-//	g.drawString("Framerate: " + CircuitElm.showFormat.format(framerate), 10, 10);
-//	g.drawString("Steprate: " + CircuitElm.showFormat.format(steprate),  10, 30);
-//	g.drawString("Steprate/iter: " + CircuitElm.showFormat.format(steprate/getIterCount()),  10, 50);
-//	g.drawString("iterc: " + CircuitElm.showFormat.format(getIterCount()),  10, 70);
-//	g.drawString("Frames: "+ frames,10,90);
-//	g.drawString("ms per frame (other): "+ CircuitElm.showFormat.format((mytime-myruntime-mydrawtime)/myframes),10,110);
-//	g.drawString("ms per frame (sim): "+ CircuitElm.showFormat.format((myruntime)/myframes),10,130);
-//	g.drawString("ms per frame (draw): "+ CircuitElm.showFormat.format((mydrawtime)/myframes),10,150);
-	
 	cvcontext.drawImage(backcontext.getCanvas(), 0.0, 0.0);
 	
 	// if we did DC analysis, we need to re-analyze the circuit with that flag cleared. 
@@ -1225,22 +1188,6 @@ MouseOutHandler, MouseWheelHandler {
 	}
 	return null;
     }
-
-//    public void toggleSwitch(int n) {
-//	int i;
-//	for (i = 0; i != elmList.size(); i++) {
-//	    CircuitElm ce = getElm(i);
-//	    if (ce instanceof SwitchElm) {
-//		n--;
-//		if (n == 0) {
-//		    ((SwitchElm) ce).toggle();
-//		    analyzeFlag = true;
-//		    cv.repaint();
-//		    return;
-//		}
-//	    }
-//	}
-//    }
     
     void needAnalyze() {
 	analyzeFlag = true;
@@ -1668,15 +1615,6 @@ MouseOutHandler, MouseWheelHandler {
 
 	if (!simplifyMatrix(matrixSize))
 	    return;
-	
-	/*
-	System.out.println("matrixSize = " + matrixSize + " " + circuitNonLinear);
-	for (j = 0; j != circuitMatrixSize; j++) {
-	    for (i = 0; i != circuitMatrixSize; i++)
-		System.out.print(circuitMatrix[j][i] + " ");
-	    System.out.print("  " + circuitRightSide[j] + "\n");
-	}
-	System.out.print("\n");*/
 
 	// check if we called stop()
 	if (circuitMatrix == null)
@@ -2304,12 +2242,6 @@ MouseOutHandler, MouseWheelHandler {
     	if (menu == "key" && mouseElm != null) {
     	    menuElm = mouseElm;
     	    menu = "elm";
-    	}
-    	
-    	if (item == "cut") {
-    		if (menu!="elm")
-    			menuElm = null;
-    		doCut();
     	}
     	if (item == "copy") {
     		if (menu!="elm")
@@ -2971,15 +2903,6 @@ MouseOutHandler, MouseWheelHandler {
     		ce.selectRect(selectedArea);
     	}
     }
-
-//    void setSelectedElm(CircuitElm cs) {
-//    	int i;
-//    	for (i = 0; i != elmList.size(); i++) {
-//    		CircuitElm ce = getElm(i);
-//    		ce.setSelected(ce == cs);
-//    	}
-//    	mouseElm = cs;
-//    }
     
     void setMouseElm(CircuitElm ce) {
     	if (ce!=mouseElm) {
@@ -2993,13 +2916,11 @@ MouseOutHandler, MouseWheelHandler {
 
     void removeZeroLengthElements() {
     	int i;
-    	boolean changed = false;
     	for (i = elmList.size()-1; i >= 0; i--) {
     		CircuitElm ce = getElm(i);
     		if (ce.x == ce.x2 && ce.y == ce.y2) {
     			elmList.removeElementAt(i);
     			ce.delete();
-    			changed = true;
     		}
     	}
     	needAnalyze();
@@ -3496,22 +3417,6 @@ MouseOutHandler, MouseWheelHandler {
     	}
     }
 
-    void doCut() {
-    	int i;
-    	pushUndo();
-    	setMenuSelection();
-    	clipboard = "";
-    	for (i = elmList.size()-1; i >= 0; i--) {
-    		CircuitElm ce = getElm(i);
-    		// ScopeElms don't cut-paste well because their reference to a parent
-    		// elm by number get's messed up in the dump. For now we will just ignore them
-    		// until I can be bothered to come up with something better
-    	}
-    	writeClipboardToStorage();
-    	doDelete(true);
-    	enablePaste();
-    }
-
     void writeClipboardToStorage() {
     	Storage stor = Storage.getLocalStorageIfSupported();
     	if (stor == null)
@@ -3714,9 +3619,6 @@ MouseOutHandler, MouseWheelHandler {
     			return true;
     	return false;
     }
-
-//    public void keyPressed(KeyEvent e) {}
-//    public void keyReleased(KeyEvent e) {}
     
     boolean dialogIsShowing() {
     	if (editDialog!=null && editDialog.isShowing())
@@ -4063,44 +3965,6 @@ MouseOutHandler, MouseWheelHandler {
     static SafeHtml LSHTML(String s) { return SafeHtmlUtils.fromTrustedString(s); }
     
     
-    // For debugging
-    void dumpNodelist() {
-
-	CircuitNode nd;
-	CircuitElm e;
-	int i,j;
-	String s;
-	String cs;
-//
-//	for(i=0; i<nodeList.size(); i++) {
-//	    s="Node "+i;
-//	    nd=nodeList.get(i);
-//	    for(j=0; j<nd.links.size();j++) {
-//		s=s+" " + nd.links.get(j).num + " " +nd.links.get(j).elm.getDumpType();
-//	    }
-//	    console(s);
-//	}
-	console("Elm list Dump");
-	for (i=0;i<elmList.size(); i++) {
-	    e=elmList.get(i);
-	    cs = e.getDumpClass().toString();
-	    int p = cs.lastIndexOf('.');
-	    cs = cs.substring(p+1);
-	    if (cs=="WireElm") 
-		continue;
-	    if (cs=="TransistorElm") {
-		if (((TransistorElm)e).pnp == -1)
-		    cs= "PTransistorElm";
-		else
-		    cs = "NTransistorElm";
-	    }
-	    s=cs;
-	    for(j=0; j<e.getPostCount(); j++) {
-		s=s+" "+e.nodes[j];
-	    }
-	    console(s);
-	}
-    }
     
 	native void printCanvas(CanvasElement cv) /*-{
 	    var img    = cv.toDataURL("image/png");
