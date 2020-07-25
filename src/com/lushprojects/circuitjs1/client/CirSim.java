@@ -749,7 +749,6 @@ MouseOutHandler, MouseWheelHandler {
     	
     	MenuBar activeMenuBar = new MenuBar(true);
     	activeMenuBar.addItem(getClassCheckItem("Add Diode", "DiodeElm"));
-    	activeMenuBar.addItem(getClassCheckItem("Add Transistor (bipolar, NPN)", "NTransistorElm"));
     	activeMenuBar.addItem(getClassCheckItem("Add Transistor (bipolar, PNP)", "PTransistorElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+"&nbsp;</div>Active Components"), activeMenuBar);
 
@@ -3820,8 +3819,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new ResistorElm(x1, y1);
     	if (n=="RailElm")
     		return (CircuitElm) new RailElm(x1, y1);
-    	if (n=="NTransistorElm" || n == "TransistorElm")
-    		return (CircuitElm) new NTransistorElm(x1, y1);
     	if (n=="PTransistorElm")
     		return (CircuitElm) new PTransistorElm(x1, y1);
     	if (n=="WireElm")
