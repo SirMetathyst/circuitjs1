@@ -100,7 +100,7 @@ MouseOutHandler, MouseWheelHandler {
     Button runStopButton;
     Button dumpMatrixButton;
     MenuItem aboutItem;
-    MenuItem importFromLocalFileItem, importFromTextItem,
+    MenuItem importFromLocalFileItem,
     	exportAsUrlItem, exportAsLocalFileItem, exportAsTextItem, printItem, recoverItem;
     MenuItem undoItem, redoItem,
 	cutItem, copyItem, pasteItem, selectAllItem, optionsItem;
@@ -360,8 +360,6 @@ MouseOutHandler, MouseWheelHandler {
 	  importFromLocalFileItem = new MenuItem(LS("Open File..."), new MyCommand("file","importfromlocalfile"));
 	  importFromLocalFileItem.setEnabled(LoadFile.isSupported());
 	  fileMenuBar.addItem(importFromLocalFileItem);
-	  importFromTextItem = new MenuItem(LS("Import From Text..."), new MyCommand("file","importfromtext"));
-	  fileMenuBar.addItem(importFromTextItem);
 	  exportAsLocalFileItem = new MenuItem(LS("Save As..."), new MyCommand("file","exportaslocalfile"));
 	  exportAsLocalFileItem.setEnabled(ExportAsLocalFileDialog.downloadIsSupported());
 	  fileMenuBar.addItem(exportAsLocalFileItem);
@@ -2400,9 +2398,6 @@ MouseOutHandler, MouseWheelHandler {
     	if (item=="importfromlocalfile") {
     		pushUndo();
     		loadFileInput.click();
-    	}
-    	if (item=="importfromtext") {
-    		dialogShowing = new ImportFromTextDialog(this);
     	}
     	if (item=="exportasurl") {
     		doExportAsUrl();
