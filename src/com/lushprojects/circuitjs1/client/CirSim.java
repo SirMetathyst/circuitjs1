@@ -216,7 +216,6 @@ MouseOutHandler, MouseWheelHandler {
     static ImportFromDropbox importFromDropbox;
     static ScrollValuePopup scrollValuePopup;
     static DialogBox dialogShowing;
-    static AboutBox aboutBox;
     static ImportFromDropboxDialog importFromDropboxDialog;
 //    Class dumpTypes[], shortcuts[];
     String shortcuts[];
@@ -383,10 +382,6 @@ MouseOutHandler, MouseWheelHandler {
 	  fileMenuBar.addItem(recoverItem);
 	  printItem = new MenuItem(LS("Print..."), new MyCommand("file","print"));
 	  fileMenuBar.addItem(printItem);
-	  fileMenuBar.addSeparator();
-	  aboutItem=new MenuItem(LS("About..."),(Command)null);
-	  fileMenuBar.addItem(aboutItem);
-	  aboutItem.setScheduledCommand(new MyCommand("file","about"));
 	  
 	  int width=(int)RootLayoutPanel.get().getOffsetWidth();
 	  VERTICALPANELWIDTH = width/5;
@@ -2414,8 +2409,6 @@ MouseOutHandler, MouseWheelHandler {
     
     
     public void menuPerformed(String menu, String item) {
-    	if (item=="about")
-    		aboutBox = new AboutBox(circuitjs1.versionString);
     	if (item=="importfromlocalfile") {
     		pushUndo();
     		loadFileInput.click();
@@ -4069,8 +4062,6 @@ MouseOutHandler, MouseWheelHandler {
     	if (contextPanel!=null && contextPanel.isShowing())
     		return true;
     	if (scrollValuePopup != null && scrollValuePopup.isShowing())
-    		return true;
-    	if (aboutBox !=null && aboutBox.isShowing())
     		return true;
     	if (importFromDropboxDialog != null && importFromDropboxDialog.isShowing())
     		return true;
