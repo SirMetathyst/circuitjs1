@@ -102,7 +102,7 @@ MouseOutHandler, MouseWheelHandler {
     MenuItem aboutItem;
     MenuItem importFromLocalFileItem, exportAsLocalFileItem, printItem, recoverItem;
     MenuItem undoItem, redoItem,
-	cutItem, copyItem, pasteItem, selectAllItem, optionsItem;
+	cutItem, copyItem, pasteItem, selectAllItem;
     MenuBar optionsMenuBar;
     CheckboxMenuItem dotsCheckItem;
     CheckboxMenuItem voltsCheckItem;
@@ -397,8 +397,6 @@ MouseOutHandler, MouseWheelHandler {
 	menuBar.addItem(LS("Draw"), drawMenuBar);
 	
 		
-	optionsMenuBar = m = new MenuBar(true );
-	menuBar.addItem(LS("Options"), optionsMenuBar);
 	m.addItem(dotsCheckItem = new CheckboxMenuItem(LS("Show Current")));
 	dotsCheckItem.setState(true);
 	m.addItem(voltsCheckItem = new CheckboxMenuItem(LS("Show Voltage"),
@@ -468,8 +466,6 @@ MouseOutHandler, MouseWheelHandler {
 		}
 	}));
 	conventionCheckItem.setState(convention);
-	
-	m.addItem(optionsItem = new CheckboxAlignedMenuItem(LS("Other Options..."), new MyCommand("options","other")));
 
 	mainMenuBar = new MenuBar(true);
 	mainMenuBar.setAutoOpen(true);
@@ -2301,8 +2297,6 @@ MouseOutHandler, MouseWheelHandler {
     	    	doRecover();
     	if (menu=="elm" && contextPanel!=null)
     		contextPanel.hide();
-    	if (menu=="options" && item=="other")
-    		doEdit(new EditOptions(this));
     	if (item=="undo")
     		doUndo();
     	if (item=="redo")
