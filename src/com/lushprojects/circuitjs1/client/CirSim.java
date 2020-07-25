@@ -2263,7 +2263,6 @@ MouseOutHandler, MouseWheelHandler {
 
     String dumpCircuit() {
 	int i;
-	CustomLogicModel.clearDumpedFlags();
 	int f = (dotsCheckItem.getState()) ? 1 : 0;
 	f |= (smallGridCheckItem.getState()) ? 2 : 0;
 	f |= (voltsCheckItem.getState()) ? 0 : 4;
@@ -2475,10 +2474,6 @@ MouseOutHandler, MouseWheelHandler {
 		    }
 		    if (tint == '$') {
 			readOptions(st);
-			break;
-		    }
-		    if (tint == '!') {
-			CustomLogicModel.undumpModel(st);
 			break;
 		    }
 		    if (tint == '%' || tint == '?' || tint == 'B') {
@@ -3387,7 +3382,6 @@ MouseOutHandler, MouseWheelHandler {
     
     String copyOfSelectedElms() {
 	String r="";
-	CustomLogicModel.clearDumpedFlags();
 	for (int i = elmList.size()-1; i >= 0; i--) {
 	    CircuitElm ce = getElm(i);
 	    String m = ce.dumpModel();

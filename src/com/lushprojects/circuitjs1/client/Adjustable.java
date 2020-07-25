@@ -32,7 +32,6 @@ public class Adjustable implements Command {
 	editItem = new Integer(st.nextToken()).intValue();
 	minValue = new Double(st.nextToken()).doubleValue();
 	maxValue = new Double(st.nextToken()).doubleValue();
-	sliderText = CustomLogicModel.unescape(st.nextToken());
     }
     
     void createSlider(CirSim sim) {
@@ -74,6 +73,6 @@ public class Adjustable implements Command {
     }
     
     String dump() {
-	return CircuitElm.sim.locateElm(elm) + " " + editItem + " " + minValue + " " + maxValue + " " + CustomLogicModel.escape(sliderText);
+	return CircuitElm.sim.locateElm(elm) + " " + editItem + " " + minValue + " " + maxValue + " ";
     }
 }
