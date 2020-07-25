@@ -63,10 +63,5 @@ class EditInfo {
 	
 	// for slider dialog
 	TextBox minBox, maxBox, labelBox;
-	
-	boolean canCreateAdjustable() {
-	    return choice == null && checkbox == null && button == null && textArea == null &&
-			widget == null && !noSliders;
-	}
 }
     

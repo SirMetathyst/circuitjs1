@@ -175,7 +175,6 @@ MouseOutHandler, MouseWheelHandler {
     static final int HINT_TWINT = 4;
     static final int HINT_3DB_L = 5;
     Vector<CircuitElm> elmList;
-    Vector<Adjustable> adjustables;
 //    Vector setupList;
     CircuitElm dragElm, menuElm, stopElm;
     private CircuitElm mouseElm=null;
@@ -529,7 +528,6 @@ MouseOutHandler, MouseWheelHandler {
 	
 	setGrid();
 	elmList = new Vector<CircuitElm>();
-	adjustables = new Vector<Adjustable>();
 //	setupList = new Vector();
 	undoStack = new Vector<String>();
 	redoStack = new Vector<String>();
@@ -1142,15 +1140,6 @@ MouseOutHandler, MouseWheelHandler {
 	return elmList.elementAt(n);
     }
     
-    public Adjustable findAdjustable(CircuitElm elm, int item) {
-	int i;
-	for (i = 0; i != adjustables.size(); i++) {
-	    Adjustable a = adjustables.get(i);
-	    if (a.elm == elm && a.editItem == item)
-		return a;
-	}
-	return null;
-    }
     
     public static native void console(String text)
     /*-{
@@ -2281,10 +2270,6 @@ MouseOutHandler, MouseWheelHandler {
 		dump += m + "\n";
 	    dump += ce.dump() + "\n";
 	}
-	for (i = 0; i != adjustables.size(); i++) {
-	    Adjustable adj = adjustables.get(i);
-	    dump += "38 " + adj.dump() + "\n";
-	}
 	if (hintType != -1)
 	    dump += "h " + hintType + " " + hintItem1 + " " +
 		hintItem2 + "\n";
@@ -2485,12 +2470,7 @@ MouseOutHandler, MouseWheelHandler {
 		    // if first character is a digit then parse the type as a number
 		    if (tint >= '0' && tint <= '9')
 			tint = new Integer(type).intValue();
-		    
-		    if (tint == 38) {
-			Adjustable adj = new Adjustable(st, this);
-			adjustables.add(adj);
-			break;
-		    }
+		   
 		    int x1 = new Integer(st.nextToken()).intValue();
 		    int y1 = new Integer(st.nextToken()).intValue();
 		    int x2 = new Integer(st.nextToken()).intValue();
@@ -2516,29 +2496,10 @@ MouseOutHandler, MouseWheelHandler {
 	}
 	setPowerBarEnable();
 	enableItems();
-	if (!retain) {
-	    // create sliders as needed
-	    for (i = 0; i != adjustables.size(); i++)
-		adjustables.get(i).createSlider(this);
-	}
 	needAnalyze();
 	if (centre)
 		centreCircuit();
 	
-    }
-
-    // delete sliders for an element
-    void deleteSliders(CircuitElm elm) {
-	int i;
-	if (adjustables == null)
-	    return;
-	for (i = adjustables.size()-1; i >= 0; i--) {
-	    Adjustable adj = adjustables.get(i);
-	    if (adj.elm == elm) {
-		adj.deleteSlider(this);
-		adjustables.remove(i);
-	    }
-	}
     }
     
     void readHint(StringTokenizer st) {
@@ -3017,8 +2978,6 @@ MouseOutHandler, MouseWheelHandler {
 	    EditInfo ei = elm.getEditInfo(i);
 	    if (ei == null)
 		return false;
-	    if (ei.canCreateAdjustable())
-		return true;
 	}
     }
 

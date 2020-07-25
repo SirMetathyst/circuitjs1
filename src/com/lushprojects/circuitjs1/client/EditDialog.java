@@ -235,13 +235,7 @@ class EditDialog extends DialogBox  {
 			if (ei.button != null)
 			    continue;
 			elm.setEditValue(i, ei);
-			
-			// update slider if any
-			if (elm instanceof CircuitElm) {
-			    Adjustable adj = cframe.findAdjustable((CircuitElm)elm, i);
-			    if (adj != null)
-				adj.setSliderValue(ei.value);
-			}
+		
 		}
 		cframe.needAnalyze();
 	}
