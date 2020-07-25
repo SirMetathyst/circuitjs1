@@ -757,10 +757,7 @@ MouseOutHandler, MouseWheelHandler {
     	activeMenuBar.addItem(getClassCheckItem("Add Transistor (bipolar, PNP)", "PTransistorElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+"&nbsp;</div>Active Components"), activeMenuBar);
 
-    	MenuBar activeBlocMenuBar = new MenuBar(true);
-    	activeBlocMenuBar.addItem(getClassCheckItem("Add Analog Switch (SPST)", "AnalogSwitchElm"));
-    	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+"&nbsp;</div>Active Building Blocks"), activeBlocMenuBar);
-    	
+
     	MenuBar otherMenuBar = new MenuBar(true);
     	CheckboxMenuItem mi;
     	otherMenuBar.addItem(mi=getClassCheckItem("Drag All", "DragAll"));
@@ -3885,7 +3882,6 @@ MouseOutHandler, MouseWheelHandler {
     	case 't': return new TransistorElm(x1, y1, x2, y2, f, st);
     	case 'v': return new VoltageElm(x1, y1, x2, y2, f, st);
     	case 'w': return new WireElm(x1, y1, x2, y2, f, st);
-    	case 159: return new AnalogSwitchElm(x1, y1, x2, y2, f, st);
     	case 172: return new VarRailElm(x1, y1, x2, y2, f, st);
         }
     	return null;
@@ -3916,8 +3912,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new DiodeElm(x1, y1);
     	if (n=="ACVoltageElm")
     		return (CircuitElm) new ACVoltageElm(x1, y1);
-    	if (n=="AnalogSwitchElm")
-    		return (CircuitElm) new AnalogSwitchElm(x1, y1);
     	return null;
     }
     
