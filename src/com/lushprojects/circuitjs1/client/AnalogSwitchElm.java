@@ -19,6 +19,10 @@
 
 package com.lushprojects.circuitjs1.client;
 
+import java.awt.Checkbox;
+
+import com.google.gwt.user.client.ui.CheckBox;
+
 class AnalogSwitchElm extends CircuitElm {
     final int FLAG_INVERT = 1;
     double resistance, r_on, r_off;
@@ -126,8 +130,8 @@ class AnalogSwitchElm extends CircuitElm {
     public EditInfo getEditInfo(int n) {
 	if (n == 0) {
 	    EditInfo ei = new EditInfo("", 0, -1, -1);
-	    ei.checkbox = new Checkbox("Normally closed",
-				       (flags & FLAG_INVERT) != 0);
+	    ei.checkbox = new CheckBox("Normally closed");
+	    ei.checkbox.setValue((flags & FLAG_INVERT) != 0);
 	    return ei;
 	}
 	if (n == 1)
@@ -138,7 +142,7 @@ class AnalogSwitchElm extends CircuitElm {
     }
     public void setEditValue(int n, EditInfo ei) {
 	if (n == 0)
-	    flags = (ei.checkbox.getState()) ?
+	    flags = (ei.checkbox.getValue()) ?
 		(flags | FLAG_INVERT) :
 		(flags & ~FLAG_INVERT);
 	if (n == 1 && ei.value > 0)

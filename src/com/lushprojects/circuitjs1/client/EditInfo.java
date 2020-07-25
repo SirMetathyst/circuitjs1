@@ -21,11 +21,9 @@ package com.lushprojects.circuitjs1.client;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-import java.awt.Choice;
-
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.TextArea;
 
 class EditInfo {
@@ -46,7 +44,7 @@ class EditInfo {
 	EditInfo setDimensionless() { dimensionless = true; return this; }
 	EditInfo disallowSliders() { noSliders = true; return this; }
 	int changeFlag(int flags, int bit) {
-	    if (checkbox.getState())
+	    if (checkbox.getValue())
 		return flags | bit;
 	    return flags & ~bit;
 	}
@@ -55,7 +53,7 @@ class EditInfo {
 	double value;
 	TextBox textf;
 	ListBox choice;
-	Checkbox checkbox;
+	CheckBox checkbox;
 	Button button;
 	TextArea textArea;
 	Widget widget;

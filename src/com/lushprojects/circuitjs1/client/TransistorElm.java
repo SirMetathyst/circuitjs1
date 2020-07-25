@@ -19,7 +19,9 @@
 
 package com.lushprojects.circuitjs1.client;
 
-    class TransistorElm extends CircuitElm {
+import com.google.gwt.user.client.ui.CheckBox;
+
+class TransistorElm extends CircuitElm {
 	// node 0 = base
 	// node 1 = collector
 	// node 2 = emitter
@@ -271,7 +273,7 @@ package com.lushprojects.circuitjs1.client;
 		    setDimensionless();
 	    if (n == 1) {
 		EditInfo ei = new EditInfo("", 0, -1, -1);
-		ei.checkbox = new Checkbox("Swap E/C", (flags & FLAG_FLIP) != 0);
+		ei.checkbox = new CheckBox("Swap E/C", (flags & FLAG_FLIP) != 0);
 		return ei;
 	    }
 	    return null;
@@ -282,7 +284,7 @@ package com.lushprojects.circuitjs1.client;
 		setup();
 	    }
 	    if (n == 1) {
-		if (ei.checkbox.getState())
+		if (ei.checkbox.getValue())
 		    flags |= FLAG_FLIP;
 		else
 		    flags &= ~FLAG_FLIP;

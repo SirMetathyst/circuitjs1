@@ -154,7 +154,7 @@ public class CustomLogicModel implements Editable {
 	    parseRules();
 	}
 	if (n == 4) {
-	    if (ei.checkbox.getState())
+	    if (ei.checkbox.getValue())
 		flags |= FLAG_SCHMITT;
 	    else
 		flags &= ~FLAG_SCHMITT;

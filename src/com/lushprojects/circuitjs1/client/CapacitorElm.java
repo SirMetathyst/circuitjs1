@@ -19,7 +19,11 @@
 
 package com.lushprojects.circuitjs1.client;
 
-    class CapacitorElm extends CircuitElm {
+import java.awt.Checkbox;
+
+import com.google.gwt.user.client.ui.CheckBox;
+
+class CapacitorElm extends CircuitElm {
 	double capacitance;
 	double compResistance, voltdiff;
 	Point plate1[], plate2[];
@@ -158,7 +162,8 @@ package com.lushprojects.circuitjs1.client;
 		return new EditInfo("Capacitance (F)", capacitance, 0, 0);
 	    if (n == 1) {
 		EditInfo ei = new EditInfo("", 0, -1, -1);
-		ei.checkbox = new Checkbox("Trapezoidal Approximation", isTrapezoidal());
+		ei.checkbox = new CheckBox("Trapezoidal Approximation");
+		ei.checkbox.setValue(isTrapezoidal());
 		return ei;
 	    }
 	    return null;
@@ -167,7 +172,7 @@ package com.lushprojects.circuitjs1.client;
 	    if (n == 0 && ei.value > 0)
 		capacitance = ei.value;
 	    if (n == 1) {
-		if (ei.checkbox.getState())
+		if (ei.checkbox.getValue())
 		    flags &= ~FLAG_BACK_EULER;
 		else
 		    flags |= FLAG_BACK_EULER;

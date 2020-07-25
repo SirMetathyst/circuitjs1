@@ -19,7 +19,9 @@
 
 package com.lushprojects.circuitjs1.client;
 
-    class WireElm extends CircuitElm {
+import com.google.gwt.user.client.ui.CheckBox;
+
+class WireElm extends CircuitElm {
 	boolean hasWireInfo; // used in CirSim to calculate wire currents
 	
 	public WireElm(int xx, int yy) { super(xx, yy); }
@@ -66,25 +68,27 @@ package com.lushprojects.circuitjs1.client;
 	public EditInfo getEditInfo(int n) {
 	    if (n == 0) {
 		EditInfo ei = new EditInfo("", 0, -1, -1);
-		ei.checkbox = new Checkbox("Show Current", mustShowCurrent());
+		ei.checkbox = new CheckBox("Show Current");
+		ei.checkbox.setValue(mustShowCurrent());
 		return ei;
 	    }
 	    if (n == 1) {
 		EditInfo ei = new EditInfo("", 0, -1, -1);
-		ei.checkbox = new Checkbox("Show Voltage", mustShowVoltage());
+		ei.checkbox = new CheckBox("Show Voltage");
+		ei.checkbox.setValue(mustShowVoltage());
 		return ei;
 	    }
 	    return null;
 	}
 	public void setEditValue(int n, EditInfo ei) {
 	    if (n == 0) {
-		if (ei.checkbox.getState())
+		if (ei.checkbox.getValue())
 		    flags |= FLAG_SHOWCURRENT;
 		else
 		    flags &= ~FLAG_SHOWCURRENT;
 	    }
 	    if (n == 1) {
-		if (ei.checkbox.getState())
+		if (ei.checkbox.getValue())
 		    flags |= FLAG_SHOWVOLTAGE;
 		else
 		    flags &= ~FLAG_SHOWVOLTAGE;
