@@ -745,12 +745,6 @@ MouseOutHandler, MouseWheelHandler {
     	inputMenuBar.addItem(getClassCheckItem("Add Variable Voltage", "VarRailElm"));
     	inputMenuBar.addItem(getClassCheckItem("Add Current Source", "CurrentElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+"&nbsp;</div>Inputs and Sources"), inputMenuBar);
-    	
-    	
-    	MenuBar activeMenuBar = new MenuBar(true);
-    	activeMenuBar.addItem(getClassCheckItem("Add Diode", "DiodeElm"));
-    	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+"&nbsp;</div>Active Components"), activeMenuBar);
-
 
     	MenuBar otherMenuBar = new MenuBar(true);
     	CheckboxMenuItem mi;
@@ -3799,7 +3793,6 @@ MouseOutHandler, MouseWheelHandler {
     public static CircuitElm createCe(int tint, int x1, int y1, int x2, int y2, int f, StringTokenizer st) {
 	switch (tint) {
     	case 'R': return new RailElm(x1, y1, x2, y2, f, st);	
-    	case 'd': return new DiodeElm(x1, y1, x2, y2, f, st);
     	case 'g': return new GroundElm(x1, y1, x2, y2, f, st);
     	case 'i': return new CurrentElm(x1, y1, x2, y2, f, st);
     	case 'r': return new ResistorElm(x1, y1, x2, y2, f, st);
@@ -3826,8 +3819,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new VarRailElm(x1, y1);
     	if (n=="CurrentElm")
     		return (CircuitElm) new CurrentElm(x1, y1);
-    	if (n=="DiodeElm")
-    		return (CircuitElm) new DiodeElm(x1, y1);
     	if (n=="ACVoltageElm")
     		return (CircuitElm) new ACVoltageElm(x1, y1);
     	return null;
