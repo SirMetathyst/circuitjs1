@@ -755,12 +755,9 @@ MouseOutHandler, MouseWheelHandler {
     	activeMenuBar.addItem(getClassCheckItem("Add Diode", "DiodeElm"));
     	activeMenuBar.addItem(getClassCheckItem("Add Transistor (bipolar, NPN)", "NTransistorElm"));
     	activeMenuBar.addItem(getClassCheckItem("Add Transistor (bipolar, PNP)", "PTransistorElm"));
-    	//    	activeMenuBar.addItem(getClassCheckItem("Add Photoresistor", "PhotoResistorElm"));
-    	//    	activeMenuBar.addItem(getClassCheckItem("Add Thermistor", "ThermistorElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+"&nbsp;</div>Active Components"), activeMenuBar);
 
     	MenuBar activeBlocMenuBar = new MenuBar(true);
-    	activeBlocMenuBar.addItem(getClassCheckItem("Add Op Amp (ideal, - on top)", "OpAmpElm"));
     	activeBlocMenuBar.addItem(getClassCheckItem("Add Analog Switch (SPST)", "AnalogSwitchElm"));
     	mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+"&nbsp;</div>Active Building Blocks"), activeBlocMenuBar);
     	
@@ -3883,7 +3880,6 @@ MouseOutHandler, MouseWheelHandler {
     public static CircuitElm createCe(int tint, int x1, int y1, int x2, int y2, int f, StringTokenizer st) {
 	switch (tint) {
     	case 'R': return new RailElm(x1, y1, x2, y2, f, st);
-    	case 'a': return new OpAmpElm(x1, y1, x2, y2, f, st);
     	case 'c': return new CapacitorElm(x1, y1, x2, y2, f, st);   	
     	case 'd': return new DiodeElm(x1, y1, x2, y2, f, st);
     	case 'g': return new GroundElm(x1, y1, x2, y2, f, st);
@@ -3923,8 +3919,6 @@ MouseOutHandler, MouseWheelHandler {
     		return (CircuitElm) new DiodeElm(x1, y1);
     	if (n=="ACVoltageElm")
     		return (CircuitElm) new ACVoltageElm(x1, y1);
-    	if (n=="OpAmpElm")
-    		return (CircuitElm) new OpAmpElm(x1, y1);
     	if (n=="AnalogSwitchElm")
     		return (CircuitElm) new AnalogSwitchElm(x1, y1);
     	return null;
