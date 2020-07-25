@@ -19,10 +19,12 @@
 
 package com.lushprojects.circuitjs1.client;
 
+import java.awt.Choice;
 import java.util.Vector;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ListBox;
 
 class DiodeElm extends CircuitElm {
     Diode diode;
@@ -178,15 +180,15 @@ class DiodeElm extends CircuitElm {
 	if (!customModelUI && n == 0) {
 	    EditInfo ei =  new EditInfo("Model", 0, -1, -1);
 	    models = DiodeModel.getModelList(false);
-	    ei.choice = new Choice();
+	    ei.choice = new ListBox();
 	    int i;
 	    for (i = 0; i != models.size(); i++) {
 		DiodeModel dm = models.get(i);
-		ei.choice.add(dm.getDescription());
+		ei.choice.addItem(dm.getDescription());
 		if (dm == model)
-		    ei.choice.select(i);
+		    ei.choice.setSelectedIndex(i);
 	    }
-	    ei.choice.add("Custom");
+	    ei.choice.addItem("Custom");
 	    return ei;
 	}
         if (n == 0) {

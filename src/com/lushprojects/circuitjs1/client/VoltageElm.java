@@ -19,7 +19,10 @@
 
 package com.lushprojects.circuitjs1.client;
 
+import java.awt.Choice;
+
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.ListBox;
 
 class VoltageElm extends CircuitElm {
     static final int FLAG_COS = 2;
@@ -302,15 +305,15 @@ class VoltageElm extends CircuitElm {
 				"Max Voltage", maxVoltage, -20, 20);
 	if (n == 1) {
 	    EditInfo ei =  new EditInfo("Waveform", waveform, -1, -1);
-	    ei.choice = new Choice();
-	    ei.choice.add("D/C");
-	    ei.choice.add("A/C");
-	    ei.choice.add("Square Wave");
-	    ei.choice.add("Triangle");
-	    ei.choice.add("Sawtooth");
-	    ei.choice.add("Pulse");
-	    ei.choice.add("Noise");
-	    ei.choice.select(waveform);
+	    ei.choice = new ListBox();
+	    ei.choice.addItem("D/C");
+	    ei.choice.addItem("A/C");
+	    ei.choice.addItem("Square Wave");
+	    ei.choice.addItem("Triangle");
+	    ei.choice.addItem("Sawtooth");
+	    ei.choice.addItem("Pulse");
+	    ei.choice.addItem("Noise");
+	    ei.choice.setSelectedIndex(waveform);
 	    return ei;
 	}
 	if (n == 2)
