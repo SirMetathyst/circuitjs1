@@ -100,8 +100,7 @@ MouseOutHandler, MouseWheelHandler {
     Button runStopButton;
     Button dumpMatrixButton;
     MenuItem aboutItem;
-    MenuItem importFromLocalFileItem,
-    	exportAsUrlItem, exportAsLocalFileItem, printItem, recoverItem;
+    MenuItem importFromLocalFileItem, exportAsLocalFileItem, printItem, recoverItem;
     MenuItem undoItem, redoItem,
 	cutItem, copyItem, pasteItem, selectAllItem, optionsItem;
     MenuBar optionsMenuBar;
@@ -363,8 +362,6 @@ MouseOutHandler, MouseWheelHandler {
 	  exportAsLocalFileItem = new MenuItem(LS("Save As..."), new MyCommand("file","exportaslocalfile"));
 	  exportAsLocalFileItem.setEnabled(ExportAsLocalFileDialog.downloadIsSupported());
 	  fileMenuBar.addItem(exportAsLocalFileItem);
-	  exportAsUrlItem = new MenuItem(LS("Export As Link..."), new MyCommand("file","exportasurl"));
-	  fileMenuBar.addItem(exportAsUrlItem);
 	  fileMenuBar.addItem(new MenuItem(LS("Create Subcircuit..."), new MyCommand("file","createsubcircuit")));
 	  fileMenuBar.addItem(new MenuItem(LS("Find DC Operating Point"), new MyCommand("file", "dcanalysis")));
 	  recoverItem = new MenuItem(LS("Recover Auto-Save"), new MyCommand("file","recover"));
@@ -2397,9 +2394,6 @@ MouseOutHandler, MouseWheelHandler {
     		pushUndo();
     		loadFileInput.click();
     	}
-    	if (item=="exportasurl") {
-    		doExportAsUrl();
-    	}
     	if (item=="exportaslocalfile")
     		doExportAsLocalFile();
     	if (item=="dcanalysis")
@@ -2627,14 +2621,6 @@ MouseOutHandler, MouseWheelHandler {
 	}
 	sliderDialog = new SliderDialog(ce, this);
 	sliderDialog.show();
-    }
-
-
-    void doExportAsUrl()
-    {
-    	String dump = dumpCircuit();
-	dialogShowing = new ExportAsUrlDialog(dump);
-	dialogShowing.show();
     }
 
     void doExportAsLocalFile() {
