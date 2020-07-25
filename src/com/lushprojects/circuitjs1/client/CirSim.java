@@ -209,7 +209,6 @@ MouseOutHandler, MouseWheelHandler {
     boolean showResistanceInVoltageSources;
    int scopeColCount[];
     static EditDialog editDialog, customLogicEditDialog, diodeModelEditDialog;
-    static SliderDialog sliderDialog;
     static ScrollValuePopup scrollValuePopup;
     static DialogBox dialogShowing;
 //    Class dumpTypes[], shortcuts[];
@@ -2466,8 +2465,6 @@ MouseOutHandler, MouseWheelHandler {
     		pushUndo();
     		doDelete(true);
     	}
-    	if (item=="sliders")
-    	    doSliders(menuElm);
 
     	if (item=="viewInScope" && menuElm != null) {
     		int i;
@@ -2607,17 +2604,6 @@ MouseOutHandler, MouseWheelHandler {
     	}
     	editDialog = new EditDialog(eable, this);
     	editDialog.show();
-    }
-    
-    void doSliders(CircuitElm ce) {
-	clearSelection();
-	pushUndo();
-	if (sliderDialog != null) {
-	    sliderDialog.setVisible(false);
-	    sliderDialog = null;
-	}
-	sliderDialog = new SliderDialog(ce, this);
-	sliderDialog.show();
     }
 
     void doExportAsLocalFile() {
@@ -3981,8 +3967,6 @@ MouseOutHandler, MouseWheelHandler {
     boolean dialogIsShowing() {
     	if (editDialog!=null && editDialog.isShowing())
     		return true;
-    	if (sliderDialog!=null && sliderDialog.isShowing())
-		return true;
     	if (customLogicEditDialog!=null && customLogicEditDialog.isShowing())
 		return true;
     	if (diodeModelEditDialog!=null && diodeModelEditDialog.isShowing())
