@@ -2264,7 +2264,6 @@ MouseOutHandler, MouseWheelHandler {
     String dumpCircuit() {
 	int i;
 	CustomLogicModel.clearDumpedFlags();
-	DiodeModel.clearDumpedFlags();
 	int f = (dotsCheckItem.getState()) ? 1 : 0;
 	f |= (smallGridCheckItem.getState()) ? 2 : 0;
 	f |= (voltsCheckItem.getState()) ? 0 : 4;
@@ -2492,10 +2491,6 @@ MouseOutHandler, MouseWheelHandler {
 		    if (tint >= '0' && tint <= '9')
 			tint = new Integer(type).intValue();
 		    
-		    if (tint == 34) {
-			DiodeModel.undumpModel(st);
-			break;
-		    }
 		    if (tint == 38) {
 			Adjustable adj = new Adjustable(st, this);
 			adjustables.add(adj);
@@ -3393,7 +3388,6 @@ MouseOutHandler, MouseWheelHandler {
     String copyOfSelectedElms() {
 	String r="";
 	CustomLogicModel.clearDumpedFlags();
-	DiodeModel.clearDumpedFlags();
 	for (int i = elmList.size()-1; i >= 0; i--) {
 	    CircuitElm ce = getElm(i);
 	    String m = ce.dumpModel();
