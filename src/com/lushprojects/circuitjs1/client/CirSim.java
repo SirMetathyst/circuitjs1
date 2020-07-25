@@ -101,7 +101,7 @@ MouseOutHandler, MouseWheelHandler {
     Button dumpMatrixButton;
     MenuItem aboutItem;
     MenuItem importFromLocalFileItem,
-    	exportAsUrlItem, exportAsLocalFileItem, exportAsTextItem, printItem, recoverItem;
+    	exportAsUrlItem, exportAsLocalFileItem, printItem, recoverItem;
     MenuItem undoItem, redoItem,
 	cutItem, copyItem, pasteItem, selectAllItem, optionsItem;
     MenuBar optionsMenuBar;
@@ -365,8 +365,6 @@ MouseOutHandler, MouseWheelHandler {
 	  fileMenuBar.addItem(exportAsLocalFileItem);
 	  exportAsUrlItem = new MenuItem(LS("Export As Link..."), new MyCommand("file","exportasurl"));
 	  fileMenuBar.addItem(exportAsUrlItem);
-	  exportAsTextItem = new MenuItem(LS("Export As Text..."), new MyCommand("file","exportastext"));
-	  fileMenuBar.addItem(exportAsTextItem);
 	  fileMenuBar.addItem(new MenuItem(LS("Create Subcircuit..."), new MyCommand("file","createsubcircuit")));
 	  fileMenuBar.addItem(new MenuItem(LS("Find DC Operating Point"), new MyCommand("file", "dcanalysis")));
 	  recoverItem = new MenuItem(LS("Recover Auto-Save"), new MyCommand("file","recover"));
@@ -2404,8 +2402,6 @@ MouseOutHandler, MouseWheelHandler {
     	}
     	if (item=="exportaslocalfile")
     		doExportAsLocalFile();
-    	if (item=="exportastext")
-    		doExportAsText();
     	if (item=="dcanalysis")
     	    	doDCAnalysis();
     	if (item=="print")
@@ -2639,13 +2635,6 @@ MouseOutHandler, MouseWheelHandler {
     	String dump = dumpCircuit();
 	dialogShowing = new ExportAsUrlDialog(dump);
 	dialogShowing.show();
-    }
-    
-    void doExportAsText()
-    {
-    	String dump = dumpCircuit();
-    	dialogShowing = new ExportAsTextDialog(this, dump);
-    	dialogShowing.show();
     }
 
     void doExportAsLocalFile() {
